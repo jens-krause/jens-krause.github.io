@@ -327,7 +327,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-cta   { display: none; }
 
@@ -699,6 +699,36 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-dim);
+}
+/* Count-up value span: a fixed-width, right-aligned cell inside the
+   <em> so the static prefix/suffix text around it (e.g. " GB",
+   "R² = ") stays pinned in place while the number ticks up. The
+   gradient-clip text effect from .stat .num em is re-applied here
+   because background-clip: text on a parent doesn't propagate to
+   descendants — without this the child text would be transparent. */
+.stat .num .count-value {
+  display: inline-block;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  background: var(--grad-warm);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Suffix (e.g. the "+" after 25.000) stays hidden while the number is
+   still counting up, then fades in once .count-done is added — see
+   initCountUp() in js/main.js. Re-applies the gradient-clip for the
+   same reason as .count-value above. */
+.stat .num .count-suffix {
+  background: var(--grad-warm);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.stat .num em.count-done .count-suffix {
+  opacity: 1;
 }
 
 .duality {
@@ -1434,6 +1464,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   margin-top: 3rem;
 }
 .hero-bottom-row > .hq-app-row { margin: 0; }
+.hero-bottom-row > .hero-actions { margin: 0; }
 .hero-bottom-row > .scroll-cue { margin: 0; }
 @media (max-width: 880px) {
   .hero-bottom-row {
@@ -1442,6 +1473,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
     gap: 2.5rem;
   }
   .hero-bottom-row > .hq-app-row { justify-content: center; }
+  .hero-bottom-row > .hero-actions { justify-content: center; }
   .hero-bottom-row > div:last-child { display: none; }
   .hq-app-banner-icon { width: 64px; height: 64px; }
 }
@@ -1678,6 +1710,33 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   transition: color 0.3s var(--ease);
 }
 .footer-legal a:hover { color: var(--text); }
+
+/* -------- Language Switch -------- */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.lang-switch a {
+  color: var(--text-dim);
+  transition: color 0.25s var(--ease);
+}
+.lang-switch a:hover { color: var(--text); }
+.lang-switch .lang-active { color: var(--text); font-weight: 600; }
+.lang-switch .lang-sep { color: var(--text-dim); }
+
+@media (max-width: 900px) {
+  .lang-switch {
+    position: absolute;
+    right: calc(84px + 2 * var(--gutter));
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 
 /* -------- Reduced motion -------- */
 @media (prefers-reduced-motion: reduce) {

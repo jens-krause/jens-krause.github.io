@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="herbIQ — an interactive ecosystem estimator by Jens Krause. Six sliders, three machine-learning regressors trained on coupled LPJ-GUESS × Madingley simulations." />
+  <meta name="description" content="herbIQ — ein interaktiver Ökosystem-Schätzer von Jens Krause. Sechs Schieberegler, drei Machine-Learning-Regressoren trainiert auf gekoppelten LPJ-GUESS × Madingley-Simulationen." />
 
   <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
   <meta property="og:site_name" content="Jens Krause" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jens-krause.github.io/tools/herbIQ/herbiq.html" />
+  <meta property="og:url" content="https://jens-krause.github.io/tools/herbIQ/herbiq_de.html" />
   <meta property="og:title" content="herbIQ — Jens Krause" />
-  <meta property="og:description" content="Interactive ecosystem estimator — six sliders, three ML regressors trained on coupled LPJ-GUESS × Madingley simulations. Runs entirely in your browser." />
+  <meta property="og:description" content="Interaktiver Ökosystem-Schätzer — sechs Schieberegler, drei ML-Regressoren trainiert auf gekoppelten LPJ-GUESS × Madingley-Simulationen. Läuft vollständig im Browser." />
   <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="JK · Jens Krause" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="de_DE" />
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="herbIQ — Jens Krause" />
-  <meta name="twitter:description" content="Interactive ecosystem estimator — six sliders, three ML regressors. Runs entirely in your browser." />
+  <meta name="twitter:description" content="Interaktiver Ökosystem-Schätzer — sechs Schieberegler, drei ML-Regressoren. Läuft vollständig im Browser." />
   <meta name="twitter:image" content="https://jens-krause.github.io/og-image.png" />
   <meta name="robots" content="noindex, nofollow, noai, noimageai" />
   <title>herbIQ — Jens Krause</title>
@@ -106,11 +106,7 @@
       box-shadow: 0 0 0 4px rgba(214, 84, 84, 0.18);
     }
 
-    /* ---------- Hero section-head: auto-width eyebrow + remaining title.
-       On narrow viewports (<860 px) it collapses to a single column so
-       the eyebrow stacks above the title — matches photography.html /
-       work.html behaviour and stops the title from being squeezed into
-       a tiny column with awkward wrapping. */
+    /* ---------- Hero section-head ---------- */
     .hq-head-grid {
       grid-template-columns: auto minmax(0, 1fr);
     }
@@ -130,7 +126,7 @@
       }
     }
 
-    /* ---------- Hero intro grid: lead+stats (left) | two facet-cards (right) ---------- */
+    /* ---------- Hero intro grid ---------- */
     .hq-intro {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -147,10 +143,6 @@
       max-width: none;
       margin: 0;
     }
-    /* Wrap multiple lead-paragraphs so flex' space-between treats them
-       as a single block, but they still get a clean visual gap between
-       each other — same vibe as the two stacked <p class="lead"> on
-       index.html / work.html. */
     .hq-intro-lead {
       display: flex;
       flex-direction: column;
@@ -158,7 +150,6 @@
     }
     .hq-intro-left .stat-grid {
       margin-top: 0;
-      /* Override main.css's repeat(2, 1fr) — three stats in one row. */
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.85rem;
     }
@@ -166,9 +157,6 @@
     .hq-intro-left .stat .num { font-size: clamp(1.5rem, 2.2vw, 2rem); }
     .hq-intro-left .stat .lbl { font-size: 0.68rem; letter-spacing: 0.14em; }
 
-    /* Right column = two stacked facet-cards. Use the site's .duality
-       grid which is already 1fr 1fr, but force a vertical stack here
-       since the visual goal is a column of large cards next to text. */
     .hq-intro-right {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -211,8 +199,6 @@
       flex-direction: column;
       gap: 0.85rem;
     }
-    /* Predictions column sticks while the user scrolls through inputs,
-       so both sides are always visible. */
     .hq-predictions-column {
       position: sticky;
       top: 1.5rem;
@@ -224,8 +210,6 @@
       border-radius: var(--radius);
       padding: clamp(1.5rem, 3vw, 2.25rem);
     }
-    /* Section labels above each column — same typeface as the site's
-       h-section heading ("Two practices, one curiosity ...") */
     .hq-section-label {
       font-family: var(--font-display);
       font-size: clamp(1.6rem, 3vw, 2.1rem);
@@ -236,7 +220,7 @@
       padding-left: 0.25rem;
     }
 
-    /* ---------- Predictions: three stacked widgets ---------- */
+    /* ---------- Predictions ---------- */
     .hq-predictions-stack {
       display: flex;
       flex-direction: column;
@@ -273,13 +257,6 @@
       line-height: 1;
       color: var(--accent-warm);
       transition: opacity 0.2s var(--ease);
-      /* Italic display-serif glyphs extend a hair past their character
-         box. When the text content changes rapidly (slider drag), Safari
-         (especially iOS) sometimes leaves those overshoot pixels behind
-         instead of repainting them. The three properties below force a
-         well-defined containing box, leave room for the overhang and
-         promote the span to its own compositor layer so every update
-         is repainted cleanly. */
       display: inline-block;
       padding-right: 0.18em;
       transform: translateZ(0);
@@ -299,30 +276,17 @@
       letter-spacing: 0.06em;
     }
 
-    /* ---------- Mobile: inputs shrink, predictions stay side-by-side ----------
-       Inputs and predictions stay in a 2-column grid even on narrow
-       viewports — inputs take whatever space is left, predictions
-       occupy a fixed-but-narrow column with glassy compact cards that
-       stay sticky while the user scrolls. */
-    /* Desktop default: hide the short "Reset" label, show full text. */
+    /* ---------- Mobile ---------- */
     .hq-reset-short { display: none; }
 
     @media (max-width: 880px) {
       .hq-wrap { padding: 0 0.85rem; }
-      /* Mobile: swap to the short "Reset" label so the button stops
-         dictating the column width. */
       .hq-reset-long  { display: none; }
       .hq-reset-short { display: inline; }
-      /* Inputs takes whatever's left; predictions are narrow and
-         fluid. With the short button label the column can now go down
-         to ~95 px without clipping. */
       .hq-grid {
         grid-template-columns: minmax(0, 1fr) clamp(95px, 24vw, 115px);
         gap: 0.55rem;
       }
-      /* Three stats need to fit side-by-side on narrow phones: scale
-         font and padding down so 1.700.000 / 93.4 GB / R² = 0.88 all
-         fit in their column without horizontal overflow. */
       .hq-intro-left .stat-grid { gap: 0.5rem; }
       .hq-intro-left .stat { padding: 0.75rem 0.55rem; }
       .hq-intro-left .stat .num { font-size: clamp(0.85rem, 4vw, 1.4rem); }
@@ -361,7 +325,6 @@
       }
       .hq-pred-meta { display: none; }
 
-      /* Compact slider chrome so it survives a narrow column. */
       .slider-icon { width: 22px; height: 22px; }
       .slider-with-icons { gap: 0.45rem; }
       .slider-name { font-size: 0.85rem; }
@@ -374,7 +337,6 @@
         letter-spacing: 0.1em;
       }
 
-      /* Footer: smaller icon, tightened spacing */
       .hq-footer {
         margin-top: 3rem;
         padding-top: 2rem;
@@ -420,7 +382,6 @@
       font-variant-numeric: tabular-nums;
       text-align: right;
     }
-    /* Slider row that flanks the range input with two small PNG icons */
     .slider-with-icons {
       display: flex;
       align-items: center;
@@ -433,7 +394,6 @@
       flex-shrink: 0;
       opacity: 0.85;
       object-fit: contain;
-      /* Lift dark PNGs onto the dark background a bit. */
       filter: brightness(1.1) contrast(0.95);
     }
     .slider-icon-empty { visibility: hidden; }
@@ -476,7 +436,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ---------- Range slider (two triangle handles) ---------- */
+    /* ---------- Range slider ---------- */
     .range-slider {
       position: relative;
       flex: 1;
@@ -513,12 +473,10 @@
       transition: filter 0.15s var(--ease), transform 0.12s var(--ease);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
-    /* Low handle: triangle pointing right (▶), cool blue */
     .rs-thumb-low {
       background: #6fa3d4;
       clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
     }
-    /* High handle: triangle pointing left (◀), warm orange */
     .rs-thumb-high {
       background: #e8b97e;
       clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
@@ -532,7 +490,7 @@
       transform: translate(-50%, -50%) scale(1.28);
     }
 
-    /* ---------- Reset button (Liquid-Glass, mirrors .gallery-shuffle) ---------- */
+    /* ---------- Reset button ---------- */
     .hq-reset {
       align-self: flex-end;
       margin-top: 0.4rem;
@@ -594,8 +552,6 @@
     .hq-reset:hover .icon { transform: rotate(-180deg); }
     .hq-reset:active { transform: translateY(0) scale(0.97); }
 
-    /* (App-promo banner CSS moved to main.css — now used on work.html only) */
-
     /* ---------- Footer ---------- */
     .hq-footer {
       margin-top: 4.5rem;
@@ -612,8 +568,6 @@
       height: 140px;
       object-fit: contain;
       flex-shrink: 0;
-      /* Push the icon down so its top edge meets the heading top edge —
-         equal to the eyebrow's rendered height + its margin-bottom. */
       margin-top: calc(0.68rem * 1.5 + 0.6rem);
     }
     .hq-footer-content {
@@ -702,8 +656,6 @@
     .hq-footer-cta:hover .arrow {
       transform: translateX(3px);
     }
-    /* Subtle disclaimer prose below the model attribution. Matches the
-       fineprint width (Tool max-width = 678px) and stays understated. */
     .hq-disclaimer {
       max-width: 678px;
       margin: 0.8rem auto 0;
@@ -738,23 +690,23 @@
 
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="../../index.html" class="brand">
+      <a href="../../de/index.html" class="brand">
         <span class="brand-dot"></span>
         <span>Jens Krause</span>
       </a>
       <div class="nav-links">
-        <a class="nav-link" href="../../index.html">Overview</a>
-        <a class="nav-link active" href="../../work.html">Work</a>
-        <a class="nav-link" href="../../photography.html">Photography</a>
+        <a class="nav-link" href="../../de/index.html">Übersicht</a>
+        <a class="nav-link active" href="../../de/work.html">Arbeit</a>
+        <a class="nav-link" href="../../de/photography.html">Fotografie</a>
       </div>
       <div class="lang-switch">
-        <span class="lang-active">EN</span>
+        <a href="herbiq.html">EN</a>
         <span class="lang-sep">·</span>
-        <a href="herbiq_de.html">DE</a>
+        <span class="lang-active">DE</span>
       </div>
-      <a class="nav-cta" href="../../contact.html">Contact &rarr;</a>
-      <button class="menu-btn" aria-expanded="false" aria-label="Menu">
-        <span class="menu-btn-label">Menu</span>
+      <a class="nav-cta" href="../../de/contact.html">Kontakt &rarr;</a>
+      <button class="menu-btn" aria-expanded="false" aria-label="Menü">
+        <span class="menu-btn-label">Menü</span>
         <span class="menu-btn-close" aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -765,66 +717,65 @@
     <div class="container">
       <div class="section-head hq-head-grid" style="align-items: end; margin-bottom: 3rem">
         <div class="meta reveal">
-          <span class="eyebrow">Interactive tool · 2026</span>
+          <span class="eyebrow">Interaktives Tool · 2026</span>
         </div>
         <h1 class="h-display reveal delay-1 hq-head-title">
-          From a process-based simulation to <em>your browser.</em>
+          Von einer prozessbasierten Simulation in <em>deinen Browser.</em>
         </h1>
       </div>
 
       <div class="hq-intro">
-        <!-- Left: lead text + 2x2 stat grid -->
+        <!-- Links: Einleitungstext + Statistiken -->
         <div class="hq-intro-left">
           <div class="hq-intro-lead">
             <p class="lead reveal delay-2">
-              Based on my simulations with the <span style="color:var(--accent-cool)">Madingley</span> &amp; <span style="color:var(--accent-warm)">LPJ&#8209;GUESS</span> model system,
-              I distilled a full trophic pyramid into a machine-learning ecosystem estimator using <tt>scikit-learn</tt> and <tt>py2app</tt>.
+              Basierend auf meinen Simulationen mit dem <span style="color:var(--accent-cool)">Madingley</span>- &amp; <span style="color:var(--accent-warm)">LPJ&#8209;GUESS</span>-Modellsystem
+              habe ich die gesamte modellierte Nahrungskette in einen Machine-Learning-Ökosystem-Estimator destilliert - mit <tt>scikit-learn</tt> und <tt>py2app</tt>.
             </p>
             <p class="lead reveal delay-2">
-              You can move the sliders to set herbivore biomass, abundance, climate and
-              precipitation. Three histogram-gradient-boosting regressor models predict
-              net primary productivity, herbivory pressure and standing leaf biomass in
-              real time, right in your browser.
+              Mit den Schiebereglern lassen sich Herbivorenbiomasse und -abundanz, Klima und
+              Niederschlag einstellen. Drei Histogram-Gradient-Boosting-Regressoren schätzen
+              Nettoprimärproduktion, gefressene und stehende Blattbiomasse
+              in Echtzeit voraus, direkt im Browser.
             </p>
           </div>
           <div class="stat-grid reveal delay-2">
             <div class="stat">
               <div class="num"><em data-count="1772035" data-count-format="locale" data-count-ease-pow="8"><span class="count-value" style="text-align: left">1.772.035</span></em></div>
-              <div class="lbl">Training samples</div>
+              <div class="lbl">Trainingsproben</div>
             </div>
             <div class="stat">
-              <div class="num"><em data-count="93.4" data-count-decimals="1"><span class="count-value" style="min-width: 3.5ch">93.4</span> GB</em></div>
-              <div class="lbl">Model output</div>
+              <div class="num"><em data-count="93.4" data-count-decimals="1"><span class="count-value" style="min-width: 3.5ch">93,4</span> GB</em></div>
+              <div class="lbl">Modellausgabe</div>
             </div>
             <div class="stat">
-              <div class="num"><em data-count="0.88" data-count-decimals="2">R&sup2; = <span class="count-value" style="min-width: 2.5ch">0.88</span></em></div>
-              <div class="lbl">Avg. model fit</div>
+              <div class="num"><em data-count="0.88" data-count-decimals="2">R&sup2; = <span class="count-value" style="min-width: 2.5ch">0,88</span></em></div>
+              <div class="lbl">Ø Modellgüte</div>
             </div>
           </div>
         </div>
 
-        <!-- Right: two large facet-cards, side by side -->
+        <!-- Rechts: zwei große Facet-Cards -->
         <div class="hq-intro-right">
           <div class="facet-card reveal delay-3">
-            <h3>Machine&#8209;Learning Model</h3>
-            <p>Three regressors are combined into a single
-              ONNX package. The model runs entirely
-              client&#8209;side via <tt>onnxruntime</tt>. <br> No backend, no telemetry.</p>
+            <h3>Machine&#8209;Learning-Modell</h3>
+            <p>Drei Estimators sind in einem einzigen
+              ONNX-Paket zusammengefasst. Das Modell läuft vollständig
+              clientseitig via <tt>onnxruntime</tt>. <br> Kein Backend, keine Telemetrie.</p>
             <div class="chip-row" style="margin-top: 1rem">
               <span class="chip">scikit&#8209;learn</span>
-              <span class="chip">~3.3 MB</span>
+              <span class="chip">~3,3 MB</span>
               <span class="chip">onnxruntime-web</span>
-              <span class="chip">client-side</span>
+              <span class="chip">clientseitig</span>
             </div>
           </div>
           <div class="facet-card warm reveal delay-3">
-            <h3>Training Data</h3>
-            <p>~1.8 million samples were extracted from over a billion simulated data points - based on
-              biomes modelled in <em>Krause et al. (2025)</em>.</p>
+            <h3>Trainingsdaten</h3>
+            <p>~1,8 Millionen Samples wurden, basierend auf <em>Krause et al. (2025)</em>, aus über einer Milliarde simulierter Datenpunkten extrahiert.</p>
             <div class="chip-row" style="margin-top: 1rem">
-              <span class="chip">1.05 B data points</span>
-              <span class="chip">equlibirum state</span>
-              <span class="chip">2025 GMD paper</span>
+              <span class="chip">1,05 Mrd. Datenpunkte</span>
+              <span class="chip">Gleichgewichtszustand</span>
+              <span class="chip">GMD-Paper 2025</span>
             </div>
           </div>
         </div>
@@ -832,41 +783,35 @@
     </div>
   </section>
 
-  <!-- Interactive tool -->
+  <!-- Interaktives Tool -->
   <section class="section" style="padding: 1.5rem 0 2rem">
     <div class="container">
-      <div class="hq-status reveal" id="status">Initializing…</div>
+      <div class="hq-status reveal" id="status">Initialisiere…</div>
       <section class="hq-grid" style="margin-top: 2rem">
         <div class="hq-column">
-          <div class="hq-section-label">Inputs</div>
+          <div class="hq-section-label">Eingaben</div>
           <div class="hq-card">
             <div id="sliders"></div>
           </div>
         </div>
         <div class="hq-column hq-predictions-column">
-          <div class="hq-section-label">Predictions</div>
+          <div class="hq-section-label">Vorhersagen</div>
           <div id="outputs" class="hq-predictions-stack"></div>
-          <button class="hq-reset" id="reset" type="button" aria-label="Reset to defaults">
+          <button class="hq-reset" id="reset" type="button" aria-label="Auf Standardwerte zurücksetzen">
             <span class="icon" aria-hidden="true">&#8635;</span>
-            <span class="hq-reset-long">Reset to Defaults</span>
+            <span class="hq-reset-long">Zurücksetzen</span>
             <span class="hq-reset-short">Reset</span>
           </button>
         </div>
       </section>
-      <!-- Model attribution sits directly under the tool with its own
-           thin separator. Width is pinned to the tool's max-width
-           (400px Inputs + 1.75rem gap + 250px Predictions = 678px)
-           and centred so the line starts and ends exactly under the
-           tool, not across the full container. -->
       <div class="hq-footer-fineprint" style="max-width: 678px; margin-left: auto; margin-right: auto;">
-        <span>herbIQ by Jens Krause</span>
-        <span>Model: HGBR</span>
+        <span>herbIQ von Jens Krause</span>
+        <span>Modell: HGBR</span>
       </div>
       <p class="hq-disclaimer" style="max-width: 540px;">
-        The estimated results can be unrealistic. The models used are trained on
-        ecological equilibrium states and are not meant to explore ecological
-        shocks or unrealistic boundary conditions. The results can not replace
-        ecological, process-based simulation or professinal assessments.
+        Die geschätzten Ergebnisse können unrealistisch sein. Die verwendeten Modelle wurden mit
+        ökologischen Gleichgewichtszuständen trainiert und sind nicht dafür geeignet, Auswirkungen von ökologische Schocks oder unrealistische Randbedingungen zu schätzen. Die Ergebnisse
+        können keine ökologischen, prozessbasierten Simulationen oder professionelle Untersuchungen ersetzen.
       </p>
     </div>
   </section>
@@ -876,19 +821,19 @@
     <div class="container">
       <footer class="hq-footer">
         <div class="hq-footer-inner">
-          <img class="hq-footer-icon" src="icons/herbIQ_icon.png" alt="herbIQ logo" />
+          <img class="hq-footer-icon" src="icons/herbIQ_icon.png" alt="herbIQ-Logo" />
           <div class="hq-footer-content">
-            <div class="hq-footer-eyebrow">Want the full version?</div>
+            <div class="hq-footer-eyebrow">Die Vollversion?</div>
             <h2 class="hq-footer-title">
-              Take <em>herbIQ</em> off the web.
+              <em>herbIQ</em> offline nutzen.
             </h2>
             <p class="hq-footer-sub">
-              A standalone desktop application for macOS and Windows is also available.
-              It adds offline access, custom model loading (e.g. a larger random forest regressor model ) and
-              a confidence indicator based on the set input values. If you are interested in collaborating, click the button!
+              Eine eigenständige Desktop-App für macOS und Windows ist ebenfalls verfügbar.
+              Sie bietet Offline-Zugriff, die Möglichkeit eigene Modell zu laden (z.&nbsp;B. ein größeres Random-Forest-Regressormodell) und
+              einen Konfidenzindikator basierend auf den eingestellten Eingabewerten. Bei Interesse an dieser App, lasse es mich wissen!
             </p>
-            <a class="hq-footer-cta" href="../../contact.html">
-              <span>That sounds awesome!</span>
+            <a class="hq-footer-cta" href="../../de/contact.html">
+              <span>Das klingt super!</span>
               <span class="arrow" aria-hidden="true">&rarr;</span>
             </a>
           </div>
@@ -908,13 +853,7 @@
     </div>
   </footer>
 
-  <!-- Site-wide JS (nav, preloader, reveals, mobile menu) -->
   <script src="../../js/main.js"></script>
-
-  <!-- ONNX Runtime Web (WebAssembly backend) -->
-  <!-- Self-hosted onnxruntime-web; see tools/herbIQ/ort/ for the bundled
-       runtime + WASM binaries. Keeps the page on a single origin so no
-       third-party CDN sees the visitor's IP. -->
   <script src="ort/ort.min.js"></script>
   <script>
     (async function () {
@@ -928,36 +867,26 @@
         statusEl.className = 'hq-status' + (state ? ' ' + state : '');
       };
 
-      // Explicit WASM asset location so ORT doesn't try to autodetect via
-      // a relative path (which breaks if the page is opened from file://).
       if (window.ort && ort.env && ort.env.wasm) {
-        // Absolute URL is required: ORT loads the .mjs as an ES module,
-        // and Safari rejects bare specifiers like "ort/..." — they must
-        // start with a scheme or "./". new URL(...) resolves against the
-        // current page, so this works both on localhost and GitHub Pages.
         ort.env.wasm.wasmPaths = new URL('ort/', window.location.href).href;
-        // Force single-threaded execution: Safari (and python3's
-        // http.server) don't ship the COOP/COEP headers needed for
-        // SharedArrayBuffer, so the multi-threaded WASM path fails.
-        // One thread is plenty for a 3.3 MB tree-ensemble model.
         ort.env.wasm.numThreads = 1;
       }
 
-      // ---------- Load metadata ----------
-      setStatus('Loading metadata…');
+      // ---------- Metadaten laden ----------
+      setStatus('Lade Metadaten…');
       let meta;
       try {
         const r = await fetch('metadata.json');
         if (!r.ok) throw new Error('HTTP ' + r.status);
         meta = await r.json();
       } catch (e) {
-        setStatus('metadata.json not loadable — open via http://, not file://', 'error');
+        setStatus('metadata.json nicht ladbar — Seite via http:// öffnen, nicht file://', 'error');
         console.error(e);
         return;
       }
 
-      // ---------- Load ONNX model ----------
-      setStatus('Loading model · 3.3 MB…');
+      // ---------- ONNX-Modell laden ----------
+      setStatus('Lade Modell · 3,3 MB…');
       let session;
       try {
         session = await ort.InferenceSession.create('herbiq.onnx', {
@@ -965,19 +894,17 @@
           graphOptimizationLevel: 'all',
         });
       } catch (e) {
-        setStatus('Model load failed — see console', 'error');
+        setStatus('Modell konnte nicht geladen werden — siehe Konsole', 'error');
         console.error(e);
         return;
       }
 
-      // ---------- Slider state ----------
+      // ---------- Schieberegler-Zustand ----------
       const state = {};
       meta.inputs.forEach(inp => { state[inp.name] = inp.default; });
 
       function formatNumber(n) {
         if (!isFinite(n)) return '—';
-        // Whole-number values render without trailing zeros — covers
-        // both linear sliders with step 1 and round_to-snapped outputs.
         if (Math.abs(n - Math.round(n)) < 1e-6) {
           return Math.round(n).toLocaleString('en-US');
         }
@@ -988,12 +915,9 @@
         if (a >= 1)    return n.toFixed(2);
         return n.toFixed(3);
       }
-      // Integer formatter for slider min/max labels.
       function formatBound(n) {
         return Math.round(n).toLocaleString('en-US');
       }
-      // Replicates herbIQ.py:slider_to_log — maps position 0-STEPS
-      // to a value in [valMin, valMax] linearly in log10 space.
       const POSITION_STEPS = 1000;
       function sliderToLog(pos, valMin, valMax) {
         const logMin = Math.log10(valMin);
@@ -1002,15 +926,12 @@
         return Math.pow(10, logVal);
       }
 
-      // ---------- Build sliders ----------
-      // Each slider registers a `reset()` callback so the Reset-button
-      // can put every input back without knowing its internal type.
+      // ---------- Schieberegler aufbauen ----------
       const sliderRefs = [];
       const handled    = new Set();
 
       meta.inputs.forEach((inp, i) => {
         if (handled.has(inp.name)) return;
-        // Paired range slider (e.g. Temperature Min + Max → one widget)
         if (inp.ui_role === 'low' && inp.ui_pair) {
           const hi = meta.inputs.find(x => x.name === inp.ui_pair);
           if (hi) {
@@ -1032,11 +953,6 @@
 
       function buildSingleSliderRow(inp, i) {
         const isLog = inp.scale === 'log10';
-        // Log sliders use position 0…POSITION_STEPS (mirrors the desktop
-        // app, so the same position maps to the same display+model value).
-        // The model range (inp.min/max) and the optional display range
-        // (inp.display_min/display_max) share that position but produce
-        // two different values via sliderToLog.
         const hasDisplayRange =
           isLog && inp.display_min != null && inp.display_max != null;
 
@@ -1056,9 +972,6 @@
           sStep = inp.step || 1;
         }
 
-        // Min/max labels: display-range bounds when set, integer-formatted,
-        // and the unit is dropped on log-display sliders (Abundance, Biomass)
-        // to save horizontal space.
         const showMin = hasDisplayRange ? inp.display_min : inp.min;
         const showMax = hasDisplayRange ? inp.display_max : inp.max;
         const showUnit = hasDisplayRange ? '' : (' ' + inp.unit);
@@ -1196,8 +1109,6 @@
           document.removeEventListener('pointermove', onMove);
           document.removeEventListener('pointerup', onUp);
         };
-        // Press anywhere on the track → grab the nearest thumb (matches
-        // the desktop app's behaviour) and start dragging immediately.
         rs.addEventListener('pointerdown', (e) => {
           e.preventDefault();
           const v = valueFromClientX(e.clientX);
@@ -1221,8 +1132,8 @@
         });
       }
 
-      // ---------- Build outputs (three stacked widgets) ----------
-      const outputRefs = []; // { output, valEl }
+      // ---------- Ausgaben aufbauen ----------
+      const outputRefs = [];
       meta.outputs.forEach((out, i) => {
         const card = document.createElement('div');
         card.className = 'hq-pred-card';
@@ -1245,7 +1156,7 @@
         outputRefs.forEach(o => o.valEl.classList.add('stale'));
       }
 
-      // ---------- Inference (debounced via rAF) ----------
+      // ---------- Inferenz (via rAF entprellt) ----------
       let pending = false;
       function schedulePredict() {
         if (pending) return;
@@ -1258,9 +1169,6 @@
 
       async function predict() {
         const t0 = performance.now();
-        // Use `model_index` to wire each input to the correct ONNX column.
-        // metadata.json now lists inputs in UI order, which is not the
-        // same as the model's expected feature order.
         const features = new Array(meta.inputs.length);
         meta.inputs.forEach(inp => { features[inp.model_index] = state[inp.name]; });
         const tensor = new ort.Tensor(
@@ -1273,7 +1181,7 @@
         try {
           results = await session.run({ [meta.raw_input_tensor]: tensor });
         } catch (e) {
-          setStatus('Inference error — see console', 'error');
+          setStatus('Inferenzfehler — siehe Konsole', 'error');
           console.error(e);
           return;
         }
@@ -1286,8 +1194,6 @@
           const pp = output.js_postprocess || {};
           if (pp.multiply != null) v *= pp.multiply;
           if (pp.clip_min != null) v = Math.max(v, pp.clip_min);
-          // Snap to nearest multiple — e.g. round_to: 10 → nearest decade,
-          // round_to: 1 → nearest integer. Skipped when null/unset.
           if (pp.round_to != null && pp.round_to > 0) {
             v = Math.round(v / pp.round_to) * pp.round_to;
           }
@@ -1295,19 +1201,17 @@
           valEl.classList.remove('stale');
         });
 
-        // Sub-millisecond predictions are common for this small model;
-        // floor at 1 ms so the pill width never jitters between values.
-        setStatus('Ready · inference ' + Math.max(1, Math.round(dt)) + ' ms', 'ready');
+        setStatus('Bereit · Inferenz ' + Math.max(1, Math.round(dt)) + ' ms', 'ready');
       }
 
-      // ---------- Reset ----------
+      // ---------- Zurücksetzen ----------
       resetBtn.addEventListener('click', () => {
         sliderRefs.forEach(ref => ref.reset());
         markStale();
         schedulePredict();
       });
 
-      // ---------- First prediction ----------
+      // ---------- Erste Vorhersage ----------
       await predict();
     })();
   </script>

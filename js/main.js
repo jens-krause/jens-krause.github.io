@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   initLightbox();
   initMasonry();
+  initCountUp();
 });
 
 /* ---------- Legal pages: strip generator inline styles ---------- */
@@ -416,6 +417,64 @@ async function initMasonry() {
 
   // All images settled + layout placed → preloader can fade now.
   document.dispatchEvent(new Event("masonry:ready"));
+}
+
+/* ---------- Count-up stat numbers ---------- */
+/* Shared by every page with [data-count] stat boxes (homepage,
+   herbIQ). Scroll-triggered via IntersectionObserver, runs once per
+   element, and short-circuits to the final value under
+   prefers-reduced-motion. Decimal separator follows <html lang>. */
+function initCountUp() {
+  const els = document.querySelectorAll("[data-count]");
+  if (!els.length) return;
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isGerman = document.documentElement.lang === "de";
+  const DEFAULT_POW = 5;
+  const DUR = 1600;
+
+  const localeFmt = new Intl.NumberFormat("de-DE");
+  const render = (el, value) => {
+    const valueSpan = el.querySelector(".count-value");
+    if (!valueSpan) return;
+    const decimals = parseInt(el.dataset.countDecimals || "0", 10);
+    const fmt = el.dataset.countFormat;
+    let body;
+    if (fmt === "locale") body = localeFmt.format(Math.round(value));
+    else if (decimals > 0) body = isGerman
+      ? value.toFixed(decimals).replace(".", ",")
+      : value.toFixed(decimals);
+    else body = String(Math.round(value));
+    valueSpan.textContent = body;
+  };
+
+  const animate = (el) => {
+    const target = parseFloat(el.dataset.count);
+    if (reduced) { render(el, target); el.classList.add("count-done"); return; }
+    el.dataset.countAnimated = "1";
+    const pow = parseFloat(el.dataset.countEasePow) || DEFAULT_POW;
+    const ease = t => 1 - Math.pow(1 - t, pow);
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min((now - start) / DUR, 1);
+      render(el, target * ease(t));
+      if (t < 1) requestAnimationFrame(step);
+      else el.classList.add("count-done");
+    };
+    requestAnimationFrame(step);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.dataset.countAnimated) return; // run once
+      animate(el);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+
+  els.forEach(el => io.observe(el));
 }
 
 /* ---------- Lightbox ---------- */

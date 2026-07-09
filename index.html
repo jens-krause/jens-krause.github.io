@@ -25,6 +25,9 @@
   <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
   <title>Jens Krause — A digital calling card</title>
 
+  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/" />
+  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/de/" />
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="styles/main.css" />
@@ -47,9 +50,13 @@
         <a class="nav-link active" href="index.html">Overview</a>
         <a class="nav-link" href="work.html">Work</a>
         <a class="nav-link" href="photography.html">Photography</a>
-        <a class="nav-link" href="contact.html">Contact</a>
       </div>
-      <a class="nav-cta" href="contact.html">Get in touch &rarr;</a>
+      <div class="lang-switch">
+        <span class="lang-active">EN</span>
+        <span class="lang-sep">·</span>
+        <a href="de/index.html">DE</a>
+      </div>
+      <a class="nav-cta" href="contact.html">Contact &rarr;</a>
       <button class="menu-btn" aria-expanded="false" aria-label="Menu">
         <span class="menu-btn-label">Menu</span>
         <span class="menu-btn-close" aria-hidden="true">&times;</span>
@@ -64,35 +71,38 @@
     </div>
     <div class="container hero-content">
       <h1 class="h-display hero-title">
-        <span data-split>Thinking</span> <em data-split>nature.</em><br>
-        <span data-split>Seeing</span> <em data-split>light.</em>
+        <span data-split>Nature &</span> <em data-split>nature.</em><br>
+        <span data-split>Moments</span> <em data-split>light.</em>
       </h1>
 
       <p class="lead reveal delay-2" style="max-width:35ch">
         I&rsquo;m a scientist and programmer who develops a large&#8209;scale
-        model system and analyses data interconnections &mdash; and a photographer who watches the world through the viewfinder.
+        model system and analyses dataset interconnections.
       </p>
-      <p class="lead reveal delay-2" style="max-width:35ch">
-        Through <span style="color:var(--accent-cool)"><em>thinking</em></span>, I seek to understand nature&rsquo;s complexity &mdash; through <span style="color:var(--accent-warm)"><em>seeing</em></span>, I capture moments that reveal its beauty.
+      <p class="lead reveal delay-2" style="max-width:37ch">
+        Professionally, I unravel the <span style="color:var(--accent-cool)"><em>mysteries</em></span> of nature, while in my freetime, I try to capture its <span style="color:var(--accent-warm)"><em>beauty</em></span>. The two worlds that inform each
+            other: both reward patience, attention to detail, and the willingness to wait for just the right moment.
       </p>
 
-      <div class="hero-actions reveal delay-3">
-        <a class="btn btn-primary" href="work.html">
-          See my work <span class="arrow">&rarr;</span>
-        </a>
-        <a class="btn btn-ghost" href="photography.html">
-          Open the gallery <span class="arrow">&rarr;</span>
-        </a>
+      <div class="hero-bottom-row reveal delay-3">
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="work.html">
+            See my work <span class="arrow">&rarr;</span>
+          </a>
+          <a class="btn btn-ghost" href="photography.html">
+            Open the gallery <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+        <div class="scroll-cue">
+          <span>Scroll</span>
+          <span class="line"></span>
+        </div>
+        <div></div>
       </div>
 
       <div class="hero-meta reveal delay-4">
         <p><strong>Based in</strong>Garmisch&#8209;Partenkirchen, DE</p>
         <p><strong>Currently</strong>Scientific Programmer · KIT &middot; IMK&#8209;IFU</p>
-      </div>
-
-      <div class="scroll-cue reveal delay-4">
-        <span>Scroll</span>
-        <span class="line"></span>
       </div>
     </div>
   </header>
@@ -106,32 +116,23 @@
           <span></span>
         </div>
         <h2 class="h-section reveal delay-1">
-          Two practices, one curiosity &mdash; finding <em>structure</em> in complex systems.
+          Two practices, one curiosity - finding <em>structure</em> in complex systems.
         </h2>
       </div>
 
       <div class="about-grid">
         <div class="about-text reveal delay-2">
-          <p>
-            By day I write code to further <span style="color:var(--accent-cool)"><em>develop</em></span> global vegetation <span style="color:var(--accent-cool)"><em>models</em></span> that incorporate the whole food&#8209;web &mdash;
-            to assess how biodiversity unfolds under changing boundary conditions.
-          </p>
-          <p>
-            By weekend I pack my <span style="color:var(--accent-warm)"><em>Canon R5</em></span> and head into nature. The two worlds inform each
-            other: both reward patience, attention to detail, and the willingness to wait for just the right moment.
-          </p>
-
           <div class="stat-grid">
             <div class="stat">
-              <div class="num"><em>8</em></div>
+              <div class="num"><em data-count="8"><span class="count-value">8</span></em></div>
               <div class="lbl">Years of experience</div>
             </div>
             <div class="stat">
-              <div class="num"><em>3</em></div>
+              <div class="num"><em data-count="3"><span class="count-value">3</span></em></div>
               <div class="lbl">Int. conferences</div>
             </div>
             <div class="stat">
-              <div class="num"><em>49.000+</em></div>
+              <div class="num"><em data-count="25000" data-count-format="locale"><span class="count-value">25.000</span><span class="count-suffix">+</span></em></div>
               <div class="lbl">Lines of code</div>
             </div>
             <div class="stat">
@@ -158,7 +159,7 @@
 
           <a class="facet-card warm reveal delay-3" href="photography.html">
             <h3>Photography<br><span style="color:var(--accent-warm)">&amp; Light</span></h3>
-            <p>Composing alpine landscapes or chasing animals in action  &mdash; the ultimate contrast between stillness and motion.</p>
+            <p>Composing alpine landscapes or chasing animals in action  - the ultimate contrast between stillness and motion.</p>
             <div class="chip-row">
               <span class="chip">Canon EOS R5</span>
               <span class="chip">Animals</span>
@@ -195,7 +196,7 @@
     <div class="container">
       <div class="section-head">
         <div class="meta reveal">
-          <span class="eyebrow">Selected milestones · 2018 &mdash; today</span>
+          <span class="eyebrow">Selected milestones · 2018 - today</span>
         </div>
         <h2 class="h-section reveal delay-1">
           Career <em>highlights</em> and personal achievements.
@@ -213,7 +214,7 @@
             </div>
             <div class="tl-info">
               <div class="yr">June 2026 · Browser&#8209;based tool</div>
-              <h3><span style="color:var(--accent-warm)"><em>released</em></span> &mdash; herbIQ, an interactive ecosystem predictor</h3>
+              <h3><span style="color:var(--accent-warm)"><em>released</em></span> - herbIQ, an interactive ecosystem predictor</h3>
               <p>
                 Machine&#8209;learning estimator of my coupled LPJ&#8209;GUESS &times;
                 Madingley simulations, packaged as a six&#8209;slider browser tool.
@@ -238,7 +239,7 @@
             </div>
             <div class="tl-info">
               <div class="yr">December 2025 · Geoscientific Model Development</div>
-              <h3><span style="color:var(--accent-warm)"><em>published</em></span> &mdash; Full Coupling of LPJ&#8209;GUESS and Madingley</h3>
+              <h3><span style="color:var(--accent-warm)"><em>published</em></span> - Full Coupling of LPJ&#8209;GUESS and Madingley</h3>
               <p>
                 First&#8209;author paper that introduces the fully coupled model system,
                 enabling simulation of bidirectional feedbacks between vegetation
@@ -264,8 +265,8 @@
               <div class="yr">April 2025 · Karlsruhe</div>
               <h3>Doctorate <span style="color:var(--accent-warm)"><em>"dr. rer. nat."</em></span> at KIT</h3>
               <p>
-                Defended my thesis &mdash; <em>&ldquo;Ecosystem Feedback from
-                Animal&#8209;Vegetation Interactions: A Modeling Approach&rdquo;</em> &mdash;
+                Defended my thesis - <em>&ldquo;Ecosystem Feedback from
+                Animal&#8209;Vegetation Interactions: A Modeling Approach&rdquo;</em> -
                 with distinction (<span style="color:var(--accent-cool)"><em>magna cum laude</em></span>)
                 before an expert committee.
               </p>
