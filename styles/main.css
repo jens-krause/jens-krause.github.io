@@ -291,6 +291,10 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   transform-origin: left;
 }
 
+/* Duplicate Contact entry, shown only in the mobile cascading menu
+   (desktop already has it via .nav-cta). */
+.nav-link-contact { display: none; }
+
 .nav-cta {
   padding: 0.55rem 1.1rem;
   border: 1px solid var(--border-strong);
@@ -437,6 +441,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
     opacity: 0;
     animation: navItemDrop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+  .nav.menu-open .nav-link-contact { display: block; }
   .nav.menu-open .nav-link::after { display: none; }
   .nav.menu-open .nav-link:hover  { background: linear-gradient(155deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.10) 100%), rgba(20,22,30,0.82); }
   .nav.menu-open .nav-link.active { background: linear-gradient(155deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.14) 100%), rgba(25,28,40,0.85); }
