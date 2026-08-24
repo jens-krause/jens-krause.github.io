@@ -808,5 +808,14 @@ window.__galleryMetadata =
   "Aperture": 6.3,
   "ExposureTime": "1/125",
   "FocalLength": "451.0 mm"
+},
+{
+  "SourceFile": "093.avif",
+  "Model": "Canon EOS R5m2",
+  "LensModel": "RF24-105mm F4 L IS USM",
+  "ISO": 100,
+  "Aperture": 8.0,
+  "ExposureTime": "1/15",
+  "FocalLength": "47.0 mm"
 }]
 ;
