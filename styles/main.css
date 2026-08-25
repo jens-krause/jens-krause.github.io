@@ -528,6 +528,12 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   inset: -8% 0 0 0;
   z-index: 0;
   pointer-events: none;
+  /* Fade the whole layer out toward the bottom instead of covering it
+     with an opaque fade-to-bg gradient. The opaque version also hid the
+     page-wide ambient glow (body::before), which then reappeared abruptly
+     below the hero and cut a visible horizontal line at its edge. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 50%, rgba(0, 0, 0, 0.6) 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 50%, rgba(0, 0, 0, 0.6) 78%, transparent 100%);
 }
 .hero-bg img {
   width: 100%;
@@ -537,13 +543,96 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   filter: brightness(0.32) saturate(1.1) contrast(1.05);
   will-change: transform;
 }
+/* Darkening for text legibility only — the fade-out itself is the mask
+   above, so this must never reach a fully opaque bottom edge. */
 .hero-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent 0%, transparent 35%, var(--bg) 95%),
+    linear-gradient(180deg, transparent 0%, transparent 35%, rgba(10, 11, 16, 0.75) 100%),
     linear-gradient(180deg, rgba(10, 11, 16, 0.6) 0%, transparent 30%);
+}
+/* Full-bleed hero (photography): the image keeps its natural aspect ratio —
+   no cover-crop of the composition — and is decoupled from the hero's height.
+   It runs on behind the following section and fades out there, so the text can
+   sit high in the sky while the gallery still starts directly beneath it. */
+.hero--full {
+  display: flex;
+  align-items: stretch;
+  /* Height as a fraction of the image's own height. The image's height is a
+     fixed ratio of its width, so expressing this as a ratio keeps the text
+     anchored to the horizon at every viewport width. */
+  aspect-ratio: 2.1;
+  /* Floor for the narrow band above the breakpoint, where the ratio alone
+     would leave the text short of room and spill it up into the nav. */
+  min-height: 28rem;
+  padding: 9rem 0 1.5rem;
+  overflow: visible;
+}
+/* Decoupled from its container's height: the image keeps its natural aspect
+   ratio, runs on behind whatever follows and fades out at its own bottom
+   edge — nothing is cropped. Usable on any positioned section, not just .hero. */
+.hero--full > .hero-bg,
+.hero-bg--flow {
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, 0.5) 88%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, 0.5) 88%, transparent 100%);
+}
+.hero--full .hero-bg img,
+.hero-bg--flow img {
+  width: 100%;
+  height: auto;
+}
+.hero-bg--mirror img {
+  transform: scaleX(-1);
+}
+/* Sits on the image, not on .hero-bg — fading the whole layer would also
+   weaken the ::after darkening and undo the effect. */
+.hero-bg--dim img {
+  opacity: 0.35;
+}
+/* The headline block absorbs the hero's free space and centres the headline
+   inside it — half the gap lands above it, half below. The eyebrow stays at
+   the bottom of that block, so it keeps sitting right on top of the lead.
+   Lead and controls stay pinned to the bottom. */
+.hero--full > .hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero--full .section-head {
+  flex-grow: 1;
+  margin-bottom: 1.2rem;
+}
+.hero--full .section-head .h-display {
+  align-self: center;
+  text-align: right;
+}
+/* Narrow screens: the image is far shorter than the text needs, so fall back
+   to the regular cover-filled hero. */
+@media (max-width: 860px) {
+  .hero--full {
+    aspect-ratio: auto;
+    min-height: 78svh;
+    overflow: hidden;
+  }
+  .hero--full > .hero-bg {
+    inset: 0;
+    height: auto;
+  }
+  .hero--full .hero-bg img {
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Single column here — right-aligning would fight the left-aligned lead. */
+  .hero--full .section-head .h-display {
+    text-align: left;
+  }
 }
 .hero-content {
   position: relative;

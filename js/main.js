@@ -124,7 +124,9 @@ function initSplitText() {
 
 /* ---------- Parallax hero ---------- */
 function initParallaxHero() {
-  const img = document.querySelector(".hero-bg img");
+  // Full-bleed heroes opt out: the scale/translate would crop the image
+  // and drift out of sync with the fade mask on .hero-bg.
+  const img = document.querySelector(".hero-bg img:not([data-no-parallax])");
   if (!img) return;
   let ticking = false;
   const onScroll = () => {
