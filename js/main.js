@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initLightbox();
   initMasonry();
   initCountUp();
+  initGuideMotion();
 });
 
 /* ---------- Legal pages: strip generator inline styles ---------- */
@@ -558,6 +559,20 @@ function initLightbox() {
     idx = (i + items.length) % items.length;
     const el = items[idx];
     const src = el.getAttribute("href") || el.querySelector("img")?.getAttribute("src");
+    // Hand the lightbox image its aspect ratio up front, taken from the
+    // thumbnail that's already decoded on the page. With width/height
+    // attributes set (and width/height:auto in CSS) the browser knows the
+    // ratio from the very first layout, instead of having to wait for the
+    // full-size file to decode — which is what made the rendered size
+    // vary from one open to the next.
+    const thumb = el.querySelector("img");
+    if (thumb && thumb.naturalWidth && thumb.naturalHeight) {
+      img.width  = thumb.naturalWidth;
+      img.height = thumb.naturalHeight;
+    } else {
+      img.removeAttribute("width");
+      img.removeAttribute("height");
+    }
     img.src = src;
     // EXIF-driven caption if metadata is available, else the counter.
     const exif = buildExifCaption(src);
@@ -615,4 +630,106 @@ function initLightbox() {
   window.addEventListener("resize", () => {
     if (lb.classList.contains("open")) positionCaption();
   }, { passive: true });
+}
+
+/* ---------- "What to find here" guide section (homepage) ----------
+   Expandable tool tiles, staggered reveals, active-block rail tracking,
+   cursor spotlight and magnetic buttons. Every selector here is specific
+   to the guide section, so on any other page every querySelectorAll
+   below just returns an empty list and the whole function is a no-op —
+   same pattern as initMasonry()/initLightbox() above. */
+function initGuideMotion() {
+  const canHover = matchMedia("(hover: hover)").matches;
+
+  // Expandable tool tiles are functional, so wired up regardless of
+  // prefers-reduced-motion — only the panel's height transition (CSS)
+  // is disabled for that, not the interaction itself.
+  document.querySelectorAll(".tool-tile-head").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tile = btn.closest(".tool-tile");
+      const open = tile.dataset.open !== "true";
+      tile.dataset.open = String(open);
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+
+  // Each chip learns its position in the row so CSS can stagger its
+  // cascade-in delay.
+  document.querySelectorAll(".chip-row").forEach(row => {
+    [...row.children].forEach((chip, i) => chip.style.setProperty("--i", i));
+  });
+
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // Reveal on enter: [data-anim] elements, .words headings (which
+  // stagger their own masked words), and whole guide blocks (which
+  // drive their rule, number and nested children via .is-in).
+  const revealIO = new IntersectionObserver((entries, obs) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("is-in");
+      obs.unobserve(en.target);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+  document
+    .querySelectorAll("[data-anim], [data-block], .words")
+    .forEach(el => revealIO.observe(el));
+
+  // Active block tracking: only the block crossing the middle band of
+  // the viewport counts, so exactly one rail is lit at a time.
+  const blocks = document.querySelectorAll("[data-block]");
+  if (blocks.length) {
+    const activeIO = new IntersectionObserver(entries => {
+      entries.forEach(en => { en.target.dataset.active = String(en.isIntersecting); });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    blocks.forEach(b => activeIO.observe(b));
+  }
+
+  // Cursor spotlight: pointermove fires far more often than the screen
+  // refreshes, so positions are batched and written once per frame.
+  const spots = document.querySelectorAll(".spot");
+  if (spots.length && canHover) {
+    let queued = false;
+    let pending = [];
+    const flush = () => {
+      for (const [el, x, y] of pending) {
+        el.style.setProperty("--mx", x + "px");
+        el.style.setProperty("--my", y + "px");
+      }
+      pending = [];
+      queued = false;
+    };
+    spots.forEach(card => {
+      card.addEventListener("pointermove", e => {
+        const r = card.getBoundingClientRect();
+        pending.push([card, e.clientX - r.left, e.clientY - r.top]);
+        if (!queued) { queued = true; requestAnimationFrame(flush); }
+      }, { passive: true });
+    });
+  }
+
+  // Magnetic buttons: the button leans toward the cursor, then springs
+  // back. Capped at 7px — enough to feel alive, not enough for the
+  // visible button to drift away from its own hit area.
+  if (canHover) {
+    const MAX = 7, RANGE = 90;
+    document.querySelectorAll(".magnetic").forEach(el => {
+      const onMove = e => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        el.classList.add("is-pulled");
+        el.style.setProperty("--tx", (dx * (MAX / RANGE)).toFixed(2) + "px");
+        el.style.setProperty("--ty", (dy * (MAX / RANGE)).toFixed(2) + "px");
+      };
+      const reset = () => {
+        el.classList.remove("is-pulled");
+        el.style.setProperty("--tx", "0px");
+        el.style.setProperty("--ty", "0px");
+      };
+      el.addEventListener("pointermove", onMove, { passive: true });
+      el.addEventListener("pointerleave", reset, { passive: true });
+      el.addEventListener("blur", reset);
+    });
+  }
 }

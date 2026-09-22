@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wildlife Sharpness Analysis — a Lightroom Classic plug-in by Jens Krause that picks the sharpest frame out of a burst of wildlife shots." />
+
+  <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
+  <meta property="og:site_name" content="Jens Krause" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jens-krause.github.io/tools/LR_Wildlife_Sharpness/sharpness.html" />
+  <meta property="og:title" content="Wildlife Sharpness Analysis — Jens Krause" />
+  <meta property="og:description" content="A Lightroom Classic plug-in that picks the sharpest frame out of a burst of wildlife shots." />
+  <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="JK · Jens Krause" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wildlife Sharpness Analysis — Jens Krause" />
+  <meta name="twitter:description" content="A Lightroom Classic plug-in that picks the sharpest frame out of a burst of wildlife shots." />
+  <meta name="twitter:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
+  <title>Wildlife Sharpness Analysis — Jens Krause</title>
+
+  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/tools/LR_Wildlife_Sharpness/sharpness.html" />
+  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/tools/LR_Wildlife_Sharpness/sharpness_de.html" />
+
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-prog" aria-hidden="true"></div>
+
+  <div class="preloader">
+    <div class="pl-inner">Wildlife Sharpness<span class="dot"></span></div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../../en/index.html" class="brand">
+        <span class="brand-dot"></span>
+        <span>Jens Krause</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../../en/work.html">Work</a>
+        <a class="nav-link active" href="../../en/tools.html">Tools</a>
+        <a class="nav-link" href="../../en/photography.html">Photography</a>
+        <a class="nav-link nav-link-contact" href="../../en/contact.html">Contact</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang-switch">
+          <a href="sharpness_de.html">DE</a>
+          <span class="lang-sep">·</span>
+          <span class="lang-active">EN</span>
+        </div>
+        <a class="nav-cta" href="../../en/contact.html">Contact &rarr;</a>
+      </div>
+      <button class="menu-btn" aria-expanded="false" aria-label="Menu">
+        <span class="menu-btn-label">Menu</span>
+        <span class="menu-btn-close" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="../LR_background.jpg" alt="" style="opacity:0.5" />
+    </div>
+    <div class="container hero-content">
+      <div class="section-head" style="align-items:end; margin-bottom: 2.5rem">
+        <div class="meta reveal">
+          <span class="eyebrow">Wildlife Sharpness Analysis</span>
+        </div>
+        <h1 class="h-display reveal delay-1" style="font-size: clamp(3rem, 8vw, 6.5rem)">
+          <em>Culling</em>...<br> made easy.
+        </h1>
+      </div>
+
+      <p class="lead reveal delay-2" style="max-width:62ch">
+        Picks the sharpest frame out of a burst of wildlife shots
+        automatically, so you don&rsquo;t have to zoom into every one
+        yourself. Instead of scoring the whole frame, the plug&#8209;in
+        weights the area the camera actually focused on, which means it
+        gets it right more often than a plain overall sharpness score
+        would.
+        <br>
+        It also accepts stacks as a selection: one sharpest photo gets
+        flagged per stack, which makes it perfect for batch&#8209;processing
+        thousands of photos. Lightroom&rsquo;s &ldquo;Auto&#8209;Stack&rdquo;
+        feature is especially handy here.
+      </p>
+
+      <div class="chip-row reveal delay-3" style="margin-top:1.6rem">
+        <span class="chip">Lightroom Classic Plug&#8209;in</span>
+        <span class="chip">Canon EOS R System</span>
+        <span class="chip">macOS</span>
+      </div>
+
+      <a class="btn gh-badge reveal delay-3" href="https://github.com/jens-krause/WildlifeSharpnessAnalysis.lrplugin" target="_blank" rel="noopener">
+        <img class="gh-icon" src="../../imgs/logos/github_logo_icon.png" alt="" />
+        Star on GitHub
+        <svg class="gh-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m12 3 2.7 5.5 6 .9-4.35 4.25 1.03 6-5.38-2.83L6.62 19.65l1.03-6L3.3 9.4l6-.9L12 3Z" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Tutorial -->
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="section-head">
+        <div class="meta reveal">
+          <span class="eyebrow">Guide</span>
+        </div>
+        <h2 class="h-section reveal delay-1">
+          Three steps to find the <em>sharpest</em> shot.
+        </h2>
+      </div>
+
+      <div class="tut-steps">
+
+        <!-- Step 1 -->
+        <article class="tut-step reveal">
+          <div>
+            <div class="tut-step-num">Step 1</div>
+            <h3>Select or stack</h3>
+            <p>
+              In the Library, select either one or more stacks, or at
+              least two different photos. Then from the menu bar:
+              <br><strong>Library &rarr; Plug&#8209;in Extras &rarr; Pick Sharpest Photo.</strong>
+            </p>
+          </div>
+          <figure class="tut-shot tut-shot--70">
+            <img src="imgs/LR_plugin_start.jpg" alt="Lightroom menu: Library, Plug-in Extras, Wildlife Sharpness Analysis, Pick Sharpest Photo" loading="lazy" />
+            <figcaption>Library &middot; Plug&#8209;in Extras &middot; Wildlife Sharpness Analysis &middot; Pick Sharpest Photo</figcaption>
+          </figure>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="tut-step reveal">
+          <div>
+            <div class="tut-step-num">Step 2</div>
+            <h3>Analysis</h3>
+            <p>
+              For each photo, the embedded preview is extracted, split
+              into an 18&times;12 tile grid, and scored with a Laplacian
+              filter. Tiles inside the camera&rsquo;s autofocus area count
+              three times as much. Depending on the burst size, this
+              takes a few seconds.
+            </p>
+          </div>
+          <figure class="tut-shot tut-shot--50">
+            <img src="imgs/LR_analyse.jpg" alt="Progress indicator for the sharpness analysis in Lightroom" loading="lazy" />
+            <figcaption>Progress indicator during the analysis</figcaption>
+          </figure>
+        </article>
+
+        <!-- Step 3 -->
+        <article class="tut-step reveal">
+          <div>
+            <div class="tut-step-num">Step 3</div>
+            <h3>Result</h3>
+            <p>
+              The sharpest photo in the series automatically gets the
+              Pick flag, all the others are left untouched.
+              <br>
+              <br>No more manually zooming in and mashing back&#8209;and&#8209;forth!
+            </p>
+          </div>
+          <figure class="tut-shot">
+            <img src="imgs/LR_Plugin_result.jpg" alt="Two photos side by side, the right one carries the Pick flag" loading="lazy" />
+            <figcaption>The right photo was marked as the sharpest and receives the Pick&#8209;flag</figcaption>
+          </figure>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why AF-weighting matters -->
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="section-head">
+        <div class="meta reveal">
+          <span class="eyebrow">Background</span>
+        </div>
+      </div>
+
+      <div class="tut-steps">
+        <article class="tut-step reveal">
+          <div>
+            <p style="margin-bottom:1.2rem">
+              A plain sharpness score across the whole frame isn&rsquo;t
+              enough. In the comparison on the right, the left photo has
+              more sharp area overall &ndash; here, because the feathers
+              and beak provide plenty of fine edges &ndash; but the focus
+              actually sits on the beak instead of the eye. The right
+              photo has a shallower depth of field, yet exactly the area
+              under the AF&#8209;point &ndash; the eye &ndash; is sharp.
+            </p>
+            <p>
+              That&rsquo;s why the plug&#8209;in weights the tile covered
+              by autofocus three times before averaging the three
+              sharpest tiles. If the actually sharpest tiles lie outside
+              the AF&#8209;area &ndash; say, because the focus drifted
+              &ndash; they can still outweigh a triple&#8209;weighted
+              background tile.
+            </p>
+          </div>
+          <figure class="tut-shot">
+            <img src="imgs/LR_zoom_compare.jpg" alt="Zoomed comparison of two photos: left more sharp area at the beak, right a sharp eye" loading="lazy" />
+            <figcaption>Left: more sharp area overall, but the beak is in focus. Right: shallower depth of field, but the sharpness sits exactly on the AF&#8209;point &ndash; the eye.</figcaption>
+          </figure>
+        </article>
+      </div>
+
+      <p style="color:var(--text-muted); line-height:1.7; margin-top:2.5rem">A small side note: the hardest part of putting this tutorial together was actually shooting a photo with the R5 II where the focus misses entirely&hellip; I built this plug&#8209;in because I usually end up with 100+ photos of the same scene that are all sharp. Its real job is spotting the tiny differences in that sharpness ranking and flagging the single best frame out of hundreds of good ones.</p>
+    </div>
+  </section>
+
+  <!-- Requirements + CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:2rem">
+        <div class="meta reveal">
+          <span class="eyebrow">Requirements</span>
+        </div>
+      </div>
+      <div class="chip-row reveal delay-2">
+        <span class="chip">Lightroom Classic</span>
+        <span class="chip">Python 3 (numpy, Pillow)</span>
+        <span class="chip">exiftool</span>
+        <span class="chip">macOS</span>
+      </div>
+      <div class="reveal delay-3" style="margin-top:2rem">
+        <a class="btn btn-primary" href="https://github.com/jens-krause/WildlifeSharpnessAnalysis.lrplugin" target="_blank" rel="noopener">Source code &amp; installation on GitHub <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem">
+      <span>&copy; 2026 Jens Krause</span>
+      <div class="footer-legal">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+      </div>
+      <div class="ai-callout" role="note">
+        <span class="ai-callout-icon" aria-hidden="true"></span>
+        <p class="ai-callout-text">Parts of this website were generated using AI.</p>
+      </div>
+      <p class="footer-credit"><svg class="footer-credit-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.5 6 .9-4.35 4.25 1.03 6-5.38-2.83L6.62 19.65l1.03-6L3.3 9.4l6-.9L12 3Z" /></svg>Github logo Icon by nerdy besky on <a href="https://icon-icons.com/authors/1311-nerdy-besky" target="_blank" rel="noopener">Icon-Icons.com</a></p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

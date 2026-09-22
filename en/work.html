@@ -8,7 +8,7 @@
   <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
   <meta property="og:site_name" content="Jens Krause" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jens-krause.github.io/work.html" />
+  <meta property="og:url" content="https://jens-krause.github.io/en/work.html" />
   <meta property="og:title" content="Work — Jens Krause" />
   <meta property="og:description" content="Selected scientific work — research in computational ecology, model coupling, and data science." />
   <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
@@ -25,14 +25,17 @@
   <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
   <title>Work — Jens Krause</title>
 
-  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/work.html" />
-  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/de/work.html" />
+  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/en/work.html" />
+  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/arbeit.html" />
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../styles/main.css" />
 </head>
 <body class="page-work">
+
+  <!-- Scroll progress -->
+  <div class="scroll-prog" aria-hidden="true"></div>
 
   <div class="preloader">
     <div class="pl-inner">Work<span class="dot"></span></div>
@@ -45,17 +48,19 @@
         <span>Jens Krause</span>
       </a>
       <div class="nav-links">
-        <a class="nav-link" href="index.html">Overview</a>
         <a class="nav-link active" href="work.html">Work</a>
+        <a class="nav-link" href="tools.html">Tools</a>
         <a class="nav-link" href="photography.html">Photography</a>
         <a class="nav-link nav-link-contact" href="contact.html">Contact</a>
       </div>
-      <div class="lang-switch">
-        <span class="lang-active">EN</span>
-        <span class="lang-sep">·</span>
-        <a href="de/work.html">DE</a>
+      <div class="nav-right">
+        <div class="lang-switch">
+          <a href="../arbeit.html">DE</a>
+          <span class="lang-sep">·</span>
+          <span class="lang-active">EN</span>
+        </div>
+        <a class="nav-cta" href="contact.html">Contact &rarr;</a>
       </div>
-      <a class="nav-cta" href="contact.html">Contact &rarr;</a>
       <button class="menu-btn" aria-expanded="false" aria-label="Menu">
         <span class="menu-btn-label">Menu</span>
         <span class="menu-btn-close" aria-hidden="true">&times;</span>
@@ -66,7 +71,7 @@
   <!-- Page hero -->
   <header class="hero" style="min-height: 88svh; padding-top: 9rem;">
     <div class="hero-bg">
-      <img src="imgs/backgrounds/keyboard.jpg" alt="" />
+      <img src="../imgs/backgrounds/keyboard.jpg" alt="" />
     </div>
     <div class="container hero-content">
       <div class="eyebrow hero-eyebrow reveal">Professional work · 2018 — today</div>
@@ -82,21 +87,7 @@
       </p>
 
       <div class="hero-bottom-row reveal delay-3">
-        <div class="hq-app-row">
-          <a class="hq-app-banner" href="tools/herbIQ/herbiq.html">
-            <div class="hq-app-banner-icon">
-              <img src="tools/herbIQ/icons/herbIQ_icon.png" alt="herbIQ app icon" />
-            </div>
-            <div class="hq-app-banner-text">
-              <div class="hq-app-banner-eyebrow">Newly developed App & Web-Tool</div>
-              <div class="hq-app-banner-title">herbIQ for macOS &amp; Windows</div>
-              <div class="hq-app-banner-sub">
-                Lightweight use &middot; No model data needed<br>
-                Pre-trained machine-learning Estimator
-              </div>
-            </div>
-          </a>
-        </div>
+        <div></div>
         <div class="scroll-cue">
           <span>Scroll</span>
           <span class="line"></span>
@@ -106,8 +97,298 @@
     </div>
   </header>
 
-  <!-- Skills / Stack -->
+  <!-- Full Timeline -->
   <section class="section" style="padding-top: 5rem">
+    <div class="container">
+      <div class="section-head">
+        <div class="meta reveal">
+          <span class="eyebrow">Selected milestones</span>
+        </div>
+        <h2 class="h-section reveal delay-1">
+          The story, <em>chronological.</em>
+        </h2>
+      </div>
+
+      <div class="tl">
+        <div class="tl-axis"></div>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb" style="background: transparent; border: none; overflow: visible; aspect-ratio: 1;">
+              <img src="../tools/herbIQ/icons/herbIQ_icon.png" alt="herbIQ app icon" style="object-fit: contain; width: 100%; height: 100%;" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">June 2026 · Browser-based tool</div>
+              <h3><span style="color:var(--accent-warm)"><em>released</em></span> - herbIQ, an interactive ecosystem estimator</h3>
+              <p>
+                Trained a machine&#8209;learning regressor on coupled LPJ&#8209;GUESS &times; Madingley
+                simulation output: this hands&#8209;on tool compress
+                the multi&#8209;trophic ecosystem response down to six sliders
+                covering herbivore biomass, abundance and climate.
+                Predictions for NPP, leaf biomass and
+                herbivory pressure update in real time.
+              </p>
+              <p>
+                Built as a self&#8209;contained desktop application for macOS
+                and Windows first, then distilled into a single 3.3&nbsp;MB ONNX
+                package that runs entirely client&#8209;side via
+                <em>onnxruntime&#8209;web</em> - no backend, no telemetry.
+                The web preview lets curious readers play with the model
+                directly in the browser; the native desktop build offers additional features.
+              </p>
+              <div class="tags">
+                <span class="chip">Machine Learning</span>
+                <span class="chip">Web-based Tool</span>
+                <span class="chip">native macOS &amp; Windows App</span>
+              </div>
+              <a class="link-arrow" href="../tools/herbIQ/herbiq.html">Try it in your browser<span class="arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2025_Paper.jpg" alt="Paper 2025" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">December 2025 · Geoscientific Model Development</div>
+              <h3><span style="color:var(--accent-warm)"><em>published</em></span> - Full Coupling of LPJ-GUESS and Madingley</h3>
+              <p>
+                The culmination of years of model development: a first&#8209;author
+                paper in <em>Geoscientific Model Development</em> introducing the
+                fully coupled LPJ&#8209;GUESS &times; Madingley system.
+                The work documents a multi&#8209;platform interface that lets the dynamic
+                vegetation model and the food&#8209;web simulator exchange leaf
+                biomass, herbivory pressure as fluxes - closing the loop between plant productivity
+                and animal communities.
+              </p>
+              <p>
+                In simple terms: trees and grasses respond to the animals that
+                eat them, and animals respond to the vegetation they live in
+                - in the same simulation, at large scale. This opens the
+                door to studying biodiversity feedbacks under climate change at
+                scales that neither model could reach on its own.
+              </p>
+              <div class="tags">
+                <span class="chip">Peer&#8209;reviewed Paper</span>
+                <span class="chip">First author</span>
+                <span class="chip">Open access</span>
+              </div>
+              <a class="link-arrow" href="https://doi.org/10.5194/gmd-18-9633-2025" target="_blank" rel="noopener">Read the paper <span class="arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2025_Promotion.jpg" alt="Promotion at KIT" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">April 2025 · Karlsruhe</div>
+              <h3>Doctorate <span style="color:var(--accent-warm)"><em>"dr. rer. nat."</em></span> at KIT</h3>
+              <p>
+                I defended my dissertation - <em>&ldquo;Ecosystem Feedback
+                from Animal&#8209;Vegetation Interactions: A Modeling
+                Approach&rdquo;</em> - before an expert committee at the
+                Karlsruhe Institute of Technology. The thesis pulls together
+                six years of work on coupled ecosystem modelling and reshapes
+                how vegetation and animal communities can be simulated as a
+                single dynamic system.
+              </p>
+              <p>
+                Awarded <span style="color:var(--accent-cool)"><em>magna cum
+                laude</em></span>. A milestone I&rsquo;ll be proud of for a long
+                time, and the formal close to an intense, formative chapter
+                that started in 2018 with the first attempts at making
+                LPJ&#8209;GUESS and Madingley talk to each other.
+              </p>
+              <div class="tags">
+                <span class="chip">PhD Defence</span>
+                <span class="chip">KIT Karlsruhe</span>
+                <span class="chip">magna cum laude</span>
+              </div>
+              <a class="link-arrow" href="https://publikationen.bibliothek.kit.edu/1000181355" target="_blank" rel="noopener">Read the thesis <span class="arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2023_Poster_ECEM.jpg" alt="ECEM 2023 Poster" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">September 2023 · Leipzig</div>
+              <h3>Poster - European Conference of Ecological Modelling 2023</h3>
+              <p>
+                Presented the in&#8209;progress version of the fully coupled LPJ&#8209;GUESS
+                &times; Madingley model system at ECEM in Leipzig - the
+                largest gathering of ecological modellers in Europe. The poster
+                walked through the coupling interface, the first validation results
+                against standalone runs and the open questions that the final version 
+                needs to solve.
+              </p>
+              <p>
+                This turned into two highly productive days: long conversations with competitive groups that are working
+                on similar multi&#8209;trophic couplings and sharp feedback
+                that directly shaped the emerging GMD paper.
+              </p>
+              <div class="tags">
+                <span class="chip">Poster Presentation</span>
+                <span class="chip">ECEM 2023</span>
+                <span class="chip">Leipzig</span>
+                <span class="chip">Coupled modelling</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2023_FoM.jpg" alt="Friends of Madingley Meeting" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">July 2023 · Garmisch&#8209;Partenkirchen</div>
+              <h3>Organised the Friends of Madingley Meeting</h3>
+              <p>
+                After attending the 2019 edition in Cambridge, I pushed the idea of 
+                a post&#8209;pandemic relaunch of the
+                <em>Friends of Madingley</em> meeting - a small, focused
+                gathering of everyone developing or applying
+                the Madingley model.
+              </p>
+              <p>
+                I drafted the multi&#8209;day agenda, ran the logistics for the
+                meeting at KIT&rsquo;s Campus Alpin in Garmisch and co&#8209;chaired
+                the sessions together with Almut Arneth. Running it end&#8209;to&#8209;end
+                taught me as much about scientific community&#8209;building, time
+                management and quiet quick-fixes as it did about the model itself.
+              </p>
+              <div class="tags">
+                <span class="chip">Organisation</span>
+                <span class="chip">Co&#8209;chair</span>
+                <span class="chip">Community building</span>
+                <span class="chip">KIT Campus Alpin</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2022_Paper.jpg" alt="Paper 2022" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">September 2022 · Ecological Modelling</div>
+              <h3><span style="color:var(--accent-warm)"><em>published</em></span> - One-Way Coupling of LPJ&#8209;GUESS and Madingley</h3>
+              <p>
+                Published in <em>Ecological Modelling</em> (Issue 471), this
+                first&#8209;author paper presents the one&#8209;way coupling: 
+                how the dynamic global vegetation simulated by
+                LPJ&#8209;GUESS can be used as inputs for Madingley
+                to run its food&#8209;web simulation.
+              </p>
+              <p>
+                The article documents the coupling interface, validates the coupled
+                outputs against the standalone Madingley defaults and discusses
+                the limitations that motivated the later full
+                coupling. This is a solid foundation to build upon.
+              </p>
+              <div class="tags">
+                <span class="chip">Peer&#8209;reviewed Paper</span>
+                <span class="chip">First author</span>
+                <span class="chip">Open access</span>
+                <span class="chip">Ecological Modelling 471</span>
+              </div>
+              <a class="link-arrow" href="https://doi.org/10.1016/j.ecolmodel.2022.110061" target="_blank" rel="noopener">Read the paper <span class="arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2021_Poster_WBF.jpg" alt="Davos Biodiversity" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">February 2020 · Davos</div>
+              <h3>Poster Session at the World Biodiversity Forum</h3>
+              <p>
+                My first major international conference - and what an introduction it was.
+                I presented an early version of the LPJ&#8209;GUESS &times; Madingley coupling at the
+                inaugural World Biodiversity Forum in Davos, an interdisciplinary initiative
+                hosted at the same venue as the World Economic Forum.
+              </p>
+              <p>
+                Sharing a room with researchers whose papers I had been reading for years was
+                both intimidating and inspiring. During the poster session, my assumptions about the model 
+                were critically challenged, which broadened my perspective on potential real&#8209;world 
+                applications. The panel discussions
+                that followed were equally memorable: hearing leading scientists reflect on
+                their work, and on how political decisions shape both research and academic
+                careers, left a lasting impression on me.
+              </p>
+              <div class="tags">
+                <span class="chip">Poster Presentation</span>
+                <span class="chip">WBF 2020</span>
+                <span class="chip">Davos</span>
+                <span class="chip">First major conference</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-thumb">
+              <img src="../imgs/science_fotos/vertical/2018_Master.jpg" alt="Davos Biodiversity" />
+            </div>
+            <div class="tl-info">
+              <div class="yr">Mai 2018 · Hanover</div>
+              <h3>Completed my <span style="color:var(--accent-warm)"><em>M.Sc.</em></span> in Theoretical Meteorology</h3>
+              <p>
+                Earned my Master of Science in Meteorology at Leibniz
+                Universit&auml;t Hannover. After developing a digital
+                weather&#8209;forecast information panel as my Bachelor&rsquo;s
+                project, the Master&rsquo;s thesis took me into the numerical
+                end of meteorology: Large&#8209;Eddy Simulations of surface
+                heterogeneities - modelling how patchy land surfaces
+                (forests, urban areas, mixed fields) shape turbulence in the lowest layers of the
+                atmosphere during the LITFASS-experiments.
+              </p>
+              <p>
+                The skills that mattered most - reading complex numerical codes,
+                running high&#8209;resolution simulations, and quietly
+                debugging them - turned out to transfer almost one&#8209;to&#8209;one
+                into my later work.
+              </p>
+              <div class="tags">
+                <span class="chip">M.Sc. Meteorology</span>
+                <span class="chip">Large&#8209;Eddy Simulation</span>
+                <span class="chip">Leibniz Uni Hannover</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills / Stack -->
+  <section class="section" style="padding-top: 2rem">
     <div class="container">
       <div class="section-head">
         <div class="meta reveal">
@@ -158,296 +439,6 @@
     </div>
   </section>
 
-  <!-- Full Timeline -->
-  <section class="section" style="padding-top: 2rem">
-    <div class="container">
-      <div class="section-head">
-        <div class="meta reveal">
-          <span class="eyebrow">Selected milestones</span>
-        </div>
-        <h2 class="h-section reveal delay-1">
-          The story, <em>chronological.</em>
-        </h2>
-      </div>
-
-      <div class="tl">
-        <div class="tl-axis"></div>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb" style="background: transparent; border: none; overflow: visible; aspect-ratio: 1;">
-              <img src="tools/herbIQ/icons/herbIQ_icon.png" alt="herbIQ app icon" style="object-fit: contain; width: 100%; height: 100%;" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">June 2026 · Browser-based tool</div>
-              <h3><span style="color:var(--accent-warm)"><em>released</em></span> - herbIQ, an interactive ecosystem estimator</h3>
-              <p>
-                Trained a machine&#8209;learning regressor on coupled LPJ&#8209;GUESS &times; Madingley
-                simulation output: this hands&#8209;on tool compress
-                the multi&#8209;trophic ecosystem response down to six sliders
-                covering herbivore biomass, abundance and climate.
-                Predictions for NPP, leaf biomass and
-                herbivory pressure update in real time.
-              </p>
-              <p>
-                Built as a self&#8209;contained desktop application for macOS
-                and Windows first, then distilled into a single 3.3&nbsp;MB ONNX
-                package that runs entirely client&#8209;side via
-                <em>onnxruntime&#8209;web</em> - no backend, no telemetry.
-                The web preview lets curious readers play with the model
-                directly in the browser; the native desktop build offers additional features.
-              </p>
-              <div class="tags">
-                <span class="chip">Machine Learning</span>
-                <span class="chip">Web-based Tool</span>
-                <span class="chip">native macOS &amp; Windows App</span>
-              </div>
-              <a class="link-arrow" href="tools/herbIQ/herbiq.html">Try it in your browser<span class="arrow">&rarr;</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2025_Paper.jpg" alt="Paper 2025" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">December 2025 · Geoscientific Model Development</div>
-              <h3><span style="color:var(--accent-warm)"><em>published</em></span> - Full Coupling of LPJ-GUESS and Madingley</h3>
-              <p>
-                The culmination of years of model development: a first&#8209;author
-                paper in <em>Geoscientific Model Development</em> introducing the
-                fully coupled LPJ&#8209;GUESS &times; Madingley system.
-                The work documents a multi&#8209;platform interface that lets the dynamic
-                vegetation model and the food&#8209;web simulator exchange leaf
-                biomass, herbivory pressure as fluxes - closing the loop between plant productivity
-                and animal communities.
-              </p>
-              <p>
-                In simple terms: trees and grasses respond to the animals that
-                eat them, and animals respond to the vegetation they live in
-                - in the same simulation, at large scale. This opens the
-                door to studying biodiversity feedbacks under climate change at
-                scales that neither model could reach on its own.
-              </p>
-              <div class="tags">
-                <span class="chip">Peer&#8209;reviewed Paper</span>
-                <span class="chip">First author</span>
-                <span class="chip">Open access</span>
-              </div>
-              <a class="link-arrow" href="https://doi.org/10.5194/gmd-18-9633-2025" target="_blank" rel="noopener">Read the paper <span class="arrow">&rarr;</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2025_Promotion.jpg" alt="Promotion at KIT" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">April 2025 · Karlsruhe</div>
-              <h3>Doctorate <span style="color:var(--accent-warm)"><em>"dr. rer. nat."</em></span> at KIT</h3>
-              <p>
-                I defended my dissertation - <em>&ldquo;Ecosystem Feedback
-                from Animal&#8209;Vegetation Interactions: A Modeling
-                Approach&rdquo;</em> - before an expert committee at the
-                Karlsruhe Institute of Technology. The thesis pulls together
-                six years of work on coupled ecosystem modelling and reshapes
-                how vegetation and animal communities can be simulated as a
-                single dynamic system.
-              </p>
-              <p>
-                Awarded <span style="color:var(--accent-cool)"><em>magna cum
-                laude</em></span>. A milestone I&rsquo;ll be proud of for a long
-                time, and the formal close to an intense, formative chapter
-                that started in 2018 with the first attempts at making
-                LPJ&#8209;GUESS and Madingley talk to each other.
-              </p>
-              <div class="tags">
-                <span class="chip">PhD Defence</span>
-                <span class="chip">KIT Karlsruhe</span>
-                <span class="chip">magna cum laude</span>
-              </div>
-              <a class="link-arrow" href="https://publikationen.bibliothek.kit.edu/1000181355" target="_blank" rel="noopener">Read the thesis <span class="arrow">&rarr;</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2023_Poster_ECEM.jpg" alt="ECEM 2023 Poster" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">September 2023 · Leipzig</div>
-              <h3>Poster - European Conference of Ecological Modelling 2023</h3>
-              <p>
-                Presented the in&#8209;progress version of the fully coupled LPJ&#8209;GUESS
-                &times; Madingley model system at ECEM in Leipzig - the
-                largest gathering of ecological modellers in Europe. The poster
-                walked through the coupling interface, the first validation results
-                against standalone runs and the open questions that the final version 
-                needs to solve.
-              </p>
-              <p>
-                This turned into two highly productive days: long conversations with competitive groups that are working
-                on similar multi&#8209;trophic couplings and sharp feedback
-                that directly shaped the emerging GMD paper.
-              </p>
-              <div class="tags">
-                <span class="chip">Poster Presentation</span>
-                <span class="chip">ECEM 2023</span>
-                <span class="chip">Leipzig</span>
-                <span class="chip">Coupled modelling</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2023_FoM.jpg" alt="Friends of Madingley Meeting" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">July 2023 · Garmisch&#8209;Partenkirchen</div>
-              <h3>Organised the Friends of Madingley Meeting</h3>
-              <p>
-                After attending the 2019 edition in Cambridge, I pushed the idea of 
-                a post&#8209;pandemic relaunch of the
-                <em>Friends of Madingley</em> meeting - a small, focused
-                gathering of everyone developing or applying
-                the Madingley model.
-              </p>
-              <p>
-                I drafted the multi&#8209;day agenda, ran the logistics for the
-                meeting at KIT&rsquo;s Campus Alpin in Garmisch and co&#8209;chaired
-                the sessions together with Almut Arneth. Running it end&#8209;to&#8209;end
-                taught me as much about scientific community&#8209;building, time
-                management and quiet quick-fixes as it did about the model itself.
-              </p>
-              <div class="tags">
-                <span class="chip">Organisation</span>
-                <span class="chip">Co&#8209;chair</span>
-                <span class="chip">Community building</span>
-                <span class="chip">KIT Campus Alpin</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2022_Paper.jpg" alt="Paper 2022" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">September 2022 · Ecological Modelling</div>
-              <h3><span style="color:var(--accent-warm)"><em>published</em></span> - One-Way Coupling of LPJ&#8209;GUESS and Madingley</h3>
-              <p>
-                Published in <em>Ecological Modelling</em> (Issue 471), this
-                first&#8209;author paper presents the one&#8209;way coupling: 
-                how the dynamic global vegetation simulated by
-                LPJ&#8209;GUESS can be used as inputs for Madingley
-                to run its food&#8209;web simulation.
-              </p>
-              <p>
-                The article documents the coupling interface, validates the coupled
-                outputs against the standalone Madingley defaults and discusses
-                the limitations that motivated the later full
-                coupling. This is a solid foundation to build upon.
-              </p>
-              <div class="tags">
-                <span class="chip">Peer&#8209;reviewed Paper</span>
-                <span class="chip">First author</span>
-                <span class="chip">Open access</span>
-                <span class="chip">Ecological Modelling 471</span>
-              </div>
-              <a class="link-arrow" href="https://doi.org/10.1016/j.ecolmodel.2022.110061" target="_blank" rel="noopener">Read the paper <span class="arrow">&rarr;</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2021_Poster_WBF.jpg" alt="Davos Biodiversity" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">February 2020 · Davos</div>
-              <h3>Poster Session at the World Biodiversity Forum</h3>
-              <p>
-                My first major international conference - and what an introduction it was.
-                I presented an early version of the LPJ&#8209;GUESS &times; Madingley coupling at the
-                inaugural World Biodiversity Forum in Davos, an interdisciplinary initiative
-                hosted at the same venue as the World Economic Forum.
-              </p>
-              <p>
-                Sharing a room with researchers whose papers I had been reading for years was
-                both intimidating and inspiring. During the poster session, my assumptions about the model 
-                were critically challenged, which broadened my perspective on potential real&#8209;world 
-                applications. The panel discussions
-                that followed were equally memorable: hearing leading scientists reflect on
-                their work, and on how political decisions shape both research and academic
-                careers, left a lasting impression on me.
-              </p>
-              <div class="tags">
-                <span class="chip">Poster Presentation</span>
-                <span class="chip">WBF 2020</span>
-                <span class="chip">Davos</span>
-                <span class="chip">First major conference</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-body">
-            <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2018_Master.jpg" alt="Davos Biodiversity" />
-            </div>
-            <div class="tl-info">
-              <div class="yr">Mai 2018 · Hanover</div>
-              <h3>Completed my <span style="color:var(--accent-warm)"><em>M.Sc.</em></span> in Theoretical Meteorology</h3>
-              <p>
-                Earned my Master of Science in Meteorology at Leibniz
-                Universit&auml;t Hannover. After developing a digital
-                weather&#8209;forecast information panel as my Bachelor&rsquo;s
-                project, the Master&rsquo;s thesis took me into the numerical
-                end of meteorology: Large&#8209;Eddy Simulations of surface
-                heterogeneities - modelling how patchy land surfaces
-                (forests, urban areas, mixed fields) shape turbulence in the lowest layers of the
-                atmosphere during the LITFASS-experiments.
-              </p>
-              <p>
-                The skills that mattered most - reading complex numerical codes,
-                running high&#8209;resolution simulations, and quietly
-                debugging them - turned out to transfer almost one&#8209;to&#8209;one
-                into my later work.
-              </p>
-              <div class="tags">
-                <span class="chip">M.Sc. Meteorology</span>
-                <span class="chip">Large&#8209;Eddy Simulation</span>
-                <span class="chip">Leibniz Uni Hannover</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="section">
     <div class="container">
@@ -465,8 +456,8 @@
     <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem">
       <span>&copy; 2026 Jens Krause</span>
       <div class="footer-legal">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
       </div>
       <div class="ai-callout" role="note">
         <span class="ai-callout-icon" aria-hidden="true"></span>
@@ -475,6 +466,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>
