@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Motorradtouren von Jens Krause &ndash; GPS-Tracks eigener Touren, interaktiv auf der Karte, ohne externe Kartendienste." />
+
+  <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
+  <meta property="og:site_name" content="Jens Krause" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jens-krause.github.io/tools/Motorradtouren/motorradtouren_de.html" />
+  <meta property="og:title" content="Motorradtouren &ndash; Jens Krause" />
+  <meta property="og:description" content="GPS-Tracks eigener Motorradtouren, interaktiv auf der Karte." />
+  <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="JK · Jens Krause" />
+  <meta property="og:locale" content="de_DE" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Motorradtouren &ndash; Jens Krause" />
+  <meta name="twitter:description" content="GPS-Tracks eigener Motorradtouren, interaktiv auf der Karte." />
+  <meta name="twitter:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
+  <title>Motorradtouren &ndash; Jens Krause</title>
+
+  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/tools/Motorradtouren/motorradtouren_de.html" />
+  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/tools/Motorradtouren/motorradtouren.html" />
+
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="motorradtouren.css" />
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-prog" aria-hidden="true"></div>
+
+  <div class="preloader">
+    <div class="pl-inner">Motorradtouren<span class="dot"></span></div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-dot"></span>
+        <span>Jens Krause</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../../arbeit.html">Arbeit</a>
+        <a class="nav-link active" href="../../werkzeuge.html">Werkzeuge</a>
+        <a class="nav-link" href="../../fotografie.html">Fotografie</a>
+        <a class="nav-link nav-link-contact" href="../../kontakt.html">Kontakt</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang-switch">
+          <span class="lang-active">DE</span>
+          <span class="lang-sep">·</span>
+          <a href="motorradtouren.html">EN</a>
+        </div>
+        <a class="nav-cta" href="../../kontakt.html">Kontakt &rarr;</a>
+      </div>
+      <button class="menu-btn" aria-expanded="false" aria-label="Menü">
+        <span class="menu-btn-label">Menü</span>
+        <span class="menu-btn-close" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 11rem; padding-bottom: 2.5rem">
+    <div class="container">
+      <div class="section-head" style="align-items:end; margin-bottom: 2rem">
+        <div class="meta reveal">
+          <span class="eyebrow">Motorradtouren</span>
+        </div>
+        <h1 class="h-display reveal delay-1" style="font-size: clamp(2.6rem, 6vw, 4.5rem)">
+          Wo ich <em>unterwegs</em> war
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="tour-layout">
+        <div class="tour-list reveal delay-2" id="tour-list">
+          <div class="tour-empty">Lade Touren&hellip;</div>
+        </div>
+        <div class="tour-map-wrap reveal delay-3" id="tour-map-wrap">
+          <div id="tour-map"></div>
+          <div class="tour-map-empty" id="tour-map-empty">Noch keine Kartenausschnitte verfügbar.</div>
+          <a class="map-download-btn" id="tour-download" href="#" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14" />
+            </svg>
+            GPX
+          </a>
+          <div class="map-zoom-ctrl">
+            <button class="map-zoom-btn" id="tour-zoom-in" type="button" aria-label="Reinzoomen">+</button>
+            <button class="map-zoom-btn" id="tour-zoom-out" type="button" aria-label="Rauszoomen">&minus;</button>
+            <button class="map-zoom-btn" id="tour-zoom-reset" type="button" aria-label="Ansicht zurücksetzen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 1 2.6 6.4" />
+                <path d="M3 8v5h5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <p class="reveal delay-2" style="max-width:820px; color:var(--text-muted); line-height:1.7">
+        Eigene GPS-Tracks, direkt auf der Karte &ndash; die Kartenausschnitte liegen lokal auf dieser Seite, es werden keine externen Kartendienste geladen.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem">
+      <span>&copy; 2026 Jens Krause</span>
+      <div class="footer-legal">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+      </div>
+      <div class="ai-callout" role="note">
+        <span class="ai-callout-icon" aria-hidden="true"></span>
+        <p class="ai-callout-text">Teile dieser Website wurden mit KI generiert.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="motorradtouren.js"></script>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

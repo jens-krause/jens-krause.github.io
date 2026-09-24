@@ -1,0 +1,76 @@
+{
+  "tours": [
+    {
+      "id": "dolomitenrundtour",
+      "title": "Dolomiten Rundtour 2023",
+      "stars": 3,
+      "distance_km": 314.6,
+      "elevation_gain_m": 12551,
+      "gpx": "data/gpx/Dolomitenrundtour.gpx",
+      "geo": "data/geo/dolomitenrundtour.json",
+      "bounds": [
+        [
+          46.42125,
+          11.32707
+        ],
+        [
+          46.76159,
+          12.25418
+        ]
+      ],
+      "zoom_levels": [
+        10,
+        12,
+        14
+      ]
+    },
+    {
+      "id": "kuehtaisattel",
+      "title": "Wetterstein und Kühtaisattel",
+      "stars": 2,
+      "distance_km": 169.6,
+      "elevation_gain_m": 4707,
+      "gpx": "data/gpx/Kuehtaisattel.gpx",
+      "geo": "data/geo/kuehtaisattel.json",
+      "bounds": [
+        [
+          47.15708,
+          10.81756
+        ],
+        [
+          47.49386,
+          11.27048
+        ]
+      ],
+      "zoom_levels": [
+        10,
+        12,
+        14
+      ]
+    },
+    {
+      "id": "namlostal-hahntennjoch",
+      "title": "Namlostal und Hahntennjoch",
+      "stars": 2,
+      "distance_km": 96.9,
+      "elevation_gain_m": 3388,
+      "gpx": "data/gpx/Namlostal+Hahntennjoch.gpx",
+      "geo": "data/geo/namlostal-hahntennjoch.json",
+      "bounds": [
+        [
+          47.24612,
+          10.53244
+        ],
+        [
+          47.42032,
+          10.89165
+        ]
+      ],
+      "zoom_levels": [
+        11,
+        12,
+        14
+      ]
+    }
+  ]
+}

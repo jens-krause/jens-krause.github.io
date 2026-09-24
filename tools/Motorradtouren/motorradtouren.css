@@ -1,0 +1,174 @@
+/* -------- Motorradtouren (tour list + Leaflet map) --------
+   Page-specific: none of these classes are reused elsewhere on the site,
+   so they live here instead of in the shared styles/main.css.
+
+   Tiles are a self-hosted global pool (tiles/{z}/{x}/{y}.png, shared
+   across all tours, deduped by coordinate) — no external map requests
+   at runtime. See scripts/build_tiles.py. Uses tokens (--border, --radius,
+   --accent-warm, etc.) defined in :root in main.css, which loads first. */
+
+.tour-layout {
+  display: grid;
+  /* Cards only fill 85% of the list column's own width (.tour-card), so
+     the column itself is narrowed by the same amount here - that reclaims
+     the dead 15% strip for the map instead of just leaving it as extra
+     gap between the two. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.53fr);
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .tour-layout { grid-template-columns: 1fr; }
+}
+
+.tour-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-height: clamp(420px, 62vh, 680px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 0.4rem 4px 0;
+}
+@media (max-width: 860px) {
+  .tour-list { max-height: none; overflow-y: visible; }
+}
+
+.tour-card {
+  display: block;
+  width: 85%;
+  text-align: left;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.tour-card:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.tour-card.is-active {
+  border-color: var(--accent-warm);
+  background: var(--surface-strong);
+}
+.tour-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 0.6rem;
+}
+.tour-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.tour-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.tour-card-stars { display: flex; gap: 0.2rem; flex-shrink: 0; }
+.tour-card-stars svg {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  fill: none;
+  color: var(--text-dim);
+}
+.tour-card-stars svg.is-filled { color: var(--accent-warm); fill: currentColor; }
+
+.tour-empty {
+  padding: 2rem 1.3rem;
+  border-radius: var(--radius);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.tour-map-wrap {
+  position: relative;
+  height: clamp(420px, 62vh, 680px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+@media (max-width: 860px) {
+  .tour-map-wrap { height: 60vh; min-height: 360px; }
+}
+#tour-map { position: absolute; inset: 0; }
+
+.tour-map-empty {
+  position: absolute;
+  inset: 1.5rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg-2);
+  z-index: 400;
+}
+.tour-map-wrap.is-empty .tour-map-empty { display: flex; }
+.tour-map-wrap.is-empty .map-download-btn,
+.tour-map-wrap.is-empty .map-zoom-ctrl { display: none; }
+
+.map-download-btn {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #12141a;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.map-download-btn:hover { background: #fff; transform: translateY(-2px); }
+.map-download-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.map-download-btn[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
+
+.map-zoom-ctrl {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.map-zoom-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #12141a;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.map-zoom-btn:hover { background: #fff; transform: translateY(-2px); }
+.map-zoom-btn svg { width: 15px; height: 15px; }

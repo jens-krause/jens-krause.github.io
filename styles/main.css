@@ -566,60 +566,6 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
 }
 .btn:hover .arrow { transform: translateX(4px); }
 
-/* -------- GitHub badge (LR Wildlife Sharpness Analysis hero) --------
-   Anchored to the bottom-right corner of .hero-content (the text column),
-   so it stays put next to the copy. Deliberately NOT anchored to .hero or
-   the viewport: the hero photo parallax-scrolls, so anything in the image
-   is a moving target to line up against.
-
-   Skinned light on purpose. The GitHub PNG is a black disc with the
-   Octocat knocked out in white, so it needs a light surface underneath to
-   be legible — recolouring it with a filter can't work, since inverting
-   turns the white cat black too and the mark collapses into a plain disc.
-   Declared after .btn above, so these win at equal specificity. */
-.gh-badge {
-  position: absolute;
-  right: var(--gutter);
-  bottom: 0;
-  z-index: 2;
-  padding: 0.65rem 1.25rem 0.65rem 0.8rem;
-  gap: 0.6rem;
-  color: #12141a;
-  border-color: rgba(255, 255, 255, 0.55);
-  background: linear-gradient(140deg,
-              rgba(255, 255, 255, 0.94) 0%,
-              rgba(214, 219, 230, 0.80) 100%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.gh-badge:hover {
-  background: linear-gradient(140deg,
-              rgba(255, 255, 255, 1) 0%,
-              rgba(228, 232, 240, 0.94) 100%);
-  border-color: rgba(255, 255, 255, 0.8);
-  transform: translateY(-2px);
-}
-.gh-badge .gh-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-.gh-badge .gh-star {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  color: currentColor;
-}
-@media (max-width: 700px) {
-  /* No room to float a badge over the photo at this width without it
-     colliding with the heading — drop it into normal flow instead,
-     right after the chip row it sits next to in the markup. */
-  .gh-badge {
-    position: static;
-    margin-top: 1.6rem;
-  }
-}
-
 /* -------- Hero -------- */
 .hero {
   position: relative;
@@ -1623,97 +1569,6 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   .hero-bottom-row > div:last-child { display: none; }
 }
 
-/* -------- Tool tutorial (screenshots + numbered steps) --------
-   Used on the Wildlife Sharpness Analysis pages. Screenshots have wildly
-   different aspect ratios (a thin progress-bar crop vs. a wide side-by-side
-   comparison), so images are shown at natural size (object-fit isn't
-   needed) inside a padded frame, never force-cropped like the photography
-   .guide-figure treatment. */
-.tut-steps {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(3rem, 6vw, 5rem);
-}
-/* Flex, not grid: with a grid, capping .tut-shot's own width just moves
-   it inside an otherwise-untouched track, leaving the text column exactly
-   as narrow as before and opening a dead gap between the two. With flex,
-   the moment the image is capped (below) and stops absorbing free space,
-   the text takes all of it instead and grows right up to the image, which
-   in turn ends up flush against the container's right edge. */
-.tut-step {
-  display: flex;
-  align-items: start;
-  gap: clamp(1.5rem, 4vw, 3rem);
-}
-.tut-step > div:first-child {
-  /* Must be grow:1, not a fraction. Once the image freezes at its
-     max-width, leftover space is shared out among the still-flexible
-     items — and if their grow factors sum to LESS than 1, only that
-     fraction is handed out. The remainder would just pile up at the
-     right edge (justify-content: flex-start), leaving the image short of
-     the edge and the text short of the image. The default 26/74 split is
-     kept by giving .tut-shot a matching 2.78 instead (1 : 2.78 = 0.36 : 1). */
-  flex: 1 1 0%;
-  min-width: 0;
-}
-@media (max-width: 800px) {
-  .tut-step { flex-direction: column; }
-}
-.tut-step-num {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
-  color: var(--text-dim);
-  margin-bottom: 0.6rem;
-}
-.tut-step h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.2vw, 1.7rem);
-  letter-spacing: -0.02em;
-  margin: 0 0 0.7rem;
-}
-.tut-step p {
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin: 0;
-}
-.tut-shot {
-  /* 2.78 against the text's 1 reproduces the original ~26/74 split. */
-  flex: 2.78 1 0%;
-  min-width: 0;
-  margin: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--bg-3);
-  padding: 0.6rem;
-}
-/* Per-screenshot width caps — percentages of the row (the flex
-   container), not of .tut-shot's own old track, since there's no fixed
-   track anymore. ~51%/~37% are roughly 70%/50% of the ~74% share the
-   image holds by default — once capped here, .tut-shot stops absorbing
-   free space and the text (uncapped, grow:1) takes all of it instead,
-   growing right up to the image. */
-.tut-shot--70 { max-width: 51%; }
-.tut-shot--50 { max-width: 37%; }
-@media (max-width: 800px) {
-  .tut-shot--70, .tut-shot--50 { max-width: 100%; }
-}
-.tut-shot img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: calc(var(--radius) - 6px);
-}
-.tut-shot figcaption {
-  margin-top: 0.7rem;
-  padding: 0 0.3rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  line-height: 1.5;
-  letter-spacing: 0.03em;
-  color: var(--text-dim);
-}
-
 /* -------- Footer -------- */
 .footer {
   position: relative;
@@ -1981,40 +1836,6 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
   text-transform: none;
   color: var(--text-dim);
   opacity: 0.85;
-}
-
-/* Small asset-credit line — same typography as .ai-callout-text, but
-   plain (no accent border/box): a license attribution isn't the same
-   kind of notice as the AI-generation disclosure and shouldn't visually
-   read as one. */
-.footer-credit {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-  text-transform: none;
-  color: var(--text-dim);
-  opacity: 0.7;
-}
-.footer-credit a {
-  color: var(--text-dim);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.footer-credit a:hover { color: var(--text); }
-/* Same glyph as .gh-star on the badge above — pairs the two into a
-   footnote-style marker/definition, reference on the button, its
-   explanation down here. currentColor picks up .footer-credit's own
-   dim text colour rather than the badge's dark one. */
-.footer-credit-star {
-  /* The global img/svg reset sets display:block, which drops this onto
-     its own line inside the <p> — put it back inline with the text. */
-  display: inline-block;
-  width: 11px;
-  height: 11px;
-  margin-right: 0.3em;
-  vertical-align: -1px;
-  color: currentColor;
 }
 
 /* -------- Language Switch -------- */

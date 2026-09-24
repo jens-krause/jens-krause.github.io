@@ -1,0 +1,6 @@
+{
+  "_comment": "Optional per-tour overrides, keyed by GPX filename (as it sits in data/gpx/). Anything left out falls back to a filename-derived title and 0 stars.",
+  "Kuehtaisattel.gpx": { "title": "Wetterstein und Kühtaisattel", "stars": 2 },
+  "Namlostal+Hahntennjoch.gpx": { "title": "Namlostal und Hahntennjoch", "stars": 2 },
+  "Dolomitenrundtour.gpx": { "title": "Dolomiten Rundtour 2023", "stars": 3 }
+}
