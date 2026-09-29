@@ -1,16 +1,29 @@
 <!DOCTYPE html>
+<!--
+  ENTWURF — noch nicht verlinkt, robots "noindex". Ersetzt später de/work.html.
+  Siehe Plan: ~/.claude/plans/ich-habe-ein-job-mossy-lake.md
+
+  TODOs vor Veröffentlichung:
+  - Startdatum eintragen — Suche nach "[Monat Jahr]" (3 Stellen: Hero-Eyebrow, Rollen-Karte, Kapitel-I-Eyebrow)
+  - Hero-Hintergrundbild ersetzen (aktuell Platzhalter keyboard.jpg, siehe Kommentar am hero-bg)
+  - Standortzeile in der Rollen-Karte prüfen/anpassen (Hörsching bei Linz / Remote?)
+  - robots-Meta zurück auf "index, follow, max-image-preview:large, noai, noimageai"
+  - placeholder-banner unten im Hero entfernen
+  - Englische Fassung bauen, lang-switch + hreflang beidseitig schließen
+  - Inline <style>-Block optional nach ../styles/main.css verschieben
+-->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Die berufliche Laufbahn von Jens Krause &ndash; ab Januar 2027 Data Scientist bei Wacker Neuson, davor acht Jahre Forschung in Computerökologie, Modellkopplung und Datenwissenschaft." />
+  <meta name="description" content="Data Scientist – Predictive & Edge Analytics bei Wacker Neuson: Vorhersagemodelle, Edge-Deployment und acht Jahre wissenschaftliche Modellentwicklung von Jens Krause." />
 
   <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
   <meta property="og:site_name" content="Jens Krause" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jens-krause.github.io/arbeit.html" />
+  <meta property="og:url" content="https://jens-krause.github.io/de/work.html" />
   <meta property="og:title" content="Arbeit — Jens Krause" />
-  <meta property="og:description" content="Ab Januar 2027 Data Scientist bei Wacker Neuson, davor acht Jahre Forschung in Computerökologie, Modellkopplung und Datenwissenschaft." />
+  <meta property="og:description" content="Data Scientist – Predictive & Edge Analytics bei Wacker Neuson, plus acht Jahre wissenschaftliche Modellentwicklung." />
   <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,23 +33,196 @@
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arbeit — Jens Krause" />
-  <meta name="twitter:description" content="Ab Januar 2027 Data Scientist bei Wacker Neuson, davor acht Jahre Forschung in Computerökologie, Modellkopplung und Datenwissenschaft." />
+  <meta name="twitter:description" content="Data Scientist – Predictive & Edge Analytics bei Wacker Neuson, plus acht Jahre wissenschaftliche Modellentwicklung." />
   <meta name="twitter:image" content="https://jens-krause.github.io/og-image.png" />
-  <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Arbeit — Jens Krause</title>
 
-  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/arbeit.html" />
-  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/en/work.html" />
+  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/work.html" />
+  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/de/work.html" />
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles/main.css" />
-  <link rel="stylesheet" href="styles/work.css" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../styles/main.css" />
+
+  <!-- ============================================================
+       Seiten-eigene Styles — Wacker-Neuson-Signalakzent.
+       Bewusst als Entwurf inline gehalten (siehe TODO oben), analog
+       zum selbsttragenden Muster von tools/herbIQ/herbiq_de.html.
+       Farben stammen aus dem öffentlichen Stylesheet von
+       wackerneuson.com (Signalgelb #ffd511, theme-color der Domain).
+       ============================================================ -->
+  <style>
+    .page-role {
+      --wn: #ffd511;
+      --wn-dim: #ccaa0e;
+      --wn-grey: #575757;
+      --wn-red: #b81839;
+      --grad-wn: linear-gradient(135deg, #ffd511 0%, #ffe680 45%, #ccaa0e 100%);
+
+      /* Kapitel II (Wissenschaft) — eigener Akzent statt Amber/Cyan,
+         damit sich die beiden Kapitel klar voneinander abgrenzen. */
+      --sci: #86efac;
+      --sci-dim: #4ade80;
+      --grad-sci: linear-gradient(135deg, #bbf7d0 0%, #86efac 50%, #4ade80 100%);
+    }
+
+    /* Innerhalb von Kapitel II ersetzt Hellgrün beide bisherigen Akzente
+       (Amber & Cyan) — betrifft automatisch auch alle inline
+       "color:var(--accent-warm/cool)"-Spans der Zeitleisten-Einträge. */
+    #wissenschaft {
+      --accent-warm: var(--sci);
+      --accent-cool: var(--sci);
+    }
+    #wissenschaft .chapter-name { color: var(--sci); }
+    #wissenschaft .chapter-line::after { background: var(--grad-sci); }
+    #wissenschaft .tl-dot::before { background: var(--grad-sci); }
+
+    /* -------- Rollen-Karte (ersetzt die herbIQ-App-Banner-Position im Hero) -------- */
+    .hq-app-banner-wn {
+      position: relative;
+      overflow: hidden;
+      border-color: rgba(255, 213, 17, 0.3);
+      background:
+        linear-gradient(135deg, rgba(255, 213, 17, 0.09) 0%, rgba(255, 213, 17, 0.02) 100%),
+        var(--bg-2);
+    }
+    .hq-app-banner-wn:hover { border-color: rgba(255, 213, 17, 0.5); }
+    /* Wandernder Signal-Balken oben am Rand — dezente "live"-Anmutung */
+    .hq-app-banner-wn::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 2px;
+      background: var(--grad-wn);
+      background-size: 200% 100%;
+      animation: wnSweep 5s linear infinite;
+    }
+    @keyframes wnSweep {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .hq-app-banner-wn .hq-app-banner-icon {
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .hq-app-banner-wn .hq-app-banner-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hq-app-banner-wn .hq-app-banner-eyebrow { color: var(--wn-dim); }
+    .role-card-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wn);
+    }
+    .role-card-live .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--wn);
+      box-shadow: 0 0 10px rgba(255, 213, 17, 0.7);
+      animation: pulse 1.4s var(--ease-in-out) infinite;
+    }
+
+    /* -------- Kapitel-Zäsuren -------- */
+    .chapter-rule {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .chapter-rule .chapter-label,
+    .chapter-rule .chapter-name {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .chapter-rule .chapter-label { color: var(--text-dim); }
+    .chapter-rule .chapter-name { color: var(--wn); }
+    .chapter-line {
+      position: relative;
+      flex: 1;
+      height: 1px;
+      background: var(--border-strong);
+      overflow: hidden;
+    }
+    .chapter-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--grad-wn);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.3s var(--ease-out) 0.15s;
+    }
+    .chapter-rule.in .chapter-line::after { transform: scaleX(1); }
+
+    /* Ohne Eyebrow-Zeile bleibt im section-head-Grid nur die Überschrift
+       übrig — die soll dann die volle Breite nutzen statt nur die
+       schmale erste Spalte (die früher für die .meta-Eyebrow reserviert war). */
+    .section-head h2:only-child { grid-column: 1 / -1; }
+
+    /* -------- Signal-/Telemetriekurve unter der Kapitel-I-Überschrift -------- */
+    .signal-line {
+      display: block;
+      width: 100%;
+      height: 44px;
+      margin: -0.5rem 0 2.5rem;
+    }
+    .signal-line path {
+      fill: none;
+      stroke: var(--wn);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      opacity: 0.55;
+      transition: stroke-dashoffset 1.6s var(--ease-out) 0.1s;
+    }
+    .signal-line.in path { stroke-dashoffset: 0; }
+
+    /* -------- Fokus-Karten Kapitel I: gelber statt cyanem Hover-Rahmen -------- */
+    .facet-card.wn::before { background: var(--grad-wn); }
+
+    /* -------- Kennzahlen Kapitel I in WN-Gelb statt Amber -------- */
+    .page-role .stat .num em,
+    .page-role .stat .num .count-value,
+    .page-role .stat .num .count-suffix {
+      background: var(--grad-wn);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* -------- Timeline-Achse Kapitel II: füllt sich beim Scrollen (progressive enhancement) -------- */
+    @supports (animation-timeline: scroll()) {
+      #wissenschaft .tl-axis { overflow: hidden; }
+      #wissenschaft .tl-axis::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, var(--wn), var(--wn-dim));
+        transform-origin: top;
+        transform: scaleY(0);
+        animation: tlFill linear;
+        animation-timeline: scroll(nearest block);
+        animation-range: entry 10% cover 70%;
+      }
+      @keyframes tlFill { to { transform: scaleY(1); } }
+    }
+  </style>
 </head>
-<body class="page-work">
-
-  <!-- Scroll progress -->
-  <div class="scroll-prog" aria-hidden="true"></div>
+<body class="page-work page-role">
 
   <div class="preloader">
     <div class="pl-inner">Arbeit<span class="dot"></span></div>
@@ -49,19 +235,18 @@
         <span>Jens Krause</span>
       </a>
       <div class="nav-links">
-        <a class="nav-link active" href="arbeit.html">Arbeit</a>
-        <a class="nav-link" href="werkzeuge.html">Werkzeuge</a>
-        <a class="nav-link" href="fotografie.html">Fotografie</a>
-        <a class="nav-link nav-link-contact" href="kontakt.html">Kontakt</a>
+        <a class="nav-link" href="index.html">Übersicht</a>
+        <a class="nav-link active" href="work.html">Arbeit</a>
+        <a class="nav-link" href="photography.html">Fotografie</a>
+        <a class="nav-link nav-link-contact" href="contact.html">Kontakt</a>
       </div>
-      <div class="nav-right">
-        <div class="lang-switch">
-          <span class="lang-active">DE</span>
-          <span class="lang-sep">·</span>
-          <a href="en/work.html">EN</a>
-        </div>
-        <a class="nav-cta" href="kontakt.html">Kontakt &rarr;</a>
+      <div class="lang-switch">
+        <!-- TODO Jens: englische Fassung existiert noch nicht — zeigt vorerst auf die alte EN-Seite -->
+        <a href="../work.html">EN</a>
+        <span class="lang-sep">·</span>
+        <span class="lang-active">DE</span>
       </div>
+      <a class="nav-cta" href="contact.html">Kontakt &rarr;</a>
       <button class="menu-btn" aria-expanded="false" aria-label="Menü">
         <span class="menu-btn-label">Menü</span>
         <span class="menu-btn-close" aria-hidden="true">&times;</span>
@@ -69,39 +254,49 @@
     </div>
   </nav>
 
-  <!-- ================= KAPITEL I · INDUSTRIE ================= -->
-  <header class="hero" id="industrie" style="min-height: 88svh; padding-top: 9rem;">
-    <!-- Platzhalter-Verlauf statt Foto, siehe styles/work.css -->
-    <div class="hero-bg hero-bg--wn" aria-hidden="true"></div>
+  <!-- Page hero -->
+  <header class="hero" style="min-height: 88svh; padding-top: 9rem;">
+    <div class="hero-bg">
+      <!-- TODO Jens: Platzhalterbild — später durch eigenes Foto ersetzen (Maschine/Industrie/Hörsching) -->
+      <img src="../imgs/backgrounds/keyboard.jpg" alt="" />
+    </div>
     <div class="container hero-content">
-      <div class="chapter-rule reveal">
-        <span class="chapter-label">ab Januar 2027</span>
-        <span class="chapter-line"></span>
-        <span class="chapter-name chapter-name--wn">Industrie</span>
+      <div class="placeholder-banner reveal">
+        Entwurf-Version — noch nicht verlinkt, für Suchmaschinen ausgeblendet (<code>noindex</code>).
+        Ersetzt später <code>de/work.html</code>.
       </div>
+      <div class="eyebrow hero-eyebrow reveal">Data Scientist · Predictive &amp; Edge Analytics · seit [Monat Jahr]</div>
       <h1 class="h-display hero-title" style="font-size: clamp(3rem, 8vw, 7rem);">
-        <span data-split>Von Telematik zur</span><br>
-        <em style="display: inline-block; vertical-align: bottom; padding-bottom: 0.08em;">Anomalie</em><span data-split>analyse.</span>
+        <span data-split>Von Simulation zu</span><br>
+        <em style="display: inline-block; vertical-align: bottom; padding-bottom: 0.08em;">Maschinen</em><span data-split>intelligenz.</span>
       </h1>
-      <p class="lead reveal delay-2" style="max-width: 55ch">
-        Ab Januar 2027 arbeite ich als Data Scientist bei der <strong>Wacker Neuson</strong> Gruppe am Standort Hörsching (AT).
+      <p class="lead reveal delay-2" style="max-width:60ch">
+        Ab [Monat Jahr] gestalte ich bei der Wacker Neuson Linz GmbH die nächste Generation
+        datengetriebener Maschinenintelligenz mit &ndash; von Vorhersagemodellen für technische
+        Anomalien bis zu Machine&#8209;Learning&#8209;Inferenz direkt auf der Maschine.
       </p>
-      <p class="lead reveal delay-2" style="max-width:52ch">
-        Ich freue mich sehr auf die neuen Aufgaben: datengetriebene Vorhersagen für
-        vernetzte Maschinen und der Schritt aus der Forschung in ein industrielles Umfeld.
+      <p class="lead reveal delay-2" style="max-width:48ch">
+        Acht Jahre Modellentwicklung und Datenanalyse in der Wissenschaft bilden das Fundament:
+        große numerische Datensätze, gekoppelte Simulationen und die Übersetzung komplexer
+        Zusammenhänge in verständliche Werkzeuge.
       </p>
 
       <div class="hero-bottom-row reveal delay-3">
-        <!-- Noch ohne echten Nutzen, solange Kapitel I nur aus diesem
-             kurzen Absatz besteht - wird relevant, sobald hier mehr Inhalt
-             steht, der den Sprung nach unten lohnt.
-        <div class="hero-actions">
-          <a class="btn btn-ghost" href="#wissenschaft">
-            Meine wissenschaftliche Karriere <span class="arrow-down">&darr;</span>
-          </a>
+        <div class="hq-app-row">
+          <div class="hq-app-banner hq-app-banner-wn">
+            <div class="hq-app-banner-icon">
+              <img src="../imgs/WackerNeuson_logo.png" alt="Wacker Neuson Logo" />
+            </div>
+            <div class="hq-app-banner-text">
+              <div class="hq-app-banner-eyebrow">Wacker Neuson Linz GmbH</div>
+              <div class="hq-app-banner-title">Data Scientist &ndash; Predictive &amp; Edge Analytics</div>
+              <div class="hq-app-banner-sub">
+                Hörsching bei Linz <!-- TODO Jens: Standort/Remote-Regelung bestätigen --><br>
+                <span class="role-card-live"><span class="dot"></span>ab [Monat Jahr]</span>
+              </div>
+            </div>
+          </div>
         </div>
-        -->
-        <div></div>
         <div class="scroll-cue">
           <span>Scroll</span>
           <span class="line"></span>
@@ -111,33 +306,108 @@
     </div>
   </header>
 
-  <!-- ================= KAPITEL II · WISSENSCHAFT ================= -->
-  <section class="section chapter-science" id="wissenschaft" style="padding-top: 7rem">
-    <!-- data-no-parallax: initParallaxHero() in js/main.js greift sonst dieses
-         Bild (das erste .hero-bg img der Seite, seit der Hero oben nur noch
-         einen Verlauf hat) und verschiebt es mit der absoluten Scroll-Position,
-         die hier unten längst viel zu groß ist. -->
-    <div class="hero-bg">
-      <img src="imgs/backgrounds/keyboard.jpg" alt="" data-no-parallax />
+  <!-- ================= KAPITEL I · INDUSTRIE ================= -->
+  <section class="section" id="rolle" style="padding-top: 5rem">
+    <div class="container">
+      <div class="chapter-rule reveal">
+        <span class="chapter-label">seit [Monat Jahr]</span>
+        <span class="chapter-line"></span>
+        <span class="chapter-name">Industrie</span>
+      </div>
+      <div class="section-head">
+        <h2 class="h-section reveal delay-1">
+          Vorhersagen für <em>vernetzte Maschinen.</em>
+        </h2>
+      </div>
+
+      <svg class="signal-line reveal" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,42 L55,42 L85,16 L112,46 L142,20 L172,44 L214,44 L246,10 L280,44 L332,44 L364,24 L396,44 L600,44" />
+      </svg>
+
+      <div class="skill-stack reveal delay-2">
+        <div class="facet-card wn">
+          <h3 style="font-size:1.4rem">Vorhersagemodelle</h3>
+          <p>
+            Machine&#8209;Learning&#8209;Modelle, die aus Sensor- und Betriebsdaten technische
+            Anomalien und Ausfälle vorhersagen &ndash; von der Datenaufbereitung bis zur
+            validierten Vorhersage.
+          </p>
+          <div class="chip-row" style="margin-top: 0.8rem">
+            <span class="chip">Python</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">HistGradientBoosting</span>
+            <span class="chip">Regressionsmodelle</span>
+            <span class="chip">Validierung</span>
+          </div>
+        </div>
+        <div class="facet-card wn">
+          <h3 style="font-size:1.4rem">Edge &amp; Deployment</h3>
+          <p>
+            Modelle, die dort rechnen, wo die Daten entstehen: leichtgewichtige Inferenz direkt
+            auf der Maschine statt im Rechenzentrum &ndash; kein Roundtrip, keine Abhängigkeit
+            vom Netz.
+          </p>
+          <div class="chip-row" style="margin-top: 0.8rem">
+            <span class="chip">ONNX</span>
+            <span class="chip">onnxruntime-web</span>
+            <span class="chip">Edge Inference</span>
+            <span class="chip">Modell-Deployment</span>
+          </div>
+        </div>
+        <div class="facet-card wn">
+          <h3 style="font-size:1.4rem">Fachbereichs-Kommunikation</h3>
+          <p>
+            Komplexe Modelle verständlich machen &ndash; für Produktmanagement, Service und
+            Engineering gleichermaßen. Workshops, Dokumentation und ein offenes Ohr für
+            Rückfragen.
+          </p>
+          <div class="chip-row" style="margin-top: 0.8rem">
+            <span class="chip">Workshops seit 2023</span>
+            <span class="chip">Wissenstransfer</span>
+            <span class="chip">Interdisziplinär</span>
+            <span class="chip">Präsentationen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO Jens: Kennzahlen deaktiviert — noch keine belastbaren Zahlen für die neue Rolle.
+           Block unten mit echten Werten (data-count-Attribute anpassen) wieder aktivieren,
+           indem dieser Kommentar entfernt wird.
+      <div class="stat-grid reveal delay-3" style="margin-top: 2.5rem">
+        <div class="stat">
+          <div class="num"><em data-count="1.05" data-count-decimals="2"><span class="count-value">1,05</span><span class="count-suffix">&nbsp;Mrd.</span></em></div>
+          <div class="lbl">Simulierte Datenpunkte</div>
+        </div>
+        <div class="stat">
+          <div class="num"><em data-count="0.88" data-count-decimals="2"><span class="count-value">0,88</span></em></div>
+          <div class="lbl">&Oslash; R&sup2; der ML-Modelle</div>
+        </div>
+        <div class="stat">
+          <div class="num"><em data-count="3.3" data-count-decimals="1"><span class="count-value">3,3</span><span class="count-suffix">&nbsp;MB</span></em></div>
+          <div class="lbl">ONNX-Paket, clientseitig</div>
+        </div>
+        <div class="stat">
+          <div class="num"><em data-count="8"><span class="count-value">8</span></em></div>
+          <div class="lbl">Jahre Modellierung &amp; Datenanalyse</div>
+        </div>
+      </div>
+      -->
     </div>
+  </section>
+
+  <!-- ================= KAPITEL II · WISSENSCHAFT 2018–2026 ================= -->
+  <section class="section chapter-past" id="wissenschaft">
     <div class="container">
       <div class="chapter-rule reveal">
         <span class="chapter-label">2018 &ndash; 2026</span>
         <span class="chapter-line"></span>
-        <span class="chapter-name chapter-name--sci">Wissenschaft</span>
+        <span class="chapter-name">Wissenschaft</span>
       </div>
       <div class="section-head">
-        <div class="meta reveal">
-          <span class="eyebrow">Ausgewählte Meilensteine</span>
-        </div>
         <h2 class="h-section reveal delay-1">
-          Die <em>Chronologie.</em>
+          Acht Jahre <em>Modellentwicklung.</em>
         </h2>
       </div>
-
-      <p class="lead reveal delay-2" style="max-width:65ch; margin-bottom: 3.5rem">
-        Seit 2018 entwickle ich ein Ökosystem-Modelframework, das Vegetationsdynamik (LPJ&#8209;GUESS) mit der Nahrungskette (Madingley) verbindet - und damit die explizite Darstellung von Wechselwirkungen über trophische Ebenen hinweg ermöglicht.
-      </p>
 
       <div class="tl">
         <div class="tl-axis"></div>
@@ -146,7 +416,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb" style="background: transparent; border: none; overflow: visible; aspect-ratio: 1;">
-              <img src="tools/herbIQ/icons/herbIQ_icon.png" alt="herbIQ App-Icon" style="object-fit: contain; width: 100%; height: 100%;" />
+              <img src="../tools/herbIQ/icons/herbIQ_icon.png" alt="herbIQ App-Icon" style="object-fit: contain; width: 100%; height: 100%;" />
             </div>
             <div class="tl-info">
               <div class="yr">Juni 2026 · Browserbasiertes Tool</div>
@@ -171,7 +441,7 @@
                 <span class="chip">Webbasiertes Tool</span>
                 <span class="chip">Native macOS &amp; Windows App</span>
               </div>
-              <a class="link-arrow" href="tools/herbIQ/herbiq_de.html">Im Browser ausprobieren<span class="arrow">&rarr;</span></a>
+              <a class="link-arrow" href="../tools/herbIQ/herbiq_de.html">Im Browser ausprobieren<span class="arrow">&rarr;</span></a>
             </div>
           </div>
         </article>
@@ -180,7 +450,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2025_Paper.jpg" alt="Paper 2025" />
+              <img src="../imgs/science_fotos/vertical/2025_Paper.jpg" alt="Paper 2025" />
             </div>
             <div class="tl-info">
               <div class="yr">Dezember 2025 · Geoscientific Model Development</div>
@@ -211,7 +481,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2025_Promotion.jpg" alt="Promotion am KIT" />
+              <img src="../imgs/science_fotos/vertical/2025_Promotion.jpg" alt="Promotion am KIT" />
             </div>
             <div class="tl-info">
               <div class="yr">April 2025 · Karlsruhe</div>
@@ -243,7 +513,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2023_Poster_ECEM.jpg" alt="ECEM 2023 Poster" />
+              <img src="../imgs/science_fotos/vertical/2023_Poster_ECEM.jpg" alt="ECEM 2023 Poster" />
             </div>
             <div class="tl-info">
               <div class="yr">September 2023 · Leipzig</div>
@@ -273,7 +543,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2023_FoM.jpg" alt="Friends of Madingley Meeting" />
+              <img src="../imgs/science_fotos/vertical/2023_FoM.jpg" alt="Friends of Madingley Meeting" />
             </div>
             <div class="tl-info">
               <div class="yr">Juli 2023 · Garmisch&#8209;Partenkirchen</div>
@@ -305,7 +575,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2022_Paper.jpg" alt="Paper 2022" />
+              <img src="../imgs/science_fotos/vertical/2022_Paper.jpg" alt="Paper 2022" />
             </div>
             <div class="tl-info">
               <div class="yr">September 2022 · Ecological Modelling</div>
@@ -314,7 +584,7 @@
                 Veröffentlicht in <em>Ecological Modelling</em> (Ausgabe 471), stellt dieses
                 Erstautoren&#8209;Paper die ursprüngliche einseitige Kopplung vor:
                 die von LPJ&#8209;GUESS simulierte Vegetation wird
-                als Eingabedaten für Madingley verwendet 
+                als Eingabedaten für Madingley verwendet
                 um die Nahrungskette mit ihrer Grundlage zu versorgen.
               </p>
               <p>
@@ -338,7 +608,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2021_Poster_WBF.jpg" alt="Davos Biodiversity" />
+              <img src="../imgs/science_fotos/vertical/2021_Poster_WBF.jpg" alt="Davos Biodiversity" />
             </div>
             <div class="tl-info">
               <div class="yr">Februar 2020 · Davos</div>
@@ -371,7 +641,7 @@
           <div class="tl-dot"></div>
           <div class="tl-body">
             <div class="tl-thumb">
-              <img src="imgs/science_fotos/vertical/2018_Master.jpg" alt="Masterabschluss" />
+              <img src="../imgs/science_fotos/vertical/2018_Master.jpg" alt="Masterabschluss" />
             </div>
             <div class="tl-info">
               <div class="yr">Mai 2018 · Hannover</div>
@@ -402,67 +672,15 @@
     </div>
   </section>
 
-  <!-- Skills / Stack -->
-  <section class="section" style="padding-top: 2rem">
-    <div class="container">
-      <div class="section-head">
-        <div class="meta reveal">
-          <span class="eyebrow">Skill-Stack</span>
-        </div>
-        <h2 class="h-section reveal delay-1">
-          Werkzeuge & Skills, auf die ich mich <em>täglich</em> verlasse.
-        </h2>
-      </div>
-      <div class="skill-stack reveal delay-2">
-        <div class="facet-card">
-          <h3 style="font-size:1.4rem">Programmiersprachen</h3>
-          <div class="chip-row" style="margin-top: 0.8rem">
-            <span class="chip">Python</span>
-            <span class="chip">C++</span>
-            <span class="chip">Bash</span>
-            <span class="chip">YAML</span>
-            <span class="chip">JSON</span>
-            <span class="chip">Markdown</span>
-            <span class="chip">LaTeX</span>
-          </div>
-        </div>
-        <div class="facet-card warm">
-          <h3 style="font-size:1.4rem">Umgebungen &amp; Anwendungen</h3>
-          <div class="chip-row" style="margin-top: 0.8rem">
-            <span class="chip">VS Code</span>
-            <span class="chip">Obsidian</span>
-            <span class="chip">Git</span>
-            <span class="chip">Docker</span>
-            <span class="chip">Apple Keynote/Pages</span>
-            <span class="chip">MS Powerpoint</span>
-            <span class="chip">Linux</span>
-            <span class="chip">macOS</span>
-          </div>
-        </div>
-        <div class="facet-card">
-          <h3 style="font-size:1.4rem">Wissenschaft &amp; Kommunikation</h3>
-          <div class="chip-row" style="margin-top: 0.8rem">
-            <span class="chip">Datenanalyse</span>
-            <span class="chip">Problemlösung</span>
-            <span class="chip">Präsentation</span>
-            <span class="chip">Visualisierung</span>
-            <span class="chip">Wissenschaftliches Schreiben</span>
-            <span class="chip">Dokumentation</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="section">
     <div class="container">
       <h2 class="h-section reveal">
-        Mehr lesen oder <em>zusammenarbeiten</em>?
+        Mehr erfahren oder <em>zusammenarbeiten</em>?
       </h2>
       <div class="hero-actions reveal delay-2" style="margin-top: 2rem">
-        <a class="btn btn-primary" href="kontakt.html">Kontakt aufnehmen <span class="arrow">&rarr;</span></a>
-        <a class="btn btn-ghost" href="fotografie.html">Die andere Seite entdecken <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-primary" href="contact.html">Kontakt aufnehmen <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#wissenschaft">Zur wissenschaftlichen Laufbahn <span class="arrow">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -471,8 +689,8 @@
     <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem">
       <span>&copy; 2026 Jens Krause</span>
       <div class="footer-legal">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
       </div>
       <div class="ai-callout" role="note">
         <span class="ai-callout-icon" aria-hidden="true"></span>
@@ -481,6 +699,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>

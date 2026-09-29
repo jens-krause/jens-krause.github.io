@@ -1,0 +1,113 @@
+/* -------- Arbeitsseite: Kapitel Industrie + Wissenschaft --------
+   Seitenspezifisch (arbeit.html / en/work.html), deshalb hier statt in
+   styles/main.css. Nutzt die Tokens aus :root in main.css, das zuerst
+   geladen wird. */
+
+.page-work {
+  /* Signalgelb von wackerneuson.com */
+  --wn: #ffd511;
+  --wn-dim: #ccaa0e;
+}
+
+/* Grünton für Kapitel II, scoped auf die Sektion selbst. Überschreibt
+   --accent-warm/--accent-cool (und die davon abgeleitete --grad-cool) nur
+   innerhalb von #wissenschaft - trifft damit automatisch jedes bestehende
+   "color:var(--accent-warm/cool)"-Highlight in den Zeitleisten-Texten und
+   den ::before-Glow von .tl-dot, ohne jede Stelle einzeln anfassen zu
+   müssen. Kein Effekt außerhalb der Sektion, da die Variable dort auf
+   ihren main.css-Default zurückfällt. */
+#wissenschaft {
+  --sci: #99ee71;
+  --accent-warm: var(--sci);
+  --accent-cool: var(--sci);
+  --grad-cool: linear-gradient(135deg, #bbf7d0 0%, #86efac 50%, #4ade80 100%);
+}
+
+/* -------- Kapitel-Zäsur -------- */
+.chapter-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  /* Rückt den rechten Rand der Zäsur (und damit chapter-name) so weit ein,
+     dass er mit dem rechten Rand von "EN" im Sprachumschalter fluchtet,
+     statt mit der vollen Container-Breite (wo stattdessen "Kontakt"
+     endet). Geschätzt aus nav-cta-Padding + Textbreite + dem 50px-Gap in
+     .nav-right - kein exakter Messwert, ggf. nachjustieren. */
+  padding-right: 160px;
+}
+@media (max-width: 900px) {
+  /* Der Sprachumschalter verlässt in diesem Breakpoint (main.css) den
+     normalen Nav-Fluss und wird absolut positioniert - der Bezug für
+     dieses Padding existiert dann nicht mehr in der gleichen Form. */
+  .chapter-rule { padding-right: 0; }
+}
+.chapter-rule .chapter-label,
+.chapter-rule .chapter-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.chapter-rule .chapter-label { color: var(--text-dim); }
+.chapter-rule .chapter-name { color: var(--text-muted); }
+.chapter-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-strong);
+}
+/* Gleiche Spezifität wie die Regel oben, gewinnt über die Quellreihenfolge. */
+.chapter-rule .chapter-name--wn { color: var(--wn); }
+.chapter-rule .chapter-name--sci { color: var(--accent-cool); }
+
+/* -------- Kapitel I: Platzhalter-Verlauf statt Foto --------
+   Bis ein eigenes Bild da ist: dunkles Feld mit WN-gelbem Schimmer.
+   Das Abdunkeln durch .hero-bg::after (main.css) greift hier genauso
+   wie bei einem Foto, die Textlesbarkeit bleibt also gleich. */
+.hero-bg--wn {
+  background:
+    radial-gradient(120% 90% at 18% 12%,
+      rgba(255, 213, 17, 0.30) 0%,
+      rgba(255, 213, 17, 0.06) 45%,
+      transparent 70%),
+    radial-gradient(90% 70% at 85% 80%,
+      rgba(204, 170, 14, 0.22) 0%,
+      transparent 65%),
+    linear-gradient(155deg, #1c1707 0%, #14110a 40%, var(--bg) 100%);
+}
+
+/* -------- Kapitel II: Foto-Band am Abschnittsanfang --------
+   .hero-bg ist auf Heros ausgelegt und füllt sonst die volle Höhe seines
+   Containers. Dieser Abschnitt ist durch die Zeitleiste aber mehrere
+   tausend Pixel hoch - ohne feste Höhe würde das Bild über die gesamte
+   Chronologie gezogen. Stattdessen ein Band oben, das über die Maske aus
+   main.css nach unten ausläuft. */
+.chapter-science > .hero-bg {
+  inset: 0 0 auto 0;
+  height: clamp(30rem, 60svh, 46rem);
+  /* Im Hero übernahm das .hero mit overflow:hidden. .section tut das nicht,
+     und .hero-bg img ist 110% hoch - ohne Clipping liefe es unten heraus,
+     wo die Maske (mask-repeat: repeat) es erneut einblenden würde. */
+  overflow: hidden;
+  /* main.css blendet nur unten aus (oben ist das Bild dort die erste
+     Kante der Seite). Hier sitzt der Kapitelanfang aber mitten im
+     Seitenfluss, direkt unter dem Industrie-Kapitel - daher die gleiche
+     Fade-Kurve gespiegelt auch oben. */
+  -webkit-mask-image: linear-gradient(180deg,
+    transparent 0%, rgba(0, 0, 0, 0.6) 22%, #000 50%,
+    #000 50%, rgba(0, 0, 0, 0.6) 78%, transparent 100%);
+  mask-image: linear-gradient(180deg,
+    transparent 0%, rgba(0, 0, 0, 0.6) 22%, #000 50%,
+    #000 50%, rgba(0, 0, 0, 0.6) 78%, transparent 100%);
+}
+
+/* -------- Sprungmarke nach unten --------
+   Eigene Klasse statt .arrow: die Regel in main.css schiebt .arrow beim
+   Hover nach rechts, was bei einem Abwärtspfeil quer zur Leserichtung
+   stünde. */
+.btn .arrow-down {
+  display: inline-block;
+  transition: transform 0.35s var(--ease);
+}
+.btn:hover .arrow-down { transform: translateY(3px); }

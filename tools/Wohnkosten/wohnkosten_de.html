@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wohnkosten &ndash; Pendelrechner für Österreich. Zwei Arbeitswege, Spritpreis und Pendlerpauschale ergeben die monatlichen Fahrtkosten, die Jahreskilometer und eine Schätzung der Kfz-Versicherung." />
+
+  <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
+  <meta property="og:site_name" content="Jens Krause" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jens-krause.github.io/tools/Wohnkosten/wohnkosten_de.html" />
+  <meta property="og:title" content="Wohnkosten &ndash; Jens Krause" />
+  <meta property="og:description" content="Pendelrechner für Österreich: Fahrtkosten pro Monat inklusive Pendlerpauschale und Pendlereuro, Jahreskilometer und geschätzte Kfz-Versicherung. Läuft vollständig im Browser." />
+  <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="JK · Jens Krause" />
+  <meta property="og:locale" content="de_AT" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wohnkosten &ndash; Jens Krause" />
+  <meta name="twitter:description" content="Pendelrechner für Österreich: Fahrtkosten, Jahreskilometer und Versicherung auf einen Blick." />
+  <meta name="twitter:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta name="robots" content="noindex, nofollow, noai, noimageai" />
+  <title>Wohnkosten &ndash; Jens Krause</title>
+
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="wohnkosten.css" />
+</head>
+<body class="page-tools">
+
+  <div class="preloader">
+    <div class="pl-inner">Wohnkosten<span class="dot"></span></div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-dot"></span>
+        <span>Jens Krause</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../../arbeit.html">Arbeit</a>
+        <a class="nav-link active" href="../../werkzeuge.html">Werkzeuge</a>
+        <a class="nav-link" href="../../fotografie.html">Fotografie</a>
+        <a class="nav-link nav-link-contact" href="../../kontakt.html">Kontakt</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang-switch">
+          <span class="lang-active">DE</span>
+        </div>
+        <a class="nav-cta" href="../../kontakt.html">Kontakt &rarr;</a>
+      </div>
+      <button class="menu-btn" aria-expanded="false" aria-label="Menü">
+        <span class="menu-btn-label">Menü</span>
+        <span class="menu-btn-close" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Rechner -->
+  <section class="section" style="padding: 10rem 0 2rem">
+    <div class="container">
+      <div class="wk-grid">
+
+        <!-- ================= Eingaben ================= -->
+        <div class="wk-column reveal">
+          <div class="wk-section-label">Eingaben</div>
+
+          <div class="wk-card">
+            <h2 class="wk-card-title">
+              <span>Gemeinsam</span>
+              <span class="wk-tag">Haushalt</span>
+            </h2>
+            <div class="wk-fields">
+              <div class="wk-field">
+                <label class="wk-label" for="in-price">
+                  Preis E10 <span class="wk-unit">€/l</span>
+                </label>
+                <input class="wk-input" id="in-price" type="text" inputmode="decimal"
+                       autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="wk-field">
+                <label class="wk-label" for="in-days">
+                  Arbeitstage <span class="wk-unit">pro Monat</span>
+                </label>
+                <input class="wk-input" id="in-days" type="number" min="0" max="31" step="1"
+                       inputmode="numeric" autocomplete="off" />
+              </div>
+            </div>
+          </div>
+
+          <div class="wk-card wk-card--vb">
+            <h2 class="wk-card-title">
+              <span>Arbeitsweg VB</span>
+              <span class="wk-tag">Person 1</span>
+            </h2>
+            <div class="wk-fields">
+              <div class="wk-field">
+                <label class="wk-label" for="in-vb-km">
+                  Entfernung <span class="wk-unit">km, einfach</span>
+                </label>
+                <input class="wk-input" id="in-vb-km" type="text" inputmode="decimal"
+                       autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="wk-field">
+                <label class="wk-label" for="in-vb-cons">
+                  Verbrauch <span class="wk-unit">l/100 km</span>
+                </label>
+                <input class="wk-input" id="in-vb-cons" type="text" inputmode="decimal"
+                       autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="wk-field">
+                <label class="wk-label" for="in-vb-priv">
+                  Privat <span class="wk-unit">km/Jahr</span>
+                </label>
+                <input class="wk-input" id="in-vb-priv" type="number" min="0" step="500"
+                       inputmode="numeric" autocomplete="off" />
+              </div>
+            </div>
+          </div>
+
+          <div class="wk-card wk-card--hoe">
+            <h2 class="wk-card-title">
+              <span>Arbeitsweg HÖ</span>
+              <span class="wk-tag">Person 2</span>
+            </h2>
+            <div class="wk-fields">
+              <div class="wk-field">
+                <label class="wk-label" for="in-hoe-km">
+                  Entfernung <span class="wk-unit">km, einfach</span>
+                </label>
+                <input class="wk-input" id="in-hoe-km" type="text" inputmode="decimal"
+                       autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="wk-field">
+                <label class="wk-label" for="in-hoe-cons">
+                  Verbrauch <span class="wk-unit">l/100 km</span>
+                </label>
+                <input class="wk-input" id="in-hoe-cons" type="text" inputmode="decimal"
+                       autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="wk-field">
+                <label class="wk-label" for="in-hoe-priv">
+                  Privat <span class="wk-unit">km/Jahr</span>
+                </label>
+                <input class="wk-input" id="in-hoe-priv" type="number" min="0" step="500"
+                       inputmode="numeric" autocomplete="off" />
+              </div>
+            </div>
+          </div>
+
+          <div class="wk-actions">
+            <button class="wk-btn" id="wk-reset" type="button">
+              <span class="icon" aria-hidden="true">&#8635;</span>
+              <span>Zurücksetzen</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= Ergebnisse ================= -->
+        <div class="wk-column reveal delay-1">
+          <div class="wk-section-label wk-section-label--totals">
+            <span>Ergebnisse:</span>
+            <span class="wk-section-total">
+              <span class="wk-res-value wk-res-value--range" id="out-mobility">&ndash;</span>
+              <span class="wk-res-unit">€ pro Monat</span>
+            </span>
+          </div>
+
+          <div class="wk-results">
+
+            <!-- 1) Fahrtkosten pro Monat -->
+            <div class="wk-res-card wk-res-card--hero">
+              <div class="wk-res-head">
+                <span class="wk-res-label">
+                  Fahrtkosten pro Monat:
+                  <span class="wk-res-label-value" id="out-net-month">&ndash;</span>
+                  <span class="wk-res-label-value">€</span>
+                </span>
+                <span class="wk-res-note" id="out-fuel-note">&ndash;</span>
+              </div>
+              <table class="wk-table">
+                <thead>
+                  <tr>
+                    <th scope="col">pro Monat</th>
+                    <th scope="col" class="wk-col-vb">VB</th>
+                    <th scope="col" class="wk-col-hoe">HÖ</th>
+                    <th scope="col">Summe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Sprit</th>
+                    <td id="out-vb-fuel">&ndash;</td>
+                    <td id="out-hoe-fuel">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-fuel">&ndash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Pendlerpauschale &amp; -euro</th>
+                    <td class="wk-credit" id="out-vb-relief">&ndash;</td>
+                    <td class="wk-credit" id="out-hoe-relief">&ndash;</td>
+                    <td class="wk-credit wk-col-sum" id="out-sum-relief">&ndash;</td>
+                  </tr>
+                  <tr class="wk-row-total">
+                    <th scope="row">Effektiv</th>
+                    <td id="out-vb-net">&ndash;</td>
+                    <td id="out-hoe-net">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-net">&ndash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 2) Jahreskilometer -->
+            <div class="wk-res-card">
+              <div class="wk-res-head">
+                <span class="wk-res-label">
+                  Jahreskilometer:
+                  <span class="wk-res-label-value" id="out-km-year">&ndash;</span>
+                  <span class="wk-res-label-value">km</span>
+                </span>
+                <span class="wk-res-note">Haushalt, beide Autos</span>
+              </div>
+              <table class="wk-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Kilometer</th>
+                    <th scope="col" class="wk-col-vb">VB</th>
+                    <th scope="col" class="wk-col-hoe">HÖ</th>
+                    <th scope="col">Summe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Pendeln pro Jahr</th>
+                    <td id="out-vb-kmcommute">&ndash;</td>
+                    <td id="out-hoe-kmcommute">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-kmcommute">&ndash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Privat pro Jahr</th>
+                    <td id="out-vb-kmpriv">&ndash;</td>
+                    <td id="out-hoe-kmpriv">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-kmpriv">&ndash;</td>
+                  </tr>
+                  <tr class="wk-row-total">
+                    <th scope="row">Gesamt pro Jahr</th>
+                    <td id="out-vb-kmtotal">&ndash;</td>
+                    <td id="out-hoe-kmtotal">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-kmtotal">&ndash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 3) Kfz-Versicherung -->
+            <div class="wk-res-card">
+              <div class="wk-res-head">
+                <span class="wk-res-label">
+                  Kfz-Versicherung:
+                  <span class="wk-res-label-value" id="out-ins-range">&ndash;</span>
+                  <span class="wk-res-label-value">€</span>  pro Jahr
+                </span>
+                <span class="wk-res-note">grobe Schätzung</span>
+              </div>
+              <table class="wk-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Prämie</th>
+                    <th scope="col" class="wk-col-vb">VB</th>
+                    <th scope="col" class="wk-col-hoe">HÖ</th>
+                    <th scope="col">Summe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">pro Jahr</th>
+                    <td id="out-vb-ins">&ndash;</td>
+                    <td id="out-hoe-ins">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-ins">&ndash;</td>
+                  </tr>
+                  <tr class="wk-row-total">
+                    <th scope="row">pro Monat</th>
+                    <td id="out-vb-insmonth">&ndash;</td>
+                    <td id="out-hoe-insmonth">&ndash;</td>
+                    <td class="wk-col-sum" id="out-sum-insmonth">&ndash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Rechenweg ================= -->
+      <div class="wk-detail reveal">
+        <div class="wk-section-label" style="margin-bottom: 0.85rem">Rechenweg</div>
+        <div class="wk-detail-grid">
+
+          <div class="wk-card">
+            <h2 class="wk-card-title">
+              <span>Großes Pendlerpauschale</span>
+              <span class="wk-tag">Stand 2026</span>
+            </h2>
+            <table class="wk-table wk-pp-table" style="margin-top: 0">
+              <thead>
+                <tr>
+                  <th scope="col">Einfache Wegstrecke</th>
+                  <th scope="col">Pauschale pro Jahr</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-mode="gross" data-min="2">
+                  <th scope="row">2 bis 20 km</th>
+                  <td>372 €</td>
+                </tr>
+                <tr data-mode="gross" data-min="20">
+                  <th scope="row">20 bis 40 km</th>
+                  <td>1.476 €</td>
+                </tr>
+                <tr data-mode="gross" data-min="40">
+                  <th scope="row">40 bis 60 km</th>
+                  <td>2.568 €</td>
+                </tr>
+                <tr data-mode="gross" data-min="60">
+                  <th scope="row">über 60 km</th>
+                  <td>3.672 €</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="wk-badge-row">
+              <span class="chip">angewandte Stufe hervorgehoben</span>
+            </div>
+          </div>
+
+          <div class="wk-card">
+            <h2 class="wk-card-title">
+              <span>Angewandte Werte</span>
+              <span class="wk-tag">je Arbeitsweg</span>
+            </h2>
+            <table class="wk-table wk-applied-table" style="margin-top: 0">
+              <tbody>
+                <tr class="wk-subhead">
+                  <th scope="colgroup" colspan="2" class="wk-col-vb">VB</th>
+                </tr>
+                <tr>
+                  <th scope="row">Stufe</th>
+                  <td id="out-vb-ppband">&ndash;</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pendlerpauschale</th>
+                  <td id="out-vb-ppyear">&ndash;</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pendlereuro</th>
+                  <td id="out-vb-peyear">&ndash;</td>
+                </tr>
+                <tr class="wk-subhead wk-subhead--gap">
+                  <th scope="colgroup" colspan="2" class="wk-col-hoe">HÖ</th>
+                </tr>
+                <tr>
+                  <th scope="row">Stufe</th>
+                  <td id="out-hoe-ppband">&ndash;</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pendlerpauschale</th>
+                  <td id="out-hoe-ppyear">&ndash;</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pendlereuro</th>
+                  <td id="out-hoe-peyear">&ndash;</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="wk-badge-row">
+              <span class="chip">Pendlereuro = 2 €/km und Jahr</span>
+              <span class="chip">Pauschale wirkt über den Steuersatz</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="wk-fineprint">
+          <span>Wohnkosten von Jens Krause</span>
+          <span>Rechtsstand 2026 · Österreich</span>
+        </div>
+        <p class="wk-disclaimer">
+          Die Beträge der Pendlerpauschale und des Pendlereuro sind dem Rechtsstand 2026
+          nachgebildet und sollten vor einer Entscheidung am BMF-Pendlerrechner gegengeprüft
+          werden. Die Versicherungsspanne ist ein Marktrichtwert ohne Fahrzeug-, Bonus-Malus-
+          und Regionaldaten und ersetzt kein Angebot. Der Rechner ist keine Steuer- oder
+          Versicherungsberatung. Die Gesamtsumme neben "Ergebnisse" umfasst Sprit netto und
+          Versicherung, aber nicht Service, Reifen, Wertverlust, Vignette oder Parkkosten.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site footer -->
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem">
+      <span>&copy; 2026 Jens Krause</span>
+      <div class="footer-legal">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+      </div>
+      <div class="ai-callout" role="note">
+        <span class="ai-callout-icon" aria-hidden="true"></span>
+        <p class="ai-callout-text">Teile dieser Website wurden mit KI generiert.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script src="wohnkosten.js"></script>
+</body>
+</html>

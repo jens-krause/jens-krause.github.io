@@ -1,0 +1,399 @@
+/* =========================================================
+   Wohnkosten — Pendel- & Fahrtkostenrechner (Österreich)
+   Tool-spezifische Styles. Design-Tokens kommen aus
+   ../../styles/main.css (--bg-2, --border, --accent-*, …).
+   Prefix: .wk-
+   ========================================================= */
+
+/* ---------- Tool-Layout: Eingaben | Ergebnisse ---------- */
+.wk-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.75rem;
+  align-items: start;
+}
+.wk-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+.wk-section-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.05;
+  padding-left: 0.25rem;
+}
+/* "Ergebnisse" mit der zusammenfassenden Monatssumme direkt daneben,
+   in derselben Größe wie die Summen in den Ergebniskacheln
+   (.wk-res-value / .wk-res-unit werden hier wiederverwendet). */
+.wk-section-label--totals {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 0.7rem;
+  row-gap: 0.2rem;
+}
+.wk-section-total {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 960px) {
+  .wk-grid { grid-template-columns: 1fr; }
+  .wk-section-label { font-size: 1.5rem; }
+}
+
+.wk-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 2.6vw, 1.9rem);
+}
+.wk-card + .wk-card { margin-top: 0; }
+
+.wk-card-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+.wk-card-title .wk-tag {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: none;
+}
+.wk-card--vb .wk-card-title { color: var(--accent-cool); }
+.wk-card--hoe .wk-card-title { color: var(--accent-warm); }
+
+/* ---------- Eingabefelder ---------- */
+.wk-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem 1.1rem;
+}
+.wk-field { min-width: 0; }
+.wk-field--wide { grid-column: 1 / -1; }
+
+.wk-label {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--text);
+  margin-bottom: 0.45rem;
+  line-height: 1.35;
+}
+.wk-label .wk-unit {
+  color: var(--text-dim);
+  font-size: 0.8em;
+  font-family: var(--font-mono);
+  margin-left: 0.4em;
+}
+.wk-hint {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.wk-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.wk-input:hover { border-color: var(--border-strong); }
+.wk-input:focus-visible {
+  outline: none;
+  border-color: var(--accent-cool);
+  background: var(--bg-2);
+}
+.wk-input.is-invalid { border-color: #d65454; }
+
+/* Auf/Ab-Pfeile der Zahlenfelder (Arbeitstage, Privat km/Jahr)
+   ausblenden — die Eingabe bleibt per Tastatur oder Wischgeste
+   möglich, nur die Stepper-Buttons verschwinden. */
+input[type="number"].wk-input {
+  -moz-appearance: textfield;
+}
+input[type="number"].wk-input::-webkit-outer-spin-button,
+input[type="number"].wk-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ---------- Ergebnisse ---------- */
+.wk-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.wk-res-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 2.6vw, 1.75rem);
+}
+.wk-res-card--hero {
+  border-color: var(--border-strong);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(125, 211, 252, 0.09), transparent 60%),
+    var(--bg-2);
+}
+.wk-res-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.55rem;
+}
+.wk-res-label {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text);
+}
+/* Ergebniswert inline im Kachel-Titel statt einer eigenen großen
+   Zeile darunter — spart vertikalen Platz. */
+.wk-res-label-value {
+  font-style: italic;
+  color: var(--accent-warm);
+  font-variant-numeric: tabular-nums;
+}
+.wk-res-note {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+/* .wk-res-value / .wk-res-value--range / .wk-res-unit werden noch von
+   der "Ergebnisse:"-Kopfzeile weiter oben verwendet. */
+.wk-res-value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2.1rem, 4.6vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-warm);
+  /* Kursive Display-Serife ragt leicht über die Glyphenbox hinaus —
+     eigene Layer-/Paddingbox verhindert Repaint-Reste in Safari. */
+  display: inline-block;
+  padding-right: 0.14em;
+  transform: translateZ(0);
+}
+.wk-res-value--range {
+  font-size: clamp(1.7rem, 3.6vw, 2.35rem);
+}
+.wk-res-unit {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+.wk-res-sub {
+  margin: 0.7rem 0 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ---------- Tabellen ---------- */
+.wk-table {
+  width: 100%;
+  margin-top: 1.1rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+.wk-table th,
+.wk-table td {
+  padding: 0.44rem 0.3rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--border);
+}
+.wk-table th:first-child,
+.wk-table td:first-child {
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.wk-table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+  padding-bottom: 0.55rem;
+}
+.wk-table thead th.wk-col-vb { color: var(--accent-cool); }
+.wk-table thead th.wk-col-hoe { color: var(--accent-warm); }
+.wk-table td {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+}
+.wk-table tbody tr:last-child td { border-bottom: none; }
+.wk-table .wk-row-total td {
+  border-top: 1px solid var(--border-strong);
+  border-bottom: none;
+  padding-top: 0.6rem;
+  color: var(--text);
+}
+.wk-table .wk-row-total td:first-child { color: var(--text); }
+.wk-table .wk-col-sum { color: var(--text); font-weight: 500; }
+.wk-table .wk-credit { color: #5bd57a; }
+.wk-table .wk-muted-cell { color: var(--text-dim); }
+
+/* ---------- Pendlerpauschale-Tabelle (Rechenweg) ---------- */
+.wk-detail {
+  margin-top: 2.5rem;
+}
+.wk-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.85rem;
+}
+.wk-pp-table td:first-child,
+.wk-pp-table th:first-child { font-family: var(--font-mono); font-size: 0.78rem; }
+.wk-pp-table tr.is-active > td,
+.wk-pp-table tr.is-active > th {
+  color: var(--text);
+  background: var(--surface);
+}
+.wk-pp-table tr.is-active > th:first-child { color: var(--accent-cool); }
+.wk-pp-table tr.is-active-hoe > th:first-child { color: var(--accent-warm); }
+/* Abschnittszeile innerhalb eines tbody (ersetzt ein zweites thead) */
+.wk-subhead > th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+.wk-subhead--gap > th { padding-top: 1.4rem; }
+.wk-applied-table td { word-break: break-word; }
+
+.wk-badge-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* ---------- Aktionen ---------- */
+.wk-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+.wk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem 0.55rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 999px;
+  background:
+    linear-gradient(155deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.05) 42%,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(255, 255, 255, 0.08) 100%),
+    rgba(15, 16, 22, 0.5);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0  1px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.10),
+    0 6px 18px rgba(0, 0, 0, 0.30);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease),
+              transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.wk-btn .icon {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.45s var(--ease-out);
+}
+.wk-btn:hover {
+  border-color: rgba(255, 255, 255, 0.30);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0  1px 0 rgba(255, 255, 255, 0.50),
+    0 10px 24px rgba(0, 0, 0, 0.38);
+}
+.wk-btn:hover .icon { transform: rotate(-180deg); }
+.wk-btn:active { transform: translateY(0) scale(0.97); }
+
+/* ---------- Fineprint & Disclaimer ---------- */
+.wk-disclaimer {
+  max-width: 62ch;
+  margin: 1rem auto 0;
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-align: center;
+}
+.wk-fineprint {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@media (max-width: 560px) {
+  .wk-table { font-size: 0.78rem; }
+  .wk-table th, .wk-table td { padding: 0.4rem 0.18rem; }
+  .wk-table td { font-size: 0.74rem; }
+  .wk-table thead th { font-size: 0.58rem; letter-spacing: 0.08em; }
+  .wk-res-label { font-size: 1.3rem; }
+}
