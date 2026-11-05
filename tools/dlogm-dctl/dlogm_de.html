@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="D-Log M nach DaVinci Wide Gamut: eine DCTL für DaVinci Resolve Studio von Jens Krause, mit gemessener Kurve und Farbmatrix für DJI Osmo Action 6 und Osmo 360 II." />
+
+  <!-- Open Graph (Facebook, WhatsApp, iMessage, Slack, Discord, LinkedIn, …) -->
+  <meta property="og:site_name" content="Jens Krause" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jens-krause.github.io/tools/dlogm-dctl/dlogm_de.html" />
+  <meta property="og:title" content="D-Log M → DaVinci Wide Gamut — Jens Krause" />
+  <meta property="og:description" content="Eine DCTL für DaVinci Resolve Studio, die DJI D-Log M mit gemessener Kurve und Farbmatrix nach DaVinci Wide Gamut umrechnet." />
+  <meta property="og:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="JK · Jens Krause" />
+  <meta property="og:locale" content="de_DE" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="D-Log-M DCTL — Jens Krause" />
+  <meta name="twitter:description" content="Eine DCTL für DaVinci Resolve Studio, die DJI D-Log M mit gemessener Kurve und Farbmatrix nach DaVinci Wide Gamut umrechnet." />
+  <meta name="twitter:image" content="https://jens-krause.github.io/og-image.png" />
+  <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
+  <title>D-Log M → DaVinci Wide Gamut — Jens Krause</title>
+
+  <link rel="alternate" hreflang="de" href="https://jens-krause.github.io/tools/dlogm-dctl/dlogm_de.html" />
+  <link rel="alternate" hreflang="en" href="https://jens-krause.github.io/tools/dlogm-dctl/dlogm.html" />
+
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../LR_Wildlife_Sharpness/sharpness.css" />
+  <link rel="stylesheet" href="dlogm.css" />
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-prog" aria-hidden="true"></div>
+
+  <div class="preloader">
+    <div class="pl-inner">D-Log M<span class="dot"></span></div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-dot"></span>
+        <span>Jens Krause</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../../arbeit.html">Arbeit</a>
+        <a class="nav-link active" href="../../werkzeuge.html">Werkzeuge</a>
+        <a class="nav-link" href="../../fotografie.html">Fotografie</a>
+        <a class="nav-link nav-link-contact" href="../../kontakt.html">Kontakt</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang-switch">
+          <span class="lang-active">DE</span>
+          <span class="lang-sep">·</span>
+          <a href="dlogm.html">EN</a>
+        </div>
+        <a class="nav-cta" href="../../kontakt.html">Kontakt &rarr;</a>
+      </div>
+      <button class="menu-btn" aria-expanded="false" aria-label="Menü">
+        <span class="menu-btn-label">Menü</span>
+        <span class="menu-btn-close" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="imgs/DLM_baum_dctl_0ev.jpg" alt="" style="opacity:0.5" />
+    </div>
+    <div class="container hero-content">
+      <div class="section-head" style="align-items:end; margin-bottom: 2.5rem">
+        <div class="meta reveal">
+          <span class="eyebrow">D-Log M &rarr; DaVinci Wide Gamut</span>
+        </div>
+        <h1 class="h-display reveal delay-1" style="font-size: clamp(3rem, 8vw, 6.5rem)">
+          Endlich <em>echte</em><br> Farben.
+        </h1>
+      </div>
+
+      <p class="lead reveal delay-2" style="max-width:62ch">
+        Wenn ich mit meiner <em>Osmo Action 6</em> und <em>Osmo 360 II</em> aufnehme, filmen diese in DJI's Farbraum D&#8209;Log M.
+        Beim bearbeiten des Materials, will ich aber im Farbraum DaVinci Wide Gamut arbeiten, denn dieser ist größer als der normale Rec.709 Farbraum. 
+        Dadurch bleiben Farben natürlich und Lichter sowie Schatten behalten ihre Informationen.
+        <br>
+        Allerdings gibt es keine offizielle Beschreibung der D-Log M Eingenschaften und lediglich eine LUT, welche direkt in den Rec.709 Farbraum übersetzt - und damit viele Informationen des Bildmaterials zurücklässt.
+
+        Bisher hilft man sich in Davinci Resolve mit einer Annäherung via "Color Space Transform" - die trifft die Kurve von D-Log M aber nicht genau. Also habe ich die Kurve einfach selbst gemessen.
+      </p>
+      <p class="lead reveal delay-2" style="max-width:62ch">
+        Das Ergebnis ist eine DCTL mit gemessener Kurve und Farbmatrix
+        für beide Kameras. Die DCTL ist ausführlich getestet, wie unten beschrieben.
+      </p>
+
+      <div class="chip-row reveal delay-3" style="margin-top:1.6rem">
+        <span class="chip">DaVinci Resolve Studio</span>
+        <span class="chip">DCTL</span>
+        <span class="chip">DJI Osmo Action 6</span>
+        <span class="chip">DJI Osmo 360 II</span>
+      </div>
+
+      <a class="btn gh-badge reveal delay-3" href="https://github.com/jens-krause/dlogm-dctl" target="_blank" rel="noopener">
+        <img class="gh-icon" src="../../imgs/logos/github_logo_icon.png" alt="" />
+        Star on GitHub
+        <svg class="gh-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m12 3 2.7 5.5 6 .9-4.35 4.25 1.03 6-5.38-2.83L6.62 19.65l1.03-6L3.3 9.4l6-.9L12 3Z" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Guide -->
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="section-head">
+        <div class="meta reveal">
+          <span class="eyebrow">Anleitung</span>
+        </div>
+        <h2 class="h-section reveal delay-1">
+          <em>Grading</em> in drei Schritten.
+        </h2>
+      </div>
+
+      <div class="dl-steps">
+
+        <article class="tut-step dl-step reveal">
+          <div>
+            <div class="tut-step-num">Schritt 1 &middot; Installieren</div>
+            <p>
+              In den Projekteinstellungen unter <em>Color Management &rarr;
+              Lookup Tables</em> auf <em>Open LUT Folder</em> klicken und
+              <code>DLogM_to_DWG.dctl</code> hineinkopieren. Danach
+              <em>Update Lists</em> klicken.
+            </p>
+          </div>
+        </article>
+
+        <article class="tut-step dl-step reveal delay-1">
+          <div>
+            <div class="tut-step-num">Schritt 2 &middot; Erste Node</div>
+            <p>
+              Projekt auf <em>DaVinci YRGB</em> und Timeline auf
+              <em>DaVinci WG/Intermediate</em> stellen. In der ersten Node jedes
+              Clips kommt der Effekt <em>DCTL</em> mit
+              <code>DLogM_to_DWG</code>.
+            </p>
+          </div>
+        </article>
+
+        <article class="tut-step dl-step reveal delay-2">
+          <div>
+            <div class="tut-step-num">Schritt 3 &middot; Graden und Output</div>
+            <p>
+              Nun kann man die CLips einfach bearbeiten. Am Ende jedes Node-Trees kommt eine CST nach Rec.709. Für die DCTL, wähle ein custom DaVinci Tone Mapping mit max. Input von
+              300&nbsp;nits.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Background -->
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="section-head">
+        <div class="meta reveal">
+          <span class="eyebrow">Hintergrund</span>
+        </div>
+        <h2 class="h-section reveal delay-1">
+          Warum nicht <em>einfach CST</em> ?
+        </h2>
+      </div>
+
+      <div class="dl-prose reveal">
+        <p>
+          DJI hat für D&#8209;Log M weder Kurve noch Farbraum veröffentlicht.
+          In Guides sieht man daher häufig eine der folgenden zwei Optionen:
+        </p>
+        <ul>
+          <li>
+            <strong>CST mit &bdquo;DJI D&#8209;Log&ldquo; als Eingangs-Gamma.</strong>
+            Das ist naheliegend, aber falsch. D&#8209;Log M ist nicht D&#8209;Log und kein "echtes" Log Profil. Das Bild wird kontrastreich und übersättigt.
+          </li>
+          <li>
+            <strong>CST mit &bdquo;Rec.709&ldquo; als Eingangs-Gamma.</strong>
+            Das Ergebnis sieht der DJI-LUT ähnlich, drückt aber die Lichter
+            zusammen. Im oberen Bereich wird aus einer echten Blende nur
+            eine halbe (im vergleich zur LUT). Belichtungskorrekturen fühlen sich dadurch falsch
+            an, und der Himmel brennt schnell aus.
+          </li>
+        </ul>
+        <p>Gemessen habe ich mit meinem ColorChecker Passport:</p>
+        <ul>
+          <li>Belichtungsreihen im Tageslicht und unter einer Lampe, jeweils mit fester ISO und festem Weißabgleich.</li>
+          <li>Die Wolken haben das Licht zwischendurch minimal verändert. Das ließ sich aber herausrechnen, weil die Osmo Action 6 ihren eigenen Belichtungsmesswert in jedem Bild mitspeichert.</li>
+          <li>Für die Osmo 360 II wurde eine eigene Reihe bei konstantem Licht aufgenommen, da der Sensor Belichtung anders berechnet.</li>
+          <li>Die Farbmatrix der Osmo Action 6 wurde aus der offiziellen DJI-LUT berechnet. Die Osmo 360 II habe ich danach an die Action 6 angeglichen.</li>
+        </ul>
+      </div>
+
+      <figure class="dl-fig reveal dl-fig--chart">
+        <ul class="dl-legend"><li><i class="lg-a6"></i>DCTL Osmo Action 6</li><li><i class="lg-360"></i>DCTL Osmo 360 II</li><li><i class="lg-rec lg-dash"></i>CST (DJI D-Gamut / Rec.709)</li><li><i class="lg-dlog lg-dash"></i>CST (DJI D-Gamut / DJI D-Log)</li></ul><div class="dl-charts dl-charts--2"><div class="dl-chart"><h4 class="dl-chart-title t-plain">Welcher Codewert steht für wie viel Licht?</h4><svg class="dl-svg" viewBox="0 0 520 380" role="img" aria-label="Kurvendiagramm: Blenden relativ zu 18 Prozent Grau über dem D-Log-M-Codewert für DCTL Osmo Action 6, DCTL Osmo 360 II, CST Rec.709 und CST D-Log. Die DCTL-Kurven verlaufen in den Lichtern flacher als D-Log, aber steiler als Rec.709." preserveAspectRatio="xMidYMid meet"><line class="gr" x1="54" x2="506" y1="328" y2="328"/><text class="tk" x="46" y="332.5" text-anchor="end">−8</text><line class="gr" x1="54" x2="506" y1="282.9" y2="282.9"/><text class="tk" x="46" y="287.4" text-anchor="end">−6</text><line class="gr" x1="54" x2="506" y1="237.7" y2="237.7"/><text class="tk" x="46" y="242.2" text-anchor="end">−4</text><line class="gr" x1="54" x2="506" y1="192.6" y2="192.6"/><text class="tk" x="46" y="197.1" text-anchor="end">−2</text><line class="gr z" x1="54" x2="506" y1="147.4" y2="147.4"/><text class="tk" x="46" y="151.9" text-anchor="end">0</text><line class="gr" x1="54" x2="506" y1="102.3" y2="102.3"/><text class="tk" x="46" y="106.8" text-anchor="end">2</text><line class="gr" x1="54" x2="506" y1="57.1" y2="57.1"/><text class="tk" x="46" y="61.6" text-anchor="end">4</text><line class="gr" x1="54" x2="506" y1="12" y2="12"/><text class="tk" x="46" y="16.5" text-anchor="end">6</text><line class="gr" x1="54" x2="54" y1="12" y2="328"/><text class="tk" x="54" y="347" text-anchor="middle">0</text><line class="gr" x1="144.4" x2="144.4" y1="12" y2="328"/><text class="tk" x="144.4" y="347" text-anchor="middle">0,2</text><line class="gr" x1="234.8" x2="234.8" y1="12" y2="328"/><text class="tk" x="234.8" y="347" text-anchor="middle">0,4</text><line class="gr" x1="325.2" x2="325.2" y1="12" y2="328"/><text class="tk" x="325.2" y="347" text-anchor="middle">0,6</text><line class="gr" x1="415.6" x2="415.6" y1="12" y2="328"/><text class="tk" x="415.6" y="347" text-anchor="middle">0,8</text><line class="gr" x1="506" x2="506" y1="12" y2="328"/><text class="tk" x="506" y="347" text-anchor="middle">1,0</text><line class="lim" x1="241.4" x2="241.4" y1="12" y2="328"/><clipPath id="clipL"><rect x="54" y="12" width="452" height="316"/></clipPath><g clip-path="url(#clipL)"><path class="k-dlog" d="M95 341.5C95.7 336.3 98 318.9 99.2 310.3C100.4 301.8 100.9 296.3 101.9 290.4C103 284.5 104.1 279.7 105.5 274.8C107 270 108.9 265 110.6 261.1C112.3 257.2 112.3 256.5 115.6 251.4C119 246.4 126.3 236.3 130.7 230.9C135.1 225.5 137.4 223.4 142 218.8C146.6 214.3 150.5 210.2 158.4 203.5C166.2 196.8 178.7 186.8 189.1 178.8C199.6 170.9 210.4 163.2 221.2 155.6C232 148.1 226.4 151.6 253.9 133.4C281.5 115.2 355.9 66.4 386.5 46.6C417.1 26.8 429 19.8 437.5 14.4"/><path class="k-rec" d="M54.1 425.2C54.1 421.8 54.1 411.9 54.1 404.7C54.2 397.5 54.2 388.7 54.3 382.1C54.3 375.6 54.3 372 54.5 365.5C54.6 359 54.7 350.5 54.9 342.9C55.1 335.4 55.4 327.2 55.8 320.4C56.2 313.6 56.7 307.1 57.2 302.1C57.6 297.2 57.9 294.7 58.5 290.5C59.1 286.4 60 281.1 60.8 277.3C61.5 273.6 61.9 271.7 63 268C64.2 264.2 66.1 258.5 67.6 254.8C69.1 251 70.6 248.2 72.1 245.4C73.6 242.6 75.1 240.3 76.6 238.1C78.1 235.9 79.6 234 81.1 232.2C82.6 230.4 84.1 228.8 85.6 227.2C87.2 225.5 89.1 223.9 90.6 222.5C92.1 221.1 93.2 220.2 94.7 219C96.1 217.8 96.9 217 99.2 215.3C101.5 213.5 104.5 211 108.2 208.3C112 205.6 115.8 202.8 121.8 199C127.8 195.3 136.9 189.8 144.4 185.8C151.9 181.7 159.5 178.1 167 174.6C174.5 171.1 178.3 169.2 189.6 164.9C200.9 160.6 219.7 153.6 234.8 148.7C249.9 143.8 264.9 139.6 280 135.5C295.1 131.4 310.1 127.8 325.2 124.3C340.3 120.9 355.3 117.7 370.4 114.7C385.5 111.6 400.5 108.8 415.6 106.1C430.7 103.4 445.7 100.9 460.8 98.5C475.9 96.1 498.5 92.7 506 91.6"/><path class="k-360" d="M55.5 341.5C56.4 338.8 58.7 331.3 60.6 325.1C62.5 318.9 64.1 312.2 67 304.4C70 296.6 74.5 286.1 78.2 278.3C81.9 270.4 85.3 263.9 89.2 257.2C93 250.6 96.6 244.7 101.1 238.4C105.7 232.2 111.2 225.3 116.2 219.7C121.3 214.2 126.6 209.2 131.3 205C136.1 200.7 139.2 198.1 144.5 194.2C149.9 190.3 155.7 185.9 163.4 181.4C171 176.8 181.6 171.2 190.4 167C199.2 162.8 209.7 158.8 216.2 156.1C222.7 153.5 225.9 152.4 229.4 151.2C232.8 150.1 234.9 150.2 236.9 149.5C239 148.7 240.2 147.4 241.8 146.9C243.4 146.4 244.5 146.9 246.6 146.2C248.6 145.5 248.4 144.7 253.9 142.8C259.4 140.8 274.8 136.3 279.7 134.6C284.6 132.9 279.2 133.8 283.4 132.5C287.6 131.2 294.3 130 304.8 126.8C315.3 123.5 334.8 117 346.3 112.8C357.8 108.7 360.5 107.7 374 101.9C387.5 96 413.8 83.7 427.4 77.8C441 71.8 445.6 69.9 455.7 66.1C465.8 62.2 479.5 57.6 487.8 54.9C496.1 52.1 502.7 50.5 505.7 49.6"/><path class="k-a6" d="M53.9 341.5C54.4 338.1 56 328.2 57.2 320.9C58.4 313.7 59.6 304.5 60.9 298.1C62.3 291.7 63.4 287.6 65.3 282.4C67.2 277.2 69.4 271.9 72.3 266.8C75.1 261.8 78 257.7 82.3 252.2C86.6 246.6 91.1 240.8 98 233.7C104.9 226.5 116 216.2 123.8 209.3C131.6 202.5 137.9 197.5 144.8 192.4C151.8 187.3 157.1 183.5 165.5 178.7C173.8 173.9 166.4 173.8 195.1 163.5C223.7 153.3 297.9 130.4 337.5 117.3C377.2 104.1 411.4 92.3 433.1 84.7C454.8 77 455.6 76.5 467.7 71.6C479.8 66.7 499.3 58.2 505.7 55.5"/></g><text class="at" x="280" y="372" text-anchor="middle">D-Log M Codewert (0–1)</text><text class="at" transform="translate(14 170) rotate(-90)" text-anchor="middle">Blenden relativ zu 18 % Grau</text><path class="ax" d="M54 12V328H506"/></svg></div><div class="dl-chart"><h4 class="dl-chart-title t-plain">Steigung der Kurve: Codewerte pro Blende Licht</h4><svg class="dl-svg" viewBox="0 0 520 380" role="img" aria-label="Kurvendiagramm: Steigung der Kurve, also Codewerte pro Blende Licht, über dem D-Log-M-Codewert. D-Log bleibt bei etwa 0,08, Rec.709 steigt in den Lichtern bis 0,34, die DCTL-Kurven liegen bei 0,11 bis 0,17." preserveAspectRatio="xMidYMid meet"><line class="gr" x1="54" x2="506" y1="328" y2="328"/><text class="tk" x="46" y="332.5" text-anchor="end">0</text><line class="gr" x1="54" x2="506" y1="288.5" y2="288.5"/><text class="tk" x="46" y="293" text-anchor="end">0,05</text><line class="gr" x1="54" x2="506" y1="249" y2="249"/><text class="tk" x="46" y="253.5" text-anchor="end">0,10</text><line class="gr" x1="54" x2="506" y1="209.5" y2="209.5"/><text class="tk" x="46" y="214" text-anchor="end">0,15</text><line class="gr" x1="54" x2="506" y1="170" y2="170"/><text class="tk" x="46" y="174.5" text-anchor="end">0,20</text><line class="gr" x1="54" x2="506" y1="130.5" y2="130.5"/><text class="tk" x="46" y="135" text-anchor="end">0,25</text><line class="gr" x1="54" x2="506" y1="91" y2="91"/><text class="tk" x="46" y="95.5" text-anchor="end">0,30</text><line class="gr" x1="54" x2="506" y1="51.5" y2="51.5"/><text class="tk" x="46" y="56" text-anchor="end">0,35</text><line class="gr" x1="54" x2="506" y1="12" y2="12"/><text class="tk" x="46" y="16.5" text-anchor="end">0,40</text><line class="gr" x1="54" x2="54" y1="12" y2="328"/><text class="tk" x="54" y="347" text-anchor="middle">0</text><line class="gr" x1="144.4" x2="144.4" y1="12" y2="328"/><text class="tk" x="144.4" y="347" text-anchor="middle">0,2</text><line class="gr" x1="234.8" x2="234.8" y1="12" y2="328"/><text class="tk" x="234.8" y="347" text-anchor="middle">0,4</text><line class="gr" x1="325.2" x2="325.2" y1="12" y2="328"/><text class="tk" x="325.2" y="347" text-anchor="middle">0,6</text><line class="gr" x1="415.6" x2="415.6" y1="12" y2="328"/><text class="tk" x="415.6" y="347" text-anchor="middle">0,8</text><line class="gr" x1="506" x2="506" y1="12" y2="328"/><text class="tk" x="506" y="347" text-anchor="middle">1,0</text><clipPath id="clipR"><rect x="54" y="12" width="452" height="316"/></clipPath><g clip-path="url(#clipR)"><path class="k-dlog" d="M100.2 321.7C103.3 318.1 113.4 305.2 118.8 300.3C124.2 295.5 127.7 295 132.6 292.4C137.5 289.9 142.4 287.4 148.1 285.3C153.8 283.2 160.5 281.4 166.5 279.8C172.6 278.2 177.6 277 184.1 275.9C190.6 274.7 195.3 273.8 205.5 272.7C215.7 271.6 229.8 270.5 245.1 269.5C260.4 268.6 254.5 267.7 297.3 267.2C340.1 266.6 467.8 266.5 501.9 266.4"/><path class="k-rec" d="M54 328C55.5 326.1 60.1 320.6 63.2 316.9C66.2 313.2 69.3 309.5 72.4 305.8C75.4 302.1 78.5 298.3 81.5 294.7C84.6 291 87.7 286.3 90.6 283.7C93.6 281.1 82.7 287.9 99.2 278.9C115.7 269.9 159.5 246.1 189.6 229.6C219.7 213.2 249.9 196.8 280 180.4C310.1 164 340.3 147.6 370.4 131.1C400.5 114.7 438.2 94.2 460.8 81.8C483.4 69.5 498.5 61.3 506 57.2"/><path class="k-360" d="M69.4 311.4C72.1 310.6 80.2 308.6 85.4 306.7C90.6 304.7 92.6 303.6 100.5 299.6C108.4 295.5 123.7 287.2 132.6 282.2C141.5 277.2 145.1 275.5 153.9 269.5C162.7 263.6 173.2 254.9 185.4 246.6C197.6 238.3 216.6 226.1 226.9 219.8C237.2 213.5 241 211.3 247 208.7C253 206.1 256.9 205.3 262.7 204C268.6 202.7 275.6 200.9 282.2 200.8C288.8 200.7 297.1 202.3 302.3 203.2C307.6 204.1 308.7 204.5 313.6 206.3C318.5 208.2 320.8 209.1 331.8 214.2C342.8 219.4 369 232.8 379.6 237.2C390.2 241.5 390.4 239.7 395.4 240.3C400.3 241 404.3 241.4 409.2 241.1C414.1 240.8 418.9 240.4 424.9 238.7C430.9 237 439.6 233.2 445 230.8C450.5 228.5 453.5 226.9 457.6 224.5C461.7 222.1 465.7 219.4 469.5 216.6C473.3 213.8 476.5 211.3 480.2 207.9C484 204.5 487.9 198.2 492.2 196.1C496.4 194 503.4 195.4 505.7 195.3"/><path class="k-a6" d="M63.1 315.4C64.8 313.5 70.2 307.3 73.4 304.3C76.6 301.3 76.7 300.2 82.3 297.2C87.9 294.2 97.1 289.9 106.8 286.1C116.5 282.3 130.5 278.5 140.7 274.3C151 270.1 160.3 266.1 168.2 260.9C176.2 255.6 181.1 248.6 188.5 242.7C195.9 236.8 206.7 229.2 212.4 225.3C218.2 221.4 217.9 221.6 223.1 219C228.2 216.3 235.9 212 243.3 209.5C250.7 207 257.9 205.3 267.4 204C276.9 202.7 286 200.8 300.4 201.6C314.8 202.4 341.7 207.5 353.9 208.7C366 209.9 366.3 209 373.3 208.7C380.4 208.4 389.8 207.3 396 207.1C402.2 207 405.1 207 410.4 207.9C415.8 208.8 420.1 209.5 428 212.7C436 215.8 451.1 223.9 458.2 226.9C465.4 229.9 464.4 229 470.8 230.8C477.2 232.7 490.7 236.6 496.6 237.9C502.4 239.3 504.2 238.6 505.7 238.7"/></g><text class="at" x="280" y="372" text-anchor="middle">D-Log M Codewert (0–1)</text><text class="at" transform="translate(14 170) rotate(-90)" text-anchor="middle">Codewerte pro Blende</text><path class="ax" d="M54 12V328H506"/></svg></div></div>
+          <figcaption>
+          Links: für wie viel Licht jeder Codewert steht. Rechts: die Steigung dieser
+          Kurve, also wie viele Codewerte die Kamera pro Blende Licht verwendet. Das ist
+          eine Eigenschaft der Kamera-Kodierung, nicht der Szene. D&#8209;Log rechnet mit
+          nur halb so vielen Codewerten pro Blende wie D&#8209;Log M, Rec.709 in den Lichtern
+          mit zu vielen.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Tests -->
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="section-head">
+        <div class="meta reveal">
+          <span class="eyebrow">Tests</span>
+        </div>
+        <h2 class="h-section reveal delay-1">
+          <em>DCTL</em> gegen CST.
+        </h2>
+      </div>
+
+      <div class="dl-prose reveal" style="margin-bottom:3rem">
+        <p>
+          Alle Vergleiche sind Bildschirmfotos aus DaVinci Resolve Studio 21.
+          Alle Varianten laufen durch dieselbe Ausgabe-Transformation.
+        </p>
+      </div>
+
+      <div class="dl-tests">
+
+        <!-- Test 1 -->
+        <article class="dl-test reveal">
+          <div class="dl-test-head">
+            <div class="tut-step-num">Test 1</div>
+            <h3>Bleibt eine Blende eine Blende?</h3>
+            <p>
+              Dieselben Graukacheln über vier Blenden Verschlusszeit aufgenommen und danach per Belichtungskorrektur ausgeglichen. Mit der DCTL liegen die Aufnahmen auf 0,06 Blenden
+              genau übereinander. Die CST mit Rec.709 weicht um 0,39 Blenden ab, die
+              CST mit &bdquo;DJI D&#8209;Log&ldquo; sogar um mehr als eine ganze Blende!
+            </p>
+            <p>
+              Bei der Omso 360 II sind es sogar nur 0,03 Blenden Abweichung via DCTL.
+            </p>
+          </div>
+
+          <figure class="dl-fig dl-fig--narrow dl-fig--chart">
+            <ul class="dl-legend"><li><i class="lg-dlog"></i>CST (DJI D-Gamut / DJI D-Log)</li><li><i class="lg-rec"></i>CST (DJI D-Gamut / Rec.709)</li><li><i class="lg-dctl"></i>DCTL</li></ul><div class="dl-charts dl-charts--1"><svg class="dl-svg" viewBox="0 0 760 420" role="img" aria-label="Balkendiagramm: Streuung der Graukacheln in Blenden (rms), kleiner ist besser. Action 6 im Tageslicht: DCTL 0,06, CST mit Rec.709 0,39, CST mit D-Log 1,12. Action 6 unter der Lampe: DCTL 0,07, Rec.709 0,24, D-Log 0,88. Osmo 360 II unter der Lampe: DCTL 0,03, Rec.709 0,36, D-Log 0,87." preserveAspectRatio="xMidYMid meet"><line class="gr" x1="64" x2="744" y1="350" y2="350"/><text class="tk" x="56" y="354.5" text-anchor="end">0,0</text><line class="gr" x1="64" x2="744" y1="294" y2="294"/><text class="tk" x="56" y="298.5" text-anchor="end">0,2</text><line class="gr" x1="64" x2="744" y1="238" y2="238"/><text class="tk" x="56" y="242.5" text-anchor="end">0,4</text><line class="gr" x1="64" x2="744" y1="182" y2="182"/><text class="tk" x="56" y="186.5" text-anchor="end">0,6</text><line class="gr" x1="64" x2="744" y1="126" y2="126"/><text class="tk" x="56" y="130.5" text-anchor="end">0,8</text><line class="gr" x1="64" x2="744" y1="70" y2="70"/><text class="tk" x="56" y="74.5" text-anchor="end">1,0</text><line class="gr" x1="64" x2="744" y1="14" y2="14"/><text class="tk" x="56" y="18.5" text-anchor="end">1,2</text><rect class="c-dlog" x="94.3" y="36.4" width="50" height="313.6" rx="3"/><text class="vl" x="119.3" y="29.4" text-anchor="middle">1,12</text><rect class="c-rec" x="152.3" y="240.8" width="50" height="109.2" rx="3"/><text class="vl" x="177.3" y="233.8" text-anchor="middle">0,39</text><rect class="c-dctl" x="210.3" y="333.2" width="50" height="16.8" rx="3"/><text class="vl" x="235.3" y="326.2" text-anchor="middle">0,06</text><text class="tk" x="177.3" y="374" text-anchor="middle">Action 6</text><text class="tk" x="177.3" y="393" text-anchor="middle">Tageslicht</text><rect class="c-dlog" x="321" y="103.6" width="50" height="246.4" rx="3"/><text class="vl" x="346" y="96.6" text-anchor="middle">0,88</text><rect class="c-rec" x="379" y="282.8" width="50" height="67.2" rx="3"/><text class="vl" x="404" y="275.8" text-anchor="middle">0,24</text><rect class="c-dctl" x="437" y="330.4" width="50" height="19.6" rx="3"/><text class="vl" x="462" y="323.4" text-anchor="middle">0,07</text><text class="tk" x="404" y="374" text-anchor="middle">Action 6</text><text class="tk" x="404" y="393" text-anchor="middle">Lampe</text><rect class="c-dlog" x="547.7" y="106.4" width="50" height="243.6" rx="3"/><text class="vl" x="572.7" y="99.4" text-anchor="middle">0,87</text><rect class="c-rec" x="605.7" y="249.2" width="50" height="100.8" rx="3"/><text class="vl" x="630.7" y="242.2" text-anchor="middle">0,36</text><rect class="c-dctl" x="663.7" y="341.6" width="50" height="8.4" rx="3"/><text class="vl" x="688.7" y="334.6" text-anchor="middle">0,03</text><text class="tk" x="630.7" y="374" text-anchor="middle">Osmo 360 II</text><text class="tk" x="630.7" y="393" text-anchor="middle">Lampe</text><text class="at" transform="translate(16 182) rotate(-90)" text-anchor="middle">Streuung der Graukacheln [Blenden, rms]</text><path class="ax" d="M64 14V350H744"/></svg></div>
+            <figcaption>
+              Streuung derselben Graukacheln über die Belichtungsreihe nach
+              Belichtungsausgleich (Blenden, rms).<br> Kleiner ist besser.
+            </figcaption>
+          </figure>
+
+          <figure class="dl-fig dl-fig--chart">
+            <div class="dl-charts dl-charts--3"><div class="dl-chart"><h4 class="dl-chart-title t-dlog">CST (DJI D-Gamut / DJI D-Log)</h4><svg class="dl-svg" viewBox="0 0 440 330" role="img" aria-label="Liniendiagramm: acht Graukacheln über vier Blenden Verschlusszeit mit der CST und D-Log, die Linien fallen stark ab" preserveAspectRatio="xMidYMid meet"><line class="gr" x1="46" x2="428" y1="241.2" y2="241.2"/><text class="tk" x="39" y="245.8" text-anchor="end">−6</text><line class="gr" x1="46" x2="428" y1="197.6" y2="197.6"/><text class="tk" x="39" y="202.1" text-anchor="end">−4</text><line class="gr" x1="46" x2="428" y1="153.9" y2="153.9"/><text class="tk" x="39" y="158.4" text-anchor="end">−2</text><line class="gr z" x1="46" x2="428" y1="110.2" y2="110.2"/><text class="tk" x="39" y="114.8" text-anchor="end">0</text><line class="gr" x1="46" x2="428" y1="66.6" y2="66.6"/><text class="tk" x="39" y="71.1" text-anchor="end">2</text><line class="gr" x1="46" x2="428" y1="22.9" y2="22.9"/><text class="tk" x="39" y="27.4" text-anchor="end">4</text><text class="tk" x="84.2" y="296" text-anchor="middle">1/400</text><text class="tk" x="160.6" y="296" text-anchor="middle">1/800</text><text class="tk" x="237" y="296" text-anchor="middle">1/1600</text><text class="tk" x="313.4" y="296" text-anchor="middle">1/3200</text><text class="tk" x="389.8" y="296" text-anchor="middle">1/6400</text><path d="M160.6 29.2L237 34.5L313.4 67.9L389.8 88.2" fill="none" stroke="#ececf0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160.6" cy="29.2" r="3.2" fill="#ececf0"/><circle cx="237" cy="34.5" r="3.2" fill="#ececf0"/><circle cx="313.4" cy="67.9" r="3.2" fill="#ececf0"/><circle cx="389.8" cy="88.2" r="3.2" fill="#ececf0"/><path d="M160.6 46.1L237 51.7L313.4 87.8L389.8 110.2" fill="none" stroke="#d2d3da" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160.6" cy="46.1" r="3.2" fill="#d2d3da"/><circle cx="237" cy="51.7" r="3.2" fill="#d2d3da"/><circle cx="313.4" cy="87.8" r="3.2" fill="#d2d3da"/><circle cx="389.8" cy="110.2" r="3.2" fill="#d2d3da"/><path d="M84.2 54.1L160.6 72L237 78.4L313.4 121.2L389.8 138.6" fill="none" stroke="#b8bac4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="54.1" r="3.2" fill="#b8bac4"/><circle cx="160.6" cy="72" r="3.2" fill="#b8bac4"/><circle cx="237" cy="78.4" r="3.2" fill="#b8bac4"/><circle cx="313.4" cy="121.2" r="3.2" fill="#b8bac4"/><circle cx="389.8" cy="138.6" r="3.2" fill="#b8bac4"/><path d="M84.2 83L160.6 102.2L237 110.2L313.4 154.8L389.8 165.3" fill="none" stroke="#9fa2ae" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="83" r="3.2" fill="#9fa2ae"/><circle cx="160.6" cy="102.2" r="3.2" fill="#9fa2ae"/><circle cx="237" cy="110.2" r="3.2" fill="#9fa2ae"/><circle cx="313.4" cy="154.8" r="3.2" fill="#9fa2ae"/><circle cx="389.8" cy="165.3" r="3.2" fill="#9fa2ae"/><path d="M84.2 110.9L160.6 132.7L237 144.3L313.4 180.3L389.8 187.8" fill="none" stroke="#868a98" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="110.9" r="3.2" fill="#868a98"/><circle cx="160.6" cy="132.7" r="3.2" fill="#868a98"/><circle cx="237" cy="144.3" r="3.2" fill="#868a98"/><circle cx="313.4" cy="180.3" r="3.2" fill="#868a98"/><circle cx="389.8" cy="187.8" r="3.2" fill="#868a98"/><path d="M84.2 185.6L160.6 208.7L237 214L313.4 232.5L389.8 251.5" fill="none" stroke="#6f7382" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="185.6" r="3.2" fill="#6f7382"/><circle cx="160.6" cy="208.7" r="3.2" fill="#6f7382"/><circle cx="237" cy="214" r="3.2" fill="#6f7382"/><circle cx="313.4" cy="232.5" r="3.2" fill="#6f7382"/><circle cx="389.8" cy="251.5" r="3.2" fill="#6f7382"/><path d="M84.2 208.1L160.6 225.5L237 229.5L313.4 249.8" fill="none" stroke="#5c606f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="208.1" r="3.2" fill="#5c606f"/><circle cx="160.6" cy="225.5" r="3.2" fill="#5c606f"/><circle cx="237" cy="229.5" r="3.2" fill="#5c606f"/><circle cx="313.4" cy="249.8" r="3.2" fill="#5c606f"/><path d="M84.2 215.7L160.6 231.9L237 235.4L313.4 257.8" fill="none" stroke="#4d5160" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="215.7" r="3.2" fill="#4d5160"/><circle cx="160.6" cy="231.9" r="3.2" fill="#4d5160"/><circle cx="237" cy="235.4" r="3.2" fill="#4d5160"/><circle cx="313.4" cy="257.8" r="3.2" fill="#4d5160"/><text class="at" x="237" y="322" text-anchor="middle">Verschlusszeit (Action 6, ISO 100)</text><path class="ax" d="M46 12V274H428"/></svg></div><div class="dl-chart"><h4 class="dl-chart-title t-rec">CST (DJI D-Gamut / Rec.709)</h4><svg class="dl-svg" viewBox="0 0 440 330" role="img" aria-label="Liniendiagramm: acht Graukacheln über vier Blenden Verschlusszeit mit der CST und Rec.709, die Linien steigen an" preserveAspectRatio="xMidYMid meet"><line class="gr" x1="46" x2="428" y1="241.2" y2="241.2"/><text class="tk" x="39" y="245.8" text-anchor="end">−6</text><line class="gr" x1="46" x2="428" y1="197.6" y2="197.6"/><text class="tk" x="39" y="202.1" text-anchor="end">−4</text><line class="gr" x1="46" x2="428" y1="153.9" y2="153.9"/><text class="tk" x="39" y="158.4" text-anchor="end">−2</text><line class="gr z" x1="46" x2="428" y1="110.2" y2="110.2"/><text class="tk" x="39" y="114.8" text-anchor="end">0</text><line class="gr" x1="46" x2="428" y1="66.6" y2="66.6"/><text class="tk" x="39" y="71.1" text-anchor="end">2</text><line class="gr" x1="46" x2="428" y1="22.9" y2="22.9"/><text class="tk" x="39" y="27.4" text-anchor="end">4</text><text class="tk" x="84.2" y="296" text-anchor="middle">1/400</text><text class="tk" x="160.6" y="296" text-anchor="middle">1/800</text><text class="tk" x="237" y="296" text-anchor="middle">1/1600</text><text class="tk" x="313.4" y="296" text-anchor="middle">1/3200</text><text class="tk" x="389.8" y="296" text-anchor="middle">1/6400</text><path d="M160.6 95.8L237 88.2L313.4 72L389.8 66.8" fill="none" stroke="#ececf0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160.6" cy="95.8" r="3.2" fill="#ececf0"/><circle cx="237" cy="88.2" r="3.2" fill="#ececf0"/><circle cx="313.4" cy="72" r="3.2" fill="#ececf0"/><circle cx="389.8" cy="66.8" r="3.2" fill="#ececf0"/><path d="M160.6 100.4L237 93.4L313.4 79L389.8 76.2" fill="none" stroke="#d2d3da" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160.6" cy="100.4" r="3.2" fill="#d2d3da"/><circle cx="237" cy="93.4" r="3.2" fill="#d2d3da"/><circle cx="313.4" cy="79" r="3.2" fill="#d2d3da"/><circle cx="389.8" cy="76.2" r="3.2" fill="#d2d3da"/><path d="M84.2 116.6L160.6 106.8L237 100.4L313.4 92.3L389.8 89.5" fill="none" stroke="#b8bac4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="116.6" r="3.2" fill="#b8bac4"/><circle cx="160.6" cy="106.8" r="3.2" fill="#b8bac4"/><circle cx="237" cy="100.4" r="3.2" fill="#b8bac4"/><circle cx="313.4" cy="92.3" r="3.2" fill="#b8bac4"/><circle cx="389.8" cy="89.5" r="3.2" fill="#b8bac4"/><path d="M84.2 123.6L160.6 115.5L237 110.2L313.4 107.8L389.8 103.9" fill="none" stroke="#9fa2ae" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="123.6" r="3.2" fill="#9fa2ae"/><circle cx="160.6" cy="115.5" r="3.2" fill="#9fa2ae"/><circle cx="237" cy="110.2" r="3.2" fill="#9fa2ae"/><circle cx="313.4" cy="107.8" r="3.2" fill="#9fa2ae"/><circle cx="389.8" cy="103.9" r="3.2" fill="#9fa2ae"/><path d="M84.2 131.6L160.6 126L237 122.5L313.4 121.2L389.8 116.1" fill="none" stroke="#868a98" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="131.6" r="3.2" fill="#868a98"/><circle cx="160.6" cy="126" r="3.2" fill="#868a98"/><circle cx="237" cy="122.5" r="3.2" fill="#868a98"/><circle cx="313.4" cy="121.2" r="3.2" fill="#868a98"/><circle cx="389.8" cy="116.1" r="3.2" fill="#868a98"/><path d="M84.2 157.8L160.6 158.3L237 156.1L313.4 149.1L389.8 141.5" fill="none" stroke="#6f7382" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="157.8" r="3.2" fill="#6f7382"/><circle cx="160.6" cy="158.3" r="3.2" fill="#6f7382"/><circle cx="237" cy="156.1" r="3.2" fill="#6f7382"/><circle cx="313.4" cy="149.1" r="3.2" fill="#6f7382"/><circle cx="389.8" cy="141.5" r="3.2" fill="#6f7382"/><path d="M84.2 168.1L160.6 167.7L237 164.6L313.4 156.1L389.8 152" fill="none" stroke="#5c606f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="168.1" r="3.2" fill="#5c606f"/><circle cx="160.6" cy="167.7" r="3.2" fill="#5c606f"/><circle cx="237" cy="164.6" r="3.2" fill="#5c606f"/><circle cx="313.4" cy="156.1" r="3.2" fill="#5c606f"/><circle cx="389.8" cy="152" r="3.2" fill="#5c606f"/><path d="M84.2 172.3L160.6 171.6L237 167.7L313.4 158.9L389.8 156.5" fill="none" stroke="#4d5160" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="172.3" r="3.2" fill="#4d5160"/><circle cx="160.6" cy="171.6" r="3.2" fill="#4d5160"/><circle cx="237" cy="167.7" r="3.2" fill="#4d5160"/><circle cx="313.4" cy="158.9" r="3.2" fill="#4d5160"/><circle cx="389.8" cy="156.5" r="3.2" fill="#4d5160"/><text class="at" x="237" y="322" text-anchor="middle">Verschlusszeit (Action 6, ISO 100)</text><path class="ax" d="M46 12V274H428"/></svg></div><div class="dl-chart"><h4 class="dl-chart-title t-dctl">DCTL</h4><svg class="dl-svg" viewBox="0 0 440 330" role="img" aria-label="Liniendiagramm: acht Graukacheln über vier Blenden Verschlusszeit mit der DCTL, die Linien verlaufen waagerecht" preserveAspectRatio="xMidYMid meet"><line class="gr" x1="46" x2="428" y1="241.2" y2="241.2"/><text class="tk" x="39" y="245.8" text-anchor="end">−6</text><line class="gr" x1="46" x2="428" y1="197.6" y2="197.6"/><text class="tk" x="39" y="202.1" text-anchor="end">−4</text><line class="gr" x1="46" x2="428" y1="153.9" y2="153.9"/><text class="tk" x="39" y="158.4" text-anchor="end">−2</text><line class="gr z" x1="46" x2="428" y1="110.2" y2="110.2"/><text class="tk" x="39" y="114.8" text-anchor="end">0</text><line class="gr" x1="46" x2="428" y1="66.6" y2="66.6"/><text class="tk" x="39" y="71.1" text-anchor="end">2</text><line class="gr" x1="46" x2="428" y1="22.9" y2="22.9"/><text class="tk" x="39" y="27.4" text-anchor="end">4</text><text class="tk" x="84.2" y="296" text-anchor="middle">1/400</text><text class="tk" x="160.6" y="296" text-anchor="middle">1/800</text><text class="tk" x="237" y="296" text-anchor="middle">1/1600</text><text class="tk" x="313.4" y="296" text-anchor="middle">1/3200</text><text class="tk" x="389.8" y="296" text-anchor="middle">1/6400</text><path d="M160.6 71.4L237 70.3L313.4 71L389.8 70.3" fill="none" stroke="#ececf0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160.6" cy="71.4" r="3.2" fill="#ececf0"/><circle cx="237" cy="70.3" r="3.2" fill="#ececf0"/><circle cx="313.4" cy="71" r="3.2" fill="#ececf0"/><circle cx="389.8" cy="70.3" r="3.2" fill="#ececf0"/><path d="M160.6 82.5L237 80.1L313.4 81.2L389.8 81.2" fill="none" stroke="#d2d3da" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160.6" cy="82.5" r="3.2" fill="#d2d3da"/><circle cx="237" cy="80.1" r="3.2" fill="#d2d3da"/><circle cx="313.4" cy="81.2" r="3.2" fill="#d2d3da"/><circle cx="389.8" cy="81.2" r="3.2" fill="#d2d3da"/><path d="M84.2 94.5L160.6 96.9L237 94.1L313.4 96.9L389.8 95.8" fill="none" stroke="#b8bac4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="94.5" r="3.2" fill="#b8bac4"/><circle cx="160.6" cy="96.9" r="3.2" fill="#b8bac4"/><circle cx="237" cy="94.1" r="3.2" fill="#b8bac4"/><circle cx="313.4" cy="96.9" r="3.2" fill="#b8bac4"/><circle cx="389.8" cy="95.8" r="3.2" fill="#b8bac4"/><path d="M84.2 111.3L160.6 112L237 110.2L313.4 113.7L389.8 112.7" fill="none" stroke="#9fa2ae" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="111.3" r="3.2" fill="#9fa2ae"/><circle cx="160.6" cy="112" r="3.2" fill="#9fa2ae"/><circle cx="237" cy="110.2" r="3.2" fill="#9fa2ae"/><circle cx="313.4" cy="113.7" r="3.2" fill="#9fa2ae"/><circle cx="389.8" cy="112.7" r="3.2" fill="#9fa2ae"/><path d="M84.2 126L160.6 127.7L237 126.4L313.4 129.5L389.8 129.5" fill="none" stroke="#868a98" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="126" r="3.2" fill="#868a98"/><circle cx="160.6" cy="127.7" r="3.2" fill="#868a98"/><circle cx="237" cy="126.4" r="3.2" fill="#868a98"/><circle cx="313.4" cy="129.5" r="3.2" fill="#868a98"/><circle cx="389.8" cy="129.5" r="3.2" fill="#868a98"/><path d="M84.2 162.4L160.6 165.3L237 163.5L313.4 166.4L389.8 162.4" fill="none" stroke="#6f7382" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="162.4" r="3.2" fill="#6f7382"/><circle cx="160.6" cy="165.3" r="3.2" fill="#6f7382"/><circle cx="237" cy="163.5" r="3.2" fill="#6f7382"/><circle cx="313.4" cy="166.4" r="3.2" fill="#6f7382"/><circle cx="389.8" cy="162.4" r="3.2" fill="#6f7382"/><path d="M84.2 174L160.6 175.8L237 174.4L313.4 175.8L389.8 176.2" fill="none" stroke="#5c606f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="174" r="3.2" fill="#5c606f"/><circle cx="160.6" cy="175.8" r="3.2" fill="#5c606f"/><circle cx="237" cy="174.4" r="3.2" fill="#5c606f"/><circle cx="313.4" cy="175.8" r="3.2" fill="#5c606f"/><circle cx="389.8" cy="176.2" r="3.2" fill="#5c606f"/><path d="M84.2 177.9L160.6 180.3L237 179.2L313.4 179.2L389.8 182.1" fill="none" stroke="#4d5160" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84.2" cy="177.9" r="3.2" fill="#4d5160"/><circle cx="160.6" cy="180.3" r="3.2" fill="#4d5160"/><circle cx="237" cy="179.2" r="3.2" fill="#4d5160"/><circle cx="313.4" cy="179.2" r="3.2" fill="#4d5160"/><circle cx="389.8" cy="182.1" r="3.2" fill="#4d5160"/><text class="at" x="237" y="322" text-anchor="middle">Verschlusszeit (Action 6, ISO 100)</text><path class="ax" d="M46 12V274H428"/></svg></div></div>
+            <figcaption>Acht Graukacheln über vier Blenden Belichtungsunterschied. Gezeigt ist ihre Helligkeit nach Belichtungsausgleich relativ zu Mittelgrau, in Blenden.<br>Ideal sind waagerechte Linien. Nur die gemessene Kurve der DCTL schafft das.</figcaption>
+          </figure>
+
+          <figure class="dl-fig">
+            <img src="imgs/DLM_belichtungsreihe_streifen.jpg" width="3032" height="490" alt="Fünf Aufnahmen der Farbtafel von 1/400 bis 1/6400 Sekunden, mit der DCTL ausgeglichen, sie sehen alle gleich aus" loading="lazy" />
+            <figcaption>
+              Fünf Clips der Action 6 von 1/400 bis 1/6400 s, in der DCTL per
+              &bdquo;Belichtung EV&ldquo; ausgeglichen (Werte aus Verschlusszeit und
+              Belichtungsmesser der Kamera berechnet). Die Tafel sieht in allen fünf gleich aus,
+              nur das Rauschen nimmt zu. Dies zeigt auch wie gut die DCTL Fehlbelichtungen ausgleichen kann.
+            </figcaption>
+          </figure>
+        </article>
+
+        <!-- Test 2 -->
+        <article class="dl-test reveal">
+          <div class="dl-test-head">
+            <div class="tut-step-num">Test 2</div>
+            <h3>Graukeil</h3>
+            <p>
+              Mittelgrau wirde via Offset Farbrad neutral gestellt, danach jede Graustufe nachgemessen. Mit der
+              DCTL bleiben die RGB-Kanalwerte von Weiß bis Schwarz beisammen. Mit der CST
+              (Rec.709) driften die dunklen Kacheln auseinander, und die hellsten
+              landen bei 255.
+            </p>
+          </div>
+
+          <div class="dl-pair">
+            <figure class="dl-shot dl-shot--dctl">
+              <figcaption class="dl-label">DCTL</figcaption>
+              <img src="imgs/DLM_graukeil_dctl.jpg" width="1000" height="817" alt="Graukeil mit der DCTL: alle Graustufen neutral, Pixel-Messanzeigen aus Resolve" loading="lazy" />
+            </figure>
+            <figure class="dl-shot">
+              <figcaption class="dl-label">CST (D-Gamut / Rec.709)</figcaption>
+              <img src="imgs/DLM_graukeil_cst.jpg" width="1000" height="817" alt="Graukeil mit der CST: dunkle Kacheln laufen farblich auseinander, die hellsten sind bei 255 abgeschnitten" loading="lazy" />
+            </figure>
+          </div>
+          <p class="dl-caption">
+            Action 6, 1/1600 s. Mittelgrau jeweils mit Offset neutralisiert. Die
+            Einblendungen sind Pixel-Messanzeigen aus Resolve.
+          </p>
+
+          <figure class="dl-fig dl-fig--chart">
+            <ul class="dl-legend"><li><i class="lg-r"></i>R</li><li><i class="lg-g"></i>G</li><li><i class="lg-b"></i>B</li></ul><div class="dl-charts dl-charts--2"><div class="dl-chart"><h4 class="dl-chart-title t-rec">CST (DJI D-Gamut / Rec.709)</h4><svg class="dl-svg" viewBox="0 0 480 400" role="img" aria-label="Punktdiagramm: R-, G- und B-Pixelwerte der zehn Graustufen mit der CST, die Kanäle driften in den Tiefen bis zu 12 Stufen auseinander, die hellsten Kacheln liegen bei 255" preserveAspectRatio="xMidYMid meet"><line class="gr" x1="168.5" x2="168.5" y1="10" y2="348"/><text class="tk" x="168.5" y="367" text-anchor="middle">50</text><line class="gr" x1="226.5" x2="226.5" y1="10" y2="348"/><text class="tk" x="226.5" y="367" text-anchor="middle">100</text><line class="gr" x1="284.6" x2="284.6" y1="10" y2="348"/><text class="tk" x="284.6" y="367" text-anchor="middle">150</text><line class="gr" x1="342.7" x2="342.7" y1="10" y2="348"/><text class="tk" x="342.7" y="367" text-anchor="middle">200</text><line class="gr" x1="400.8" x2="400.8" y1="10" y2="348"/><text class="tk" x="400.8" y="367" text-anchor="middle">250</text><line class="lim" x1="406.6" x2="406.6" y1="10" y2="348"/><text class="rl" x="112" y="31.4" text-anchor="end">Weißer Streifen</text><line x1="406.6" x2="406.6" y1="26.9" y2="26.9" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="406.6" cy="26.9" r="5"/><circle class="c-g" cx="406.6" cy="26.9" r="5"/><circle class="c-b" cx="406.6" cy="26.9" r="5"/><text class="dt" x="438" y="30.9">Δ 0</text><text class="rl" x="112" y="65.2" text-anchor="end">Spalte 4 · Reihe 1</text><line x1="406.6" x2="406.6" y1="60.7" y2="60.7" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="406.6" cy="60.7" r="5"/><circle class="c-g" cx="406.6" cy="60.7" r="5"/><circle class="c-b" cx="406.6" cy="60.7" r="5"/><text class="dt" x="438" y="64.7">Δ 0</text><text class="rl" x="112" y="99" text-anchor="end">Spalte 3 · Reihe 1</text><line x1="388" x2="391.5" y1="94.5" y2="94.5" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="391.5" cy="94.5" r="5"/><circle class="c-g" cx="388" cy="94.5" r="5"/><circle class="c-b" cx="391.5" cy="94.5" r="5"/><text class="dt" x="438" y="98.5">Δ 3</text><text class="rl" x="112" y="132.8" text-anchor="end">Spalte 3 · Reihe 2</text><line x1="349.7" x2="354.3" y1="128.3" y2="128.3" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="349.7" cy="128.3" r="5"/><circle class="c-g" cx="349.7" cy="128.3" r="5"/><circle class="c-b" cx="354.3" cy="128.3" r="5"/><text class="dt" x="438" y="132.3">Δ 4</text><text class="rl" x="112" y="166.6" text-anchor="end">Spalte 3 · Reihe 3</text><line x1="303.2" x2="310.2" y1="162.1" y2="162.1" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="303.2" cy="162.1" r="5"/><circle class="c-g" cx="307.8" cy="162.1" r="5"/><circle class="c-b" cx="310.2" cy="162.1" r="5"/><text class="dt" x="438" y="166.1">Δ 6</text><text class="rl" x="112" y="200.4" text-anchor="end">Spalte 3 · Reihe 4</text><line x1="264.9" x2="269.5" y1="195.9" y2="195.9" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="264.9" cy="195.9" r="5"/><circle class="c-g" cx="267.2" cy="195.9" r="5"/><circle class="c-b" cx="269.5" cy="195.9" r="5"/><text class="dt" x="438" y="199.9">Δ 4</text><text class="rl" x="112" y="234.2" text-anchor="end">Spalte 3 · Reihe 5</text><line x1="187" x2="201" y1="229.7" y2="229.7" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="187" cy="229.7" r="5"/><circle class="c-g" cx="191.7" cy="229.7" r="5"/><circle class="c-b" cx="201" cy="229.7" r="5"/><text class="dt" x="438" y="233.7">Δ 12</text><text class="rl" x="112" y="268" text-anchor="end">Spalte 3 · Reihe 6</text><line x1="177.8" x2="184.7" y1="263.5" y2="263.5" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="177.8" cy="263.5" r="5"/><circle class="c-g" cx="180.1" cy="263.5" r="5"/><circle class="c-b" cx="184.7" cy="263.5" r="5"/><text class="dt" x="438" y="267.5">Δ 6</text><text class="rl" x="112" y="301.8" text-anchor="end">Spalte 4 · Reihe 5</text><line x1="173.1" x2="181.2" y1="297.3" y2="297.3" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="173.1" cy="297.3" r="5"/><circle class="c-g" cx="174.3" cy="297.3" r="5"/><circle class="c-b" cx="181.2" cy="297.3" r="5"/><text class="dt" x="438" y="301.3">Δ 7</text><text class="rl" x="112" y="335.6" text-anchor="end">Schwarzer Streifen</text><line x1="147.6" x2="161.5" y1="331.1" y2="331.1" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="147.6" cy="331.1" r="5"/><circle class="c-g" cx="152.2" cy="331.1" r="5"/><circle class="c-b" cx="161.5" cy="331.1" r="5"/><text class="dt" x="438" y="335.1">Δ 12</text><text class="at" x="273" y="392" text-anchor="middle">Pixelwert R / G / B (8 Bit, Resolve-Viewer)</text><path class="ax" d="M122 10V348H424"/></svg></div><div class="dl-chart"><h4 class="dl-chart-title t-dctl">DCTL</h4><svg class="dl-svg" viewBox="0 0 480 400" role="img" aria-label="Punktdiagramm: R-, G- und B-Pixelwerte der zehn Graustufen mit der DCTL, die Kanäle liegen höchstens 9 Stufen auseinander, nichts ist abgeschnitten" preserveAspectRatio="xMidYMid meet"><line class="gr" x1="168.5" x2="168.5" y1="10" y2="348"/><text class="tk" x="168.5" y="367" text-anchor="middle">50</text><line class="gr" x1="226.5" x2="226.5" y1="10" y2="348"/><text class="tk" x="226.5" y="367" text-anchor="middle">100</text><line class="gr" x1="284.6" x2="284.6" y1="10" y2="348"/><text class="tk" x="284.6" y="367" text-anchor="middle">150</text><line class="gr" x1="342.7" x2="342.7" y1="10" y2="348"/><text class="tk" x="342.7" y="367" text-anchor="middle">200</text><line class="gr" x1="400.8" x2="400.8" y1="10" y2="348"/><text class="tk" x="400.8" y="367" text-anchor="middle">250</text><line class="lim" x1="406.6" x2="406.6" y1="10" y2="348"/><text class="rl" x="112" y="31.4" text-anchor="end">Weißer Streifen</text><line x1="375.2" x2="378.7" y1="26.9" y2="26.9" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="378.7" cy="26.9" r="5"/><circle class="c-g" cx="375.2" cy="26.9" r="5"/><circle class="c-b" cx="376.4" cy="26.9" r="5"/><text class="dt" x="438" y="30.9">Δ 3</text><text class="rl" x="112" y="65.2" text-anchor="end">Spalte 4 · Reihe 1</text><line x1="371.7" x2="372.9" y1="60.7" y2="60.7" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="371.7" cy="60.7" r="5"/><circle class="c-g" cx="372.9" cy="60.7" r="5"/><circle class="c-b" cx="371.7" cy="60.7" r="5"/><text class="dt" x="438" y="64.7">Δ 1</text><text class="rl" x="112" y="99" text-anchor="end">Spalte 3 · Reihe 1</text><line x1="352" x2="355.5" y1="94.5" y2="94.5" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="352" cy="94.5" r="5"/><circle class="c-g" cx="353.1" cy="94.5" r="5"/><circle class="c-b" cx="355.5" cy="94.5" r="5"/><text class="dt" x="438" y="98.5">Δ 3</text><text class="rl" x="112" y="132.8" text-anchor="end">Spalte 3 · Reihe 2</text><line x1="320.6" x2="326.4" y1="128.3" y2="128.3" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="320.6" cy="128.3" r="5"/><circle class="c-g" cx="321.8" cy="128.3" r="5"/><circle class="c-b" cx="326.4" cy="128.3" r="5"/><text class="dt" x="438" y="132.3">Δ 5</text><text class="rl" x="112" y="166.6" text-anchor="end">Spalte 3 · Reihe 3</text><line x1="283.5" x2="288.1" y1="162.1" y2="162.1" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="283.5" cy="162.1" r="5"/><circle class="c-g" cx="285.8" cy="162.1" r="5"/><circle class="c-b" cx="288.1" cy="162.1" r="5"/><text class="dt" x="438" y="166.1">Δ 4</text><text class="rl" x="112" y="200.4" text-anchor="end">Spalte 3 · Reihe 4</text><line x1="250.9" x2="254.4" y1="195.9" y2="195.9" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="250.9" cy="195.9" r="5"/><circle class="c-g" cx="252.1" cy="195.9" r="5"/><circle class="c-b" cx="254.4" cy="195.9" r="5"/><text class="dt" x="438" y="199.9">Δ 3</text><text class="rl" x="112" y="234.2" text-anchor="end">Spalte 3 · Reihe 5</text><line x1="187" x2="194" y1="229.7" y2="229.7" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="187" cy="229.7" r="5"/><circle class="c-g" cx="188.2" cy="229.7" r="5"/><circle class="c-b" cx="194" cy="229.7" r="5"/><text class="dt" x="438" y="233.7">Δ 6</text><text class="rl" x="112" y="268" text-anchor="end">Spalte 3 · Reihe 6</text><line x1="173.1" x2="175.4" y1="263.5" y2="263.5" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="173.1" cy="263.5" r="5"/><circle class="c-g" cx="173.1" cy="263.5" r="5"/><circle class="c-b" cx="175.4" cy="263.5" r="5"/><text class="dt" x="438" y="267.5">Δ 2</text><text class="rl" x="112" y="301.8" text-anchor="end">Spalte 4 · Reihe 5</text><line x1="167.3" x2="170.8" y1="297.3" y2="297.3" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="168.5" cy="297.3" r="5"/><circle class="c-g" cx="167.3" cy="297.3" r="5"/><circle class="c-b" cx="170.8" cy="297.3" r="5"/><text class="dt" x="438" y="301.3">Δ 3</text><text class="rl" x="112" y="335.6" text-anchor="end">Schwarzer Streifen</text><line x1="142.9" x2="153.4" y1="331.1" y2="331.1" stroke="rgba(245,245,247,.35)" stroke-width="6" stroke-linecap="round"/><circle class="c-r" cx="142.9" cy="331.1" r="5"/><circle class="c-g" cx="145.2" cy="331.1" r="5"/><circle class="c-b" cx="153.4" cy="331.1" r="5"/><text class="dt" x="438" y="335.1">Δ 9</text><text class="at" x="273" y="392" text-anchor="middle">Pixelwert R / G / B (8 Bit, Resolve-Viewer)</text><path class="ax" d="M122 10V348H424"/></svg></div></div>
+            <figcaption>R/G/B-Werte aus dem Resolve-Viewer. Δ ist der Abstand der Kanäle, kleiner ist besser. Die gestrichelte Linie markiert Clipping (255).</figcaption>
+          </figure>
+        </article>
+
+        <!-- Test 3 -->
+        <article class="dl-test reveal">
+          <div class="dl-test-head">
+            <div class="tut-step-num">Test 3</div>
+            <h3>Hoher Dynamikumfang und Kontrastkanten</h3>
+            <p>
+              Genau hier kommt die Stärke der DCTL zum tragen: Während die CST Methode starke Kontrastkanten  ausbrennt, kann die DCTL diese besser auflösen ohne dass Weiß ausbrennt. Dadurch wirken Äste vor Himmel weniger "HDR-like" und Wolken zeigen mehr Definition.
+            </p>
+          </div>
+
+          <div class="dl-pair">
+            <figure class="dl-shot dl-shot--dctl">
+              <figcaption class="dl-label">DCTL</figcaption>
+              <img src="imgs/DLM_baum_dctl_0ev.jpg" width="1000" height="855" alt="Baumkrone vor hellem Himmel mit der DCTL, die Wolken sind zu erkennen" loading="lazy" />
+            </figure>
+            <figure class="dl-shot">
+              <figcaption class="dl-label">CST (D-Gamut / Rec.709)</figcaption>
+              <img src="imgs/DLM_baum_cst_0ev.jpg" width="1000" height="855" alt="Baumkrone vor hellem Himmel mit der CST, der Himmel ist flach und hell" loading="lazy" />
+            </figure>
+          </div>
+          <div class="dl-pair">
+            <figure class="dl-shot dl-shot--dctl">
+              <figcaption class="dl-label">DCTL, &minus;1 EV, Detail</figcaption>
+              <img src="imgs/DLM_baum_dctl_minus1ev_detail.jpg" width="504" height="336" alt="Detailausschnitt Himmel und Krone mit der DCTL bei minus einer Blende, die Wolkenzeichnung ist zu sehen" loading="lazy" />
+            </figure>
+            <figure class="dl-shot">
+              <figcaption class="dl-label">CST (D-Gamut / Rec.709), &minus;1 EV, Detail</figcaption>
+              <img src="imgs/DLM_baum_cst_minus1ev_detail.jpg" width="504" height="336" alt="Detailausschnitt Himmel und Krone mit der CST bei minus einer Blende, der Himmel bleibt flach" loading="lazy" />
+            </figure>
+          </div>
+          <p class="dl-caption">
+            Action 6, 1/1250 s. &minus;1 Blende kommt über die Exposure im HDR-Rad. Ein
+            kleiner Teil des Himmels ist schon in der Kamera abgeschnitten, der wird mit
+            der DCTL bei &minus;1 EV gleichmäßig grau.
+          </p>
+        </article>
+
+        <!-- Test 4 -->
+        <article class="dl-test reveal">
+          <div class="dl-test-head">
+            <div class="tut-step-num">Test 4</div>
+            <h3>Sättigung vs. Helligkeit</h3>
+            <p>
+              Gesättigtes Gelb mit Sonnenreflex, meist der Alptraum für Sensoren. Um den Effekt sichtbarer zu machen, habe ich hier sogar überleichtet und später um -1EV abgedunkelt. Mit der DCTL
+              behält der Reflex seinen Verlauf, auch wenn die Tonne etwas weniger gesättigt ist - aber Sättigung kann man leichter später hinzufügen, als ausgebrannte Highlights entfernen.
+            </p>
+          </div>
+
+          <div class="dl-pair">
+            <figure class="dl-shot dl-shot--dctl">
+              <figcaption class="dl-label">DCTL, &minus;1 EV, Detail</figcaption>
+              <img src="imgs/DLM_tonne_dctl_minus1ev_detail.jpg" width="605" height="353" alt="Sonnenreflex auf der gelben Tonne mit der DCTL, der Verlauf bleibt erhalten" loading="lazy" />
+            </figure>
+            <figure class="dl-shot">
+              <figcaption class="dl-label">CST (D-Gamut / Rec.709), &minus;1 EV, Detail</figcaption>
+              <img src="imgs/DLM_tonne_cst_minus1ev_detail.jpg" width="605" height="353" alt="Sonnenreflex auf der gelben Tonne mit der CST, der Reflex bleibt ausgebrannt" loading="lazy" />
+            </figure>
+          </div>
+          <p class="dl-caption">
+            Action 6, 1/1250 s. Das Gelb kippt in keiner Variante im Farbton. Im
+            DCTL-Bild bei 0 EV ist eine Pixel-Messanzeige von Resolve zu sehen
+            (R 255 / G 211 / B 69).
+          </p>
+        </article>
+
+        <!-- Test 5 -->
+        <article class="dl-test reveal">
+          <div class="dl-test-head">
+            <div class="tut-step-num">Test 5</div>
+            <h3>Und die DJI-LUT?</h3>
+            <p>
+              Die offizielle LUT ist der bequeme Weg: draufziehen, fertig. Allerdings wird so der kontrastreichen DJI-"Look" zementiert. Per DCTL sieht das Ergebnis fast genauso aus, bewahrt aber die Freiheit Kontrast und Sättigung zu verändern. Die CST methode wirkt dagegen heller und härter, und
+              die hellsten Kacheln laufen Richtung Weiß zusammen.
+            </p>
+          </div>
+
+          <div class="dl-pair dl-pair--3">
+            <figure class="dl-shot">
+              <figcaption class="dl-label">Offizielle DJI-LUT</figcaption>
+              <img src="imgs/DLM_look_lut.jpeg" width="1146" height="864" alt="Action-6-Clip mit der offiziellen DJI-LUT" loading="lazy" />
+            </figure>
+            <figure class="dl-shot">
+              <figcaption class="dl-label">CST (D-Gamut / Rec.709) + Ausgabe-CST</figcaption>
+              <img src="imgs/DLM_look_cst.jpeg" width="1146" height="864" alt="Derselbe Clip mit der CST, das Bild wirkt heller und härter, die hellen Kacheln der Farbtafel sind fast weiß" loading="lazy" />
+            </figure>
+            <figure class="dl-shot dl-shot--dctl">
+              <figcaption class="dl-label">DCTL + Ausgabe-CST</figcaption>
+              <img src="imgs/DLM_look_dctl.jpeg" width="1146" height="864" alt="Derselbe Clip mit der DCTL und der Ausgabe-CST, der Look entspricht fast der DJI-LUT" loading="lazy" />
+            </figure>
+          </div>
+          <p class="dl-caption">
+            Action 6, Clip mit 1/800s. DCTL und CST laufen durch dieselbe Ausgabe-CST mit DaVinci Tone
+            Mapping, Max. Input 300 nits.
+          </p>
+
+          <div class="dl-prose dl-prose--test">
+            <p>
+              Der Look der LUT ist also kein Vorteil der LUT. Der Unterschied liegt darin,
+              <em>wo</em> du arbeitest:
+            </p>
+            <ul>
+              <li>
+                <strong>Du gradest in DaVinci Wide Gamut statt auf fertigen Rec.709-Werten.</strong>
+                Die LUT liefert schon das Endergebnis, alles danach arbeitet auf Werten, die
+                für die Rec.709-Anzeige gerechnet sind. Mit DCTL und CST bleibt das Bild
+                beim Graden im großen Arbeitsfarbraum, die Umwandlung für die Anzeige
+                passiert erst am Ende.
+              </li>
+              <li>
+                <strong>Belichtung und Weißabgleich verhalten sich richtig.</strong>
+                Weil die DCTL die Kurve trifft, ist eine Blende im Offset auch eine
+                Blende (Test 1). Auf Rec.709-Werten verschiebt jede Korrektur zugleich den
+                Look und stößt schneller an die Grenzen von Schwarz und Weiß.
+              </li>
+              <li>
+                <strong>Die Ausgabe bleibt deine Entscheidung.</strong>
+                Tone Mapping und Max. Input stellst du in der Ausgabe-CST selbst ein und
+                kannst sie später ändern, ohne das Grade anzufassen. Bei der LUT ist der
+                Look fest eingebaut.
+              </li>
+              <li>
+                <strong>Osmo und Canon landen im selben Arbeitsfarbraum.</strong>
+                Material beider Kameras lässt sich mit demselben Grade und derselben
+                Ausgabe-CST behandeln.
+              </li>
+            </ul>
+            <p>
+              Die CST allein ist dafür kein Ersatz. Sie hat denselben Aufbau, rechnet aber
+              mit der falschen Kurve und drückt die Lichter zusammen, daher das hellere,
+              härtere Bild oben. Die Vorteile des Workflows gibt es erst mit einer
+              Umrechnung, die am Anfang stimmt. Wer nur schnell ein fertiges
+              Rec.709-Ergebnis braucht, ist mit der LUT dagegen gut bedient.
+            </p>
+          </div>
+        </article>
+
+        <!-- Test 6 -->
+        <article class="dl-test reveal">
+          <div class="dl-test-head">
+            <div class="tut-step-num">Test 6</div>
+            <h3>Vergleich der zwei Kameras</h3>
+            <p>
+              Die 360 II hat mehr Reserve in den Lichtern als die Action 6, deshalb bekam
+              sie eine eigene Kurve. Umschalten kann man via Drop-down Menu &bdquo;Kamera&ldquo;.
+            </p>
+            <p>Außerdem hat die Osmo 360 II eine eigene Farbmatrix welche die Farben auf die der Action 6 projeziert.</p>
+          </div>
+
+          <div class="dl-pair">
+            <figure class="dl-shot">
+              <figcaption class="dl-label">Osmo-360-Clip mit Kurve &bdquo;Action 6&ldquo;</figcaption>
+              <img src="imgs/DLM_kamera_a6.jpg" width="1100" height="701" alt="Osmo-360-Clip mit der Kurve der Action 6, Himmel und Wolken liegen tiefer" loading="lazy" />
+            </figure>
+            <figure class="dl-shot dl-shot--dctl">
+              <figcaption class="dl-label">Osmo-360-Clip mit Kurve &bdquo;Osmo 360 II&ldquo;</figcaption>
+              <img src="imgs/DLM_kamera_360.jpg" width="1100" height="701" alt="Derselbe Osmo-360-Clip mit der Kurve der Osmo 360 II, Himmel und Wolken liegen höher" loading="lazy" />
+            </figure>
+          </div>
+          <p class="dl-caption">
+            Osmo 360 II, gleicher Clip. Mit ihrer eigenen Kurve liegen Himmel und Wolken
+            höher, die Mitten bleiben gleich.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="dl-prose reveal" style="margin-top:4rem">
+        <h3>Grenzen</h3>
+        <ul>
+          <li>Für die Farbtafel gibt es keine Referenzwerte, deshalb gibt es keine absolute ΔE-Messung.</li>
+          <li>Die 360 hat nach der Angleichung etwas kräftigeres Grün und Rot.</li>
+          <li>Was in der Kamera abgeschnitten ist, kann keine Umrechnung zurückholen.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements + CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:2rem">
+        <div class="meta reveal">
+          <span class="eyebrow">Voraussetzungen</span>
+        </div>
+      </div>
+      <div class="chip-row reveal delay-2">
+        <span class="chip">DaVinci Resolve Studio</span>
+        <span class="chip">DJI Osmo Action 6 / Osmo 360 II</span>
+        <span class="chip">D&#8209;Log M, 10 Bit</span>
+        <span class="chip">Getestet: Resolve 21 &middot; macOS</span>
+      </div>
+      <div class="dl-prose reveal delay-2" style="margin-top:1.6rem">
+        <p>
+          DCTLs laufen nicht in der kostenlosen Version von DaVinci Resolve.
+          Andere D&#8209;Log-M-Kameras habe ich nicht gemessen.
+        </p>
+      </div>
+      <div class="reveal delay-3" style="margin-top:2rem">
+        <a class="btn btn-primary" href="https://github.com/jens-krause/dlogm-dctl" target="_blank" rel="noopener">DCTL, Messmethode &amp; Anleitung auf GitHub <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem">
+      <span>&copy; 2026 Jens Krause</span>
+      <div class="footer-legal">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+      </div>
+      <div class="ai-callout" role="note">
+        <span class="ai-callout-icon" aria-hidden="true"></span>
+        <p class="ai-callout-text">Teile dieser Website wurden mit KI generiert.</p>
+      </div>
+      <p class="footer-credit"><svg class="footer-credit-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.5 6 .9-4.35 4.25 1.03 6-5.38-2.83L6.62 19.65l1.03-6L3.3 9.4l6-.9L12 3Z" /></svg>Github logo Icon by nerdy besky on <a href="https://icon-icons.com/authors/1311-nerdy-besky" target="_blank" rel="noopener">Icon-Icons.com</a></p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

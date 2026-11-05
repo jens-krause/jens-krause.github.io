@@ -175,6 +175,55 @@
                 </div>
               </div>
 
+              <!-- D-Log M → DaVinci Wide Gamut -->
+              <div class="facet-card warm tool-tile spot ring" data-open="false" data-anim="rise" style="--d:0.09s">
+                <h3 class="tool-tile-heading">
+                  <button class="tool-tile-head" type="button" aria-expanded="false" aria-controls="tool-dlogm">
+                    <span class="guide-icon">
+                      <!-- Curve glyph -->
+                      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="1.4"
+                           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 3v17h17" />
+                        <path d="M6 18c5 0 7-3 9-7s3-6 6-6" />
+                      </svg>
+                    </span>
+                    <span class="tool-tile-titles">
+                      <span class="tool-tile-title">D&#8209;Log M &rarr; DaVinci Wide Gamut</span>
+                      <span class="guide-card-sub">DCTL for DaVinci Resolve Studio &middot; macOS</span>
+                    </span>
+                    <span class="tool-tile-chevron" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                           stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </span>
+                  </button>
+                </h3>
+                <div class="tool-tile-panel" id="tool-dlogm">
+                  <div class="tool-tile-panel-inner">
+                    <div class="tool-tile-panel-content">
+                      <p>
+                        DJI only offers a LUT to Rec.709 for D&#8209;Log M, and no CST in
+                        Resolve really matches the curve. This DCTL converts Osmo Action 6
+                        and Osmo 360 II footage to DaVinci Wide Gamut with a measured curve
+                        and colour matrix. One stop stays one stop, grey stays grey, and
+                        highlights keep their detail.
+                      </p>
+                      <div class="chip-row">
+                        <span class="chip">DCTL</span>
+                        <span class="chip">DaVinci Resolve Studio</span>
+                        <span class="chip">DJI Osmo</span>
+                        <span class="chip">Open source</span>
+                      </div>
+                      <div class="guide-links">
+                        <a class="link-arrow" href="../tools/dlogm-dctl/dlogm.html">View tests <span class="arrow">&rarr;</span></a>
+                        <a class="link-arrow" href="https://github.com/jens-krause/dlogm-dctl" target="_blank" rel="noopener">View on GitHub <span class="arrow">&rarr;</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- herbIQ -->
               <div class="facet-card tool-tile spot ring" data-open="false" data-anim="rise" style="--d:0.13s">
                 <h3 class="tool-tile-heading">

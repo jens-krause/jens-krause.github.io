@@ -1,0 +1,709 @@
+{
+ "hinweis": "Alle Bilder sind Ausschnitte aus Bildschirmfotos von DaVinci Resolve Studio 21 (gleiche Ausgabe-CST für beide Varianten) bzw. aus den Messdaten berechnete Diagramme. Paare haben jeweils exakt gleiche Pixelmaße.",
+ "paare": [
+  {
+   "id": "look",
+   "titel_de": "Look im Vergleich zur DJI-LUT",
+   "titel_en": "Look compared with the DJI LUT",
+   "links": {
+    "datei": "DLM_look_dctl.jpg",
+    "label_de": "DCTL + Ausgabe-CST",
+    "label_en": "DCTL + output CST"
+   },
+   "rechts": {
+    "datei": "DLM_look_lut.jpg",
+    "label_de": "Offizielle DJI-LUT",
+    "label_en": "Official DJI LUT"
+   },
+   "zusatz": [
+    "DLM_look_dctl_parade.jpg",
+    "DLM_look_lut_parade.jpg"
+   ],
+   "text_de": "Action 6, Clip 1/100 s (etwa 3,5 Blenden überbelichtet). DCTL mit Ausgabe-CST (DaVinci Tone Mapping, Max. Input 300 nits) sieht nahezu gleich aus wie die DJI-LUT, aber die Bearbeitung passiert in DaVinci Wide Gamut.",
+   "text_en": "Action 6, 1/100 s clip (about 3.5 stops overexposed). DCTL plus output CST (DaVinci tone mapping, max input 300 nits) looks almost identical to the DJI LUT, but grading happens in DaVinci Wide Gamut.",
+   "groesse": [
+    1000,
+    817
+   ]
+  },
+  {
+   "id": "graukeil",
+   "titel_de": "Graukeil nach Weißabgleich",
+   "titel_en": "Grey wedge after white balance",
+   "links": {
+    "datei": "DLM_graukeil_dctl.jpg",
+    "label_de": "DCTL",
+    "label_en": "DCTL"
+   },
+   "rechts": {
+    "datei": "DLM_graukeil_cst.jpg",
+    "label_de": "CST (D-Gamut / Rec.709)",
+    "label_en": "CST (D-Gamut / Rec.709)"
+   },
+   "zusatz": [
+    "DLM_graukeil_dctl_parade.jpg",
+    "DLM_graukeil_cst_parade.jpg",
+    "DLM_diagramm_graukeil_de.png",
+    "DLM_diagramm_graukeil_en.png"
+   ],
+   "text_de": "Action 6, 1/1600 s. Mittelgrau jeweils mit Offset neutralisiert. Mit der DCTL bleiben alle Graustufen neutral, mit der CST (Rec.709) laufen die dunklen Kacheln auseinander und die hellsten werden bei 255 abgeschnitten. Im Bild sind die Pixel-Messanzeigen aus Resolve zu sehen.",
+   "text_en": "Action 6, 1/1600 s. Mid grey neutralised with Offset in both. With the DCTL every grey stays neutral; with the CST (Rec.709) the dark patches drift apart and the brightest clip at 255. The overlays are Resolve pixel readouts.",
+   "groesse": [
+    1000,
+    817
+   ]
+  },
+  {
+   "id": "baum",
+   "titel_de": "Äste vor hellem Himmel",
+   "titel_en": "Branches against a bright sky",
+   "links": {
+    "datei": "DLM_baum_dctl_0ev.jpg",
+    "label_de": "DCTL",
+    "label_en": "DCTL"
+   },
+   "rechts": {
+    "datei": "DLM_baum_cst_0ev.jpg",
+    "label_de": "CST (D-Gamut / Rec.709)",
+    "label_en": "CST (D-Gamut / Rec.709)"
+   },
+   "zusatz": [
+    "DLM_baum_dctl_minus1ev.jpg",
+    "DLM_baum_cst_minus1ev.jpg",
+    "DLM_baum_dctl_minus1ev_detail.jpg",
+    "DLM_baum_cst_minus1ev_detail.jpg",
+    "DLM_baum_dctl_0ev_detail.jpg",
+    "DLM_baum_cst_0ev_detail.jpg",
+    "DLM_baum_dctl_0ev_parade.jpg",
+    "DLM_baum_cst_0ev_parade.jpg",
+    "DLM_baum_dctl_minus1ev_parade.jpg",
+    "DLM_baum_cst_minus1ev_parade.jpg"
+   ],
+   "text_de": "Action 6, 1/1250 s. Die DCTL behält die Wolkenzeichnung. Bei der CST (Rec.709) klebt der Himmel flach oben, auch −1 Blende (Exposure im HDR-Rad) holt ihn nicht zurück. Ein kleiner Teil des Himmels ist schon in der Kamera abgeschnitten, der wird mit der DCTL bei −1 EV gleichmäßig grau.",
+   "text_en": "Action 6, 1/1250 s. The DCTL keeps the cloud detail. With the CST (Rec.709) the sky sits flat at the top, and −1 stop (HDR wheel exposure) does not bring it back. A small part of the sky is clipped in camera; with the DCTL it turns evenly grey at −1 EV.",
+   "groesse": [
+    1000,
+    855
+   ]
+  },
+  {
+   "id": "tonne",
+   "titel_de": "Gesättigtes Gelb mit Glanzlicht",
+   "titel_en": "Saturated yellow with specular highlight",
+   "links": {
+    "datei": "DLM_tonne_dctl_0ev.jpg",
+    "label_de": "DCTL",
+    "label_en": "DCTL"
+   },
+   "rechts": {
+    "datei": "DLM_tonne_cst_0ev.jpg",
+    "label_de": "CST (D-Gamut / Rec.709)",
+    "label_en": "CST (D-Gamut / Rec.709)"
+   },
+   "zusatz": [
+    "DLM_tonne_dctl_minus1ev.jpg",
+    "DLM_tonne_cst_minus1ev.jpg",
+    "DLM_tonne_dctl_minus1ev_detail.jpg",
+    "DLM_tonne_cst_minus1ev_detail.jpg",
+    "DLM_tonne_dctl_0ev_detail.jpg",
+    "DLM_tonne_cst_0ev_detail.jpg",
+    "DLM_tonne_dctl_0ev_parade.jpg",
+    "DLM_tonne_cst_0ev_parade.jpg",
+    "DLM_tonne_dctl_minus1ev_parade.jpg",
+    "DLM_tonne_cst_minus1ev_parade.jpg"
+   ],
+   "text_de": "Action 6, 1/1250 s. Bei −1 EV behält der Sonnenreflex mit der DCTL seinen Verlauf, mit der CST (Rec.709) bleibt er ausgebrannt. Das Gelb kippt in keiner Variante im Farbton. Im DCTL-Bild bei 0 EV ist eine Pixel-Messanzeige von Resolve zu sehen (R 255 / G 211 / B 69).",
+   "text_en": "Action 6, 1/1250 s. At −1 EV the specular highlight keeps its gradation with the DCTL and stays burnt out with the CST (Rec.709). The yellow does not shift hue in either version. The DCTL frame at 0 EV shows a Resolve pixel readout (R 255 / G 211 / B 69).",
+   "groesse": [
+    1000,
+    750
+   ]
+  },
+  {
+   "id": "kamera",
+   "titel_de": "Kamera-Regler: eigene Kurve für die Osmo 360 II",
+   "titel_en": "Camera control: dedicated curve for the Osmo 360 II",
+   "links": {
+    "datei": "DLM_kamera_a6.jpg",
+    "label_de": "Osmo-360-Clip mit Kurve „Action 6“",
+    "label_en": "Osmo 360 clip with “Action 6” curve"
+   },
+   "rechts": {
+    "datei": "DLM_kamera_360.jpg",
+    "label_de": "Osmo-360-Clip mit Kurve „Osmo 360 II“",
+    "label_en": "Osmo 360 clip with “Osmo 360 II” curve"
+   },
+   "zusatz": [
+    "DLM_kamera_a6_parade.jpg",
+    "DLM_kamera_360_parade.jpg"
+   ],
+   "text_de": "Osmo 360 II, gleicher Clip. Die 360 hat mehr Reserve in den Lichtern als die Action 6. Mit ihrer eigenen Kurve liegen Himmel und Wolken höher, die Mitten bleiben gleich. Hinweis: Diese Aufnahme entstand mit Version 1.2 der DCTL, also vor der eigenen Farbmatrix der 360.",
+   "text_en": "Osmo 360 II, same clip. The 360 has more highlight headroom than the Action 6. With its own curve, sky and clouds sit higher while midtones stay the same. Note: captured with DCTL version 1.2, before the 360 got its own colour matrix.",
+   "groesse": [
+    1100,
+    701
+   ]
+  }
+ ],
+ "belichtungsreihe": {
+  "titel_de": "Belichtungsreihe mit der DCTL",
+  "titel_en": "Exposure series with the DCTL",
+  "text_de": "Fünf Clips der Action 6 von 1/400 bis 1/6400 s, in der DCTL per „Belichtung EV“ ausgeglichen (Werte aus Verschlusszeit und Belichtungsmesser der Kamera). Die Tafel sieht in allen fünf gleich aus, nur das Rauschen nimmt zu.",
+  "text_en": "Five Action 6 clips from 1/400 to 1/6400 s, compensated with the DCTL “Belichtung EV” control (values from shutter speed and the camera’s exposure meter). The chart looks the same in all five; only noise increases.",
+  "bilder": [
+   {
+    "datei": "DLM_reihe_06.jpg",
+    "parade": "DLM_reihe_06_parade.jpg",
+    "verschluss": "1/400",
+    "ev": "-1.42"
+   },
+   {
+    "datei": "DLM_reihe_07.jpg",
+    "parade": "DLM_reihe_07_parade.jpg",
+    "verschluss": "1/800",
+    "ev": "-0.55"
+   },
+   {
+    "datei": "DLM_reihe_08.jpg",
+    "parade": "DLM_reihe_08_parade.jpg",
+    "verschluss": "1/1600",
+    "ev": "0.00"
+   },
+   {
+    "datei": "DLM_reihe_09.jpg",
+    "parade": "DLM_reihe_09_parade.jpg",
+    "verschluss": "1/3200",
+    "ev": "+1.64"
+   },
+   {
+    "datei": "DLM_reihe_10.jpg",
+    "parade": "DLM_reihe_10_parade.jpg",
+    "verschluss": "1/6400",
+    "ev": "+2.57"
+   }
+  ],
+  "streifen": "DLM_belichtungsreihe_streifen.jpg"
+ },
+ "diagramme": [
+  {
+   "datei_de": "DLM_diagramm_streuung_de.png",
+   "datei_en": "DLM_diagramm_streuung_en.png",
+   "titel_de": "Bleibt eine Blende eine Blende?",
+   "titel_en": "Does one stop stay one stop?",
+   "text_de": "Streuung derselben Graukacheln über die Belichtungsreihe nach Belichtungsausgleich (Blenden, rms). Kleiner ist besser. Die D-Log-Werte sind mit der Formel aus dem DJI-Whitepaper nachgerechnet.",
+   "text_en": "Spread of the same grey patches across the exposure series after compensation (stops, rms). Lower is better. D-Log values computed with the formula from DJI's white paper."
+  },
+  {
+   "datei_de": "DLM_diagramm_belichtungsreihe_de.png",
+   "datei_en": "DLM_diagramm_belichtungsreihe_en.png",
+   "titel_de": "Acht Graukacheln über vier Blenden",
+   "titel_en": "Eight grey patches across four stops",
+   "text_de": "Ideal sind waagerechte Linien. Nur die gemessene Kurve schafft das.",
+   "text_en": "Flat lines are ideal. Only the measured curve achieves that."
+  },
+  {
+   "datei_de": "DLM_diagramm_graukeil_de.png",
+   "datei_en": "DLM_diagramm_graukeil_en.png",
+   "titel_de": "Graukeil-Messwerte",
+   "titel_en": "Grey wedge readings",
+   "text_de": "R/G/B-Werte aus dem Resolve-Viewer, Rohdaten in DLM_graukeil_messwerte.json.",
+   "text_en": "R/G/B values read from the Resolve viewer; raw data in DLM_graukeil_messwerte.json."
+  },
+  {
+   "datei_de": "DLM_diagramm_kurve_de.png",
+   "datei_en": "DLM_diagramm_kurve_en.png",
+   "titel_de": "Die gemessenen Kurven",
+   "titel_en": "The measured curves",
+   "text_de": "Links: für wie viel Licht jeder Codewert steht. Rechts: die Steigung dieser Kurve, also wie viele Codewerte die Kamera pro Blende Licht verwendet. Das ist eine Eigenschaft der Kamera-Kodierung, nicht der Szene. D-Log rechnet mit nur halb so vielen Codewerten pro Blende wie D-Log M, Rec.709 in den Lichtern mit zu vielen.",
+   "text_en": "Left: how much light each code value stands for. Right: the slope of that curve, i.e. how many code values the camera spends per stop of light. A property of the camera encoding, not the scene. D-Log assumes only half as many code values per stop as D-Log M; Rec.709 assumes too many in the highlights."
+  }
+ ],
+ "fertige_vergleichsbilder": {
+  "text": "Fertig zusammengesetzte Side-by-side-Bilder mit Beschriftung (Fallback, oder für Social Media). _de/_en = Sprache der Beschriftung.",
+  "dateien": [
+   "DLM_belichtungsreihe_streifen.jpg",
+   "DLM_vergleich_baum_de.jpg",
+   "DLM_vergleich_baum_detail_de.jpg",
+   "DLM_vergleich_baum_detail_en.jpg",
+   "DLM_vergleich_baum_en.jpg",
+   "DLM_vergleich_graukeil_de.jpg",
+   "DLM_vergleich_graukeil_en.jpg",
+   "DLM_vergleich_kamera_de.jpg",
+   "DLM_vergleich_kamera_en.jpg",
+   "DLM_vergleich_look_de.jpg",
+   "DLM_vergleich_look_en.jpg",
+   "DLM_vergleich_tonne_de.jpg",
+   "DLM_vergleich_tonne_detail_de.jpg",
+   "DLM_vergleich_tonne_detail_en.jpg",
+   "DLM_vergleich_tonne_en.jpg"
+  ]
+ },
+ "alle_einzelkacheln": [
+  {
+   "datei": "DLM_look_dctl.jpg",
+   "gruppe": "look",
+   "variante": "DCTL",
+   "groesse": [
+    1000,
+    817
+   ]
+  },
+  {
+   "datei": "DLM_look_lut.jpg",
+   "gruppe": "look",
+   "variante": "DJI-LUT",
+   "groesse": [
+    1000,
+    817
+   ]
+  },
+  {
+   "datei": "DLM_look_dctl_parade.jpg",
+   "gruppe": "look",
+   "variante": "DCTL",
+   "groesse": [
+    1200,
+    389
+   ]
+  },
+  {
+   "datei": "DLM_look_lut_parade.jpg",
+   "gruppe": "look",
+   "variante": "DJI-LUT",
+   "groesse": [
+    1200,
+    389
+   ]
+  },
+  {
+   "datei": "DLM_graukeil_dctl.jpg",
+   "gruppe": "graukeil",
+   "variante": "DCTL",
+   "groesse": [
+    1000,
+    817
+   ]
+  },
+  {
+   "datei": "DLM_graukeil_cst.jpg",
+   "gruppe": "graukeil",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1000,
+    817
+   ]
+  },
+  {
+   "datei": "DLM_graukeil_dctl_parade.jpg",
+   "gruppe": "graukeil",
+   "variante": "DCTL",
+   "groesse": [
+    1200,
+    389
+   ]
+  },
+  {
+   "datei": "DLM_graukeil_cst_parade.jpg",
+   "gruppe": "graukeil",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1200,
+    389
+   ]
+  },
+  {
+   "datei": "DLM_reihe_06.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    700,
+    572
+   ],
+   "shutter": "1/400",
+   "ev": "-1.42"
+  },
+  {
+   "datei": "DLM_reihe_06_parade.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    900,
+    292
+   ],
+   "shutter": "1/400",
+   "ev": "-1.42"
+  },
+  {
+   "datei": "DLM_reihe_07.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    700,
+    572
+   ],
+   "shutter": "1/800",
+   "ev": "-0.55"
+  },
+  {
+   "datei": "DLM_reihe_07_parade.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    900,
+    292
+   ],
+   "shutter": "1/800",
+   "ev": "-0.55"
+  },
+  {
+   "datei": "DLM_reihe_08.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    700,
+    572
+   ],
+   "shutter": "1/1600",
+   "ev": "0.00"
+  },
+  {
+   "datei": "DLM_reihe_08_parade.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    900,
+    292
+   ],
+   "shutter": "1/1600",
+   "ev": "0.00"
+  },
+  {
+   "datei": "DLM_reihe_09.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    700,
+    572
+   ],
+   "shutter": "1/3200",
+   "ev": "+1.64"
+  },
+  {
+   "datei": "DLM_reihe_09_parade.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    900,
+    292
+   ],
+   "shutter": "1/3200",
+   "ev": "+1.64"
+  },
+  {
+   "datei": "DLM_reihe_10.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    700,
+    572
+   ],
+   "shutter": "1/6400",
+   "ev": "+2.57"
+  },
+  {
+   "datei": "DLM_reihe_10_parade.jpg",
+   "gruppe": "belichtungsreihe",
+   "variante": "DCTL",
+   "groesse": [
+    900,
+    292
+   ],
+   "shutter": "1/6400",
+   "ev": "+2.57"
+  },
+  {
+   "datei": "DLM_baum_dctl_0ev.jpg",
+   "gruppe": "baum",
+   "variante": "DCTL",
+   "groesse": [
+    1000,
+    855
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_baum_dctl_0ev_parade.jpg",
+   "gruppe": "baum",
+   "variante": "DCTL",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_baum_dctl_0ev_detail.jpg",
+   "gruppe": "baum",
+   "variante": "DCTL",
+   "groesse": [
+    504,
+    336
+   ],
+   "ev": "0",
+   "detail": "Himmel und Krone oben"
+  },
+  {
+   "datei": "DLM_baum_cst_0ev.jpg",
+   "gruppe": "baum",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1000,
+    855
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_baum_cst_0ev_parade.jpg",
+   "gruppe": "baum",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_baum_cst_0ev_detail.jpg",
+   "gruppe": "baum",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    504,
+    336
+   ],
+   "ev": "0",
+   "detail": "Himmel und Krone oben"
+  },
+  {
+   "datei": "DLM_baum_dctl_minus1ev.jpg",
+   "gruppe": "baum",
+   "variante": "DCTL",
+   "groesse": [
+    1000,
+    855
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_baum_dctl_minus1ev_parade.jpg",
+   "gruppe": "baum",
+   "variante": "DCTL",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_baum_dctl_minus1ev_detail.jpg",
+   "gruppe": "baum",
+   "variante": "DCTL",
+   "groesse": [
+    504,
+    336
+   ],
+   "ev": "-1",
+   "detail": "Himmel und Krone oben"
+  },
+  {
+   "datei": "DLM_baum_cst_minus1ev.jpg",
+   "gruppe": "baum",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1000,
+    855
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_baum_cst_minus1ev_parade.jpg",
+   "gruppe": "baum",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_baum_cst_minus1ev_detail.jpg",
+   "gruppe": "baum",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    504,
+    336
+   ],
+   "ev": "-1",
+   "detail": "Himmel und Krone oben"
+  },
+  {
+   "datei": "DLM_tonne_dctl_0ev.jpg",
+   "gruppe": "tonne",
+   "variante": "DCTL",
+   "groesse": [
+    1000,
+    750
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_tonne_dctl_0ev_parade.jpg",
+   "gruppe": "tonne",
+   "variante": "DCTL",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_tonne_dctl_0ev_detail.jpg",
+   "gruppe": "tonne",
+   "variante": "DCTL",
+   "groesse": [
+    605,
+    353
+   ],
+   "ev": "0",
+   "detail": "Sonnenreflex auf der Tonne"
+  },
+  {
+   "datei": "DLM_tonne_cst_0ev.jpg",
+   "gruppe": "tonne",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1000,
+    750
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_tonne_cst_0ev_parade.jpg",
+   "gruppe": "tonne",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "0"
+  },
+  {
+   "datei": "DLM_tonne_cst_0ev_detail.jpg",
+   "gruppe": "tonne",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    605,
+    353
+   ],
+   "ev": "0",
+   "detail": "Sonnenreflex auf der Tonne"
+  },
+  {
+   "datei": "DLM_tonne_dctl_minus1ev.jpg",
+   "gruppe": "tonne",
+   "variante": "DCTL",
+   "groesse": [
+    1000,
+    750
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_tonne_dctl_minus1ev_parade.jpg",
+   "gruppe": "tonne",
+   "variante": "DCTL",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_tonne_dctl_minus1ev_detail.jpg",
+   "gruppe": "tonne",
+   "variante": "DCTL",
+   "groesse": [
+    605,
+    353
+   ],
+   "ev": "-1",
+   "detail": "Sonnenreflex auf der Tonne"
+  },
+  {
+   "datei": "DLM_tonne_cst_minus1ev.jpg",
+   "gruppe": "tonne",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1000,
+    750
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_tonne_cst_minus1ev_parade.jpg",
+   "gruppe": "tonne",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    1200,
+    389
+   ],
+   "ev": "-1"
+  },
+  {
+   "datei": "DLM_tonne_cst_minus1ev_detail.jpg",
+   "gruppe": "tonne",
+   "variante": "CST (D-Gamut / Rec.709)",
+   "groesse": [
+    605,
+    353
+   ],
+   "ev": "-1",
+   "detail": "Sonnenreflex auf der Tonne"
+  },
+  {
+   "datei": "DLM_kamera_a6.jpg",
+   "gruppe": "kamera",
+   "variante": "Kamera: Osmo Action 6",
+   "groesse": [
+    1100,
+    701
+   ]
+  },
+  {
+   "datei": "DLM_kamera_a6_parade.jpg",
+   "gruppe": "kamera",
+   "variante": "Kamera: Osmo Action 6",
+   "groesse": [
+    1200,
+    389
+   ]
+  },
+  {
+   "datei": "DLM_kamera_360.jpg",
+   "gruppe": "kamera",
+   "variante": "Kamera: Osmo 360 II",
+   "groesse": [
+    1100,
+    701
+   ]
+  },
+  {
+   "datei": "DLM_kamera_360_parade.jpg",
+   "gruppe": "kamera",
+   "variante": "Kamera: Osmo 360 II",
+   "groesse": [
+    1200,
+    389
+   ]
+  }
+ ]
+}

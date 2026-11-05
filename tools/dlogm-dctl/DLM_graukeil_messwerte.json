@@ -1,0 +1,131 @@
+{
+ "names_de": [
+  "Weißer Streifen",
+  "Spalte 4 · Reihe 1",
+  "Spalte 3 · Reihe 1",
+  "Spalte 3 · Reihe 2",
+  "Spalte 3 · Reihe 3",
+  "Spalte 3 · Reihe 4",
+  "Spalte 3 · Reihe 5",
+  "Spalte 3 · Reihe 6",
+  "Spalte 4 · Reihe 5",
+  "Schwarzer Streifen"
+ ],
+ "names_en": [
+  "White strip",
+  "Col 4 · Row 1",
+  "Col 3 · Row 1",
+  "Col 3 · Row 2",
+  "Col 3 · Row 3",
+  "Col 3 · Row 4",
+  "Col 3 · Row 5",
+  "Col 3 · Row 6",
+  "Col 4 · Row 5",
+  "Black strip"
+ ],
+ "dctl": [
+  [
+   231,
+   228,
+   229
+  ],
+  [
+   225,
+   226,
+   225
+  ],
+  [
+   208,
+   209,
+   211
+  ],
+  [
+   181,
+   182,
+   186
+  ],
+  [
+   149,
+   151,
+   153
+  ],
+  [
+   121,
+   122,
+   124
+  ],
+  [
+   66,
+   67,
+   72
+  ],
+  [
+   54,
+   54,
+   56
+  ],
+  [
+   50,
+   49,
+   52
+  ],
+  [
+   28,
+   30,
+   37
+  ]
+ ],
+ "cst_rec709": [
+  [
+   255,
+   255,
+   255
+  ],
+  [
+   255,
+   255,
+   255
+  ],
+  [
+   242,
+   239,
+   242
+  ],
+  [
+   206,
+   206,
+   210
+  ],
+  [
+   166,
+   170,
+   172
+  ],
+  [
+   133,
+   135,
+   137
+  ],
+  [
+   66,
+   70,
+   78
+  ],
+  [
+   58,
+   60,
+   64
+  ],
+  [
+   54,
+   55,
+   61
+  ],
+  [
+   32,
+   36,
+   44
+  ]
+ ],
+ "note": "Pixelwerte (8 Bit) aus dem Resolve-Viewer, Clip 8 (1/1600), Mittelgrau-Streifen jeweils per Offset neutralisiert, Messungenauigkeit ±3"
+}
