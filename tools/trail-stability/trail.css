@@ -1,0 +1,142 @@
+/* Page-specific additions for the Trail Stability pages. Loaded AFTER
+   main.css, ../LR_Wildlife_Sharpness/sharpness.css and
+   ../dlogm-dctl/dlogm.css, which provide the hero badge, steps, prose,
+   figures and the dark SVG chart styles. Only what is new lives here:
+   code block, tables, problem/flow cards, and the extra chart colours. */
+
+/* -------- Extra chart colours (neutral grey for "Original") -------- */
+.dl-svg .c-orig { fill: #9aa0b0; }
+.lg-orig { background: #9aa0b0; }
+.dl-svg .pc { font-size: 12px; font-weight: 600; }
+/* Time series: solid, slightly thinner lines (noisy data) */
+.dl-svg .k-orig { stroke: #9aa0b0; }
+.dl-svg .k-solid { stroke-dasharray: none; stroke-width: 1.9; stroke-linecap: round; }
+.dl-svg .pc-dctl { fill: #3ecf8e; }
+.dl-svg .pc-dlog { fill: #ff7a59; }
+
+/* -------- Comparison video (looping WebM) --------
+   The video is three 200 px panels with 6 px gaps (gaps painted in the card
+   colour), so the headings use the same 200:6:200:6:200 grid to sit exactly
+   above their panel. */
+.tr-media { max-width: 760px; margin-left: auto; margin-right: auto; }
+.tr-media img,
+.tr-media video { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 6px); }
+.tr-cols {
+  display: grid;
+  grid-template-columns: 200fr 6fr 200fr 6fr 200fr;
+  align-items: end;
+  margin-bottom: 0.2rem;
+}
+.tr-cols .dl-chart-title { margin: 0 0 0.5rem; padding-left: 0.2rem; }
+.t-orig { color: #9aa0b0; }
+.tr-sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+@media (max-width: 700px) {
+  .tr-cols .dl-chart-title { font-size: 0.68rem; letter-spacing: 0; padding-left: 0; }
+  .tr-sub { display: none; }
+}
+
+/* -------- Code block -------- */
+.tr-code {
+  margin: 1.2rem 0 0;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-3);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.tr-code .tr-prompt { color: var(--text-dim); user-select: none; }
+
+/* -------- Tables (results, controls) -------- */
+.tr-table-wrap {
+  margin-top: 1.6rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-3);
+}
+.tr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.tr-table th,
+.tr-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+.tr-table tr:last-child td { border-bottom: 0; }
+.tr-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.tr-table td:first-child { color: var(--text); white-space: nowrap; }
+.tr-table .num { font-family: var(--font-mono); white-space: nowrap; }
+.tr-table .best { color: #3ecf8e; font-weight: 600; }
+.tr-table .worse { color: #ff7a59; }
+
+/* -------- Cards: three problems / five pipeline stages -------- */
+.tr-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.tr-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.2rem;
+}
+.tr-card {
+  display: block;
+  padding: 1.2rem 1.3rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-3);
+}
+.tr-card .tut-step-num { margin-bottom: 0.5rem; }
+.tr-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6rem;
+}
+.tr-card p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+@media (max-width: 900px) {
+  .tr-cards { grid-template-columns: 1fr; gap: 1.2rem; }
+}
+
+/* -------- Highlight passage inside prose -------- */
+.dl-prose .tr-hl {
+  margin: 1.4rem 0;
+  padding: 0.9rem 1.2rem;
+  border-left: 3px solid var(--accent-warm);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--bg-3);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* -------- Section heading that must stay on one line -------- */
+.section-head.tr-head-wide { grid-template-columns: 1fr; }
